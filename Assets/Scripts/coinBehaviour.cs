@@ -5,13 +5,6 @@ using UnityEngine;
 
 public class coinBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         transform.Rotate(0, 3, 0);
@@ -23,9 +16,9 @@ public class coinBehaviour : MonoBehaviour
         GameObject entity = col.gameObject;
         if (entity.CompareTag("Player"))
         {
-            entity.GetComponent<EntityStatus>().AddXp(1000);
-            entity.GetComponent<EntityStatus>().SetGold( entity.GetComponent<EntityStatus>().GetGold()+1 );
-            
+            entity.GetComponent<EntityStatus>().AddXp(13);
+            entity.GetComponent<EntityStatus>().AddGold(1);
+            Destroy(gameObject);
         }
     }
 }

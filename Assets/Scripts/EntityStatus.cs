@@ -1,6 +1,8 @@
 using System;
+using TMPro;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EntityStatus : MonoBehaviour
 {
@@ -12,7 +14,13 @@ public class EntityStatus : MonoBehaviour
     public int entityMaxHelath = 100;
     public int gold = 0;
     public int soulsCount = 1;
-    
+
+    private GameObject mainUserInterface;
+
+    private void Awake()
+    {
+        mainUserInterface = GameObject.Find("MainUserInterface");
+    }
 
     /*
      * Nazwa
@@ -55,7 +63,6 @@ public class EntityStatus : MonoBehaviour
         {
             int xpToLvlUp = entityExperienceToNextLvl - GetXp();
             
-            Debug.Log(xpAmount + "    " + xpToLvlUp); 
             // Jeżeli nie mamy wystaczająco xp do lvl up
             if (xpAmount < xpToLvlUp)
             {
@@ -105,6 +112,18 @@ public class EntityStatus : MonoBehaviour
     public int GetGold()
     {
         return this.gold;
+    }
+    public void AddGold(int gold)
+    {
+        this.gold += gold;
+
+        /*
+         * Jeśli encja jest graczem, to wyświetlamy złoto w UI
+         */
+        if ( gameObject.CompareTag("Player") )
+        {
+            mainUserInterface.transform.Find("Gold/Count").GetComponent<TextMeshProUGUI>().text = Convert.ToString( this.gold );
+        }
     }
     
     /*
