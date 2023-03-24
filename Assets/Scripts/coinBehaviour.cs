@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class coinBehaviour : MonoBehaviour
+public class CoinBehaviour : MonoBehaviour
 {
     void FixedUpdate()
     {
@@ -18,7 +18,7 @@ public class coinBehaviour : MonoBehaviour
         {
             entity.GetComponent<EntityStatus>().AddXp(13);
             entity.GetComponent<EntityStatus>().AddGold(1);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

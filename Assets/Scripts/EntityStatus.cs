@@ -19,7 +19,7 @@ public class EntityStatus : MonoBehaviour
 
     private void Awake()
     {
-        mainUserInterface = GameObject.Find("MainUserInterface");
+        mainUserInterface = GameObject.Find("Main User Interface");
     }
 
     /*
@@ -72,6 +72,7 @@ public class EntityStatus : MonoBehaviour
             if ( xpToLvlUp <= xpAmount )
             {
                 SetLevel( GetLevel() + 1 );
+                SetExpToNextLVl(  Convert.ToInt32(Convert.ToDouble(GetExpToNextLVl()) * 1.25 ) );
                 xpAmount -= xpToLvlUp;
                 this.entityExperiencePoints = 0;
             }
@@ -100,6 +101,18 @@ public class EntityStatus : MonoBehaviour
     public int GetMaxHp()
     {
         return this.entityMaxHelath;
+    }
+    
+    /*
+     * Punkty doświadczenia do następnego poziomu
+     */
+    public void SetExpToNextLVl(int expToNextLvl)
+    {
+        this.entityExperienceToNextLvl = expToNextLvl;
+    }
+    public int GetExpToNextLVl()
+    {
+        return this.entityExperienceToNextLvl;
     }
     
     /*
@@ -136,5 +149,17 @@ public class EntityStatus : MonoBehaviour
     public int GetSoulsCount()
     {
         return this.soulsCount;
+    }
+    public void AddSouls(int souls)
+    {
+        this.soulsCount += soulsCount;
+
+        /*
+         * Jeśli encja jest graczem, to wyświetlamy dusze w UI
+         */
+        if ( gameObject.CompareTag("Player") )
+        {
+            mainUserInterface.transform.Find("Souls/Count").GetComponent<TextMeshProUGUI>().text = Convert.ToString( this.soulsCount );
+        }
     }
 }
