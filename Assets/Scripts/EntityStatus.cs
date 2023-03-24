@@ -135,7 +135,11 @@ public class EntityStatus : MonoBehaviour
          */
         if ( gameObject.CompareTag("Player") )
         {
-            mainUserInterface.transform.Find("Gold/Count").GetComponent<TextMeshProUGUI>().text = Convert.ToString( this.gold );
+            GameObject UiGoldCount = mainUserInterface.transform.Find("Gold/Count").gameObject;
+            if (UiGoldCount)
+            {
+                UiGoldCount.GetComponent<TextMeshProUGUI>().text = Convert.ToString( this.gold );
+            }
         }
     }
     
@@ -159,7 +163,11 @@ public class EntityStatus : MonoBehaviour
          */
         if ( gameObject.CompareTag("Player") )
         {
-            mainUserInterface.transform.Find("Souls/Count").GetComponent<TextMeshProUGUI>().text = Convert.ToString( this.soulsCount );
+            GameObject UiSoulsCount = mainUserInterface.transform.Find("Souls/Count").gameObject;
+            if (UiSoulsCount)
+            {
+                UiSoulsCount.GetComponent<TextMeshProUGUI>().text = Convert.ToString( this.soulsCount );
+            }
         }
     }
 }

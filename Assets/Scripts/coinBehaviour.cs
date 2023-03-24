@@ -8,7 +8,6 @@ public class CoinBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         transform.Rotate(0, 3, 0);
-        
     }
 
     private void OnTriggerEnter2D(Collider2D col)

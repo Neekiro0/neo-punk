@@ -56,9 +56,10 @@ public class VoodooDoll : MonoBehaviour
         }
     }
 
-    public void FixedUpdate()
+    public void OnTriggerStay2D(Collider2D col)
     {
-        if ( _isPlayerInsideOfRange && (Input.GetKeyDown(KeyCode.F)) )
+        GameObject entity = col.gameObject;
+        if ( entity.CompareTag("Player") && ( Input.GetKeyDown( KeyCode.F ) ) )
         {
             // dodawanie do ekwipunku
             try
@@ -72,4 +73,5 @@ public class VoodooDoll : MonoBehaviour
             }
         }
     }
+    
 }
