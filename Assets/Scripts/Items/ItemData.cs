@@ -12,8 +12,11 @@ namespace Items
         private string lore;
         private double cooldown;
         private double actualCooldown;
+        private string rarity;
+        private double damage;
+        private double minPlayerLvl;
 
-        public ItemData(string itemName, string damageType, string description, string Lore, double cooldown = 0, double actualCooldown = 0)
+        public ItemData(string itemName, string damageType, string description, string Lore, string rarity, double cooldown = 0, double actualCooldown = 0, double damage = 0, double minPlayerLvl = 0 )
         {
             this.itemName = itemName;
             this.damageType = damageType;
@@ -21,6 +24,9 @@ namespace Items
             this.lore = Lore;
             this.cooldown = cooldown;
             this.actualCooldown = actualCooldown;
+            this.damage = damage;
+            this.rarity = rarity;
+            this.minPlayerLvl = minPlayerLvl;
         }
     
         /*

@@ -11,8 +11,9 @@ public class VoodooDoll : MonoBehaviour
     public string damageType = "none";
     public string description = "Gives 15% more damage, but if you get hit, doll gets a needle stack. If you get hit when Doll have 3 stacks you will die.";
     public string lore;
-    public double cooldown;
-    public double actualCooldown;
+    private string rarity;
+    private double damage;
+    private double minPlayerLvl;
     
     private Items.ItemData itemData;
     private GameObject titleObject;
@@ -26,8 +27,7 @@ public class VoodooDoll : MonoBehaviour
             damageType,
             description,
             lore,
-            cooldown,
-            actualCooldown
+            rarity
             );
         titleObject = gameObject.transform.Find("Title").gameObject;
         titleObject.GetComponent<Renderer>().enabled = false;
