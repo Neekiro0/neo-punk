@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [Range(0, 30)]
     public float jumpForce = 6f;
 
+    private PlayerInventory playerEq;
     /*
      * Zmienne lokalne
      */
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     {
         // pobieranie rigidbody
         playerBody = GetComponent<Rigidbody2D>();
+        playerEq = gameObject.GetComponent<PlayerInventory>();
     }
 
     private void Update()
@@ -49,7 +51,7 @@ public class Player : MonoBehaviour
         float playerBodyVelocity = playerBody.GetPointVelocity(jumpVector).y;
         
 
-        if ( playerBodyVelocity == 0 )
+        if ( playerBodyVelocity == 0 && !playerEq.isEquipmentShown)
         {
             playerBody.AddForce(jumpVector, ForceMode2D.Impulse);
         }
