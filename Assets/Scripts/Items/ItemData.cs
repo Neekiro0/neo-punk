@@ -15,8 +15,9 @@ namespace Items
         private string rarity;
         private double damage;
         private double minPlayerLvl;
+        private string imagePath;
 
-        public ItemData(string itemName, string damageType, string description, string Lore, string rarity, double cooldown = 0, double actualCooldown = 0, double damage = 0, double minPlayerLvl = 0 )
+        public ItemData(string itemName, string damageType, string description, string Lore, string rarity, string imagePath = "", double cooldown = 0, double actualCooldown = 0, double damage = 0, double minPlayerLvl = 0 )
         {
             this.itemName = itemName;
             this.damageType = damageType;
@@ -24,6 +25,7 @@ namespace Items
             this.lore = Lore;
             this.cooldown = cooldown;
             this.actualCooldown = actualCooldown;
+            this.imagePath = imagePath;
             this.damage = damage;
             this.rarity = rarity;
             this.minPlayerLvl = minPlayerLvl;
@@ -87,6 +89,18 @@ namespace Items
         public double GetCooldown()
         {
             return this.cooldown;
+        }
+
+        /*
+         * ścieżka to obrazka
+         */
+        public void SetImagePath(string imagePath)
+        {
+            this.imagePath = imagePath;
+        }
+        public string GetImagePath()
+        {
+            return this.imagePath;
         }
     }
 }
