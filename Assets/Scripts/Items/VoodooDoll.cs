@@ -59,13 +59,12 @@ public class VoodooDoll : MonoBehaviour
     public void OnTriggerStay2D(Collider2D col)
     {
         GameObject entity = col.gameObject;
-        if ( entity.CompareTag("Player") && ( Input.GetKeyDown( KeyCode.F ) ) )
+        if ( entity.CompareTag("Player") && ( Input.GetKey( KeyCode.F ) ) )
         {
             // dodawanie do ekwipunku
             try
             {
-                player.GetComponent<PlayerInventory>().AddItem(itemData);
-                Destroy(gameObject);
+                player.GetComponent<PlayerInventory>().AddItem(itemData, gameObject);
             }
             catch (Exception)
             {
