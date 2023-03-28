@@ -18,14 +18,25 @@ public class PlayerInventory : MonoBehaviour
     private GameObject InventoryUi;
     private GameObject fields;
 
-    public void AddItem(ItemData itemData)
+    public void AddItem(ItemData itemData, GameObject objectToDelete)
     {
-        items.Add(itemData);
-        foreach (var item in items)
+        StartCoroutine(WaitForAction(itemData, objectToDelete));
+    }
+    
+    private IEnumerator WaitForAction(ItemData itemData, GameObject objectToDelete)
+    {
+        ShowEquipment();
+        while (isEquipmentShown)
         {
-            Debug.Log(item.GetName());
-            Debug.Log(items.Count);
+            if (Input.GetKey(KeyCode.E))
+            {
+                items.Insert(selectedItemIndex, itemData);
+                Destroy(objectToDelete);
+                HideEquipment();
+            }
+            yield return null;
         }
+
     }
 
     public void Start()
@@ -36,6 +47,11 @@ public class PlayerInventory : MonoBehaviour
         InventoryUi.SetActive(false);
         
         fields = InventoryUi.transform.Find("ItemsFields").gameObject;
+        
+        items.Add( new ItemData( "", "", "", "", "") );
+        items.Add( new ItemData( "", "", "", "", "") );
+        items.Add( new ItemData( "", "", "", "", "") );
+        items.Add( new ItemData( "", "", "", "", "") );
     }
 
     void Update()
@@ -92,12 +108,24 @@ public class PlayerInventory : MonoBehaviour
             {
                 image.sprite = fieldImage;
             }
+            GameObject actionButtonImage = child.transform.Find("ActionButtonImage").gameObject;
+            if (actionButtonImage != null)
+            {
+                actionButtonImage.SetActive(false);
+            }
         }
 
         GameObject selectedField = fields.transform.GetChild(selectedItemIndex).gameObject;
         if (selectedFieldImage != null && selectedField != null)
         {
             selectedField.GetComponent<Image>().sprite = selectedFieldImage;
+            
+            // pokazywanie przycisku do zmiany ekwipunku
+            GameObject actionButtonImage = selectedField.transform.Find("ActionButtonImage").gameObject;
+            if (actionButtonImage != null)
+            {
+                actionButtonImage.SetActive(true);
+            }
         }
 
     }
