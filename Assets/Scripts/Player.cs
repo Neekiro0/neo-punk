@@ -15,17 +15,23 @@ public class Player : MonoBehaviour
     [Range(0, 30)]
     public float jumpForce = 6f;
 
-    private PlayerInventory playerEq;
+    public bool isPlayerFacedRight = true;
+    public Animator animator;
+    
     /*
      * Zmienne lokalne
      */
     private Rigidbody2D playerBody;
+    private PlayerInventory playerEq;
+    private GameObject camera;
     
     private void Awake()
     {
         // pobieranie rigidbody
         playerBody = GetComponent<Rigidbody2D>();
         playerEq = gameObject.GetComponent<PlayerInventory>();
+        isPlayerFacedRight = true;
+        camera = transform.Find("Main Camera").gameObject;
     }
 
     private void Update()
@@ -34,6 +40,7 @@ public class Player : MonoBehaviour
          * przemieszczanie w osi x
          */
         float horizontalInput = Input.GetAxis("Horizontal");
+        Debug.Log(horizontalInput);
         transform.Translate(new Vector3(horizontalInput, 0, 0) * playerSpeed * Time.deltaTime);
 
         /*
@@ -43,6 +50,23 @@ public class Player : MonoBehaviour
         {
             jump();
         }
+        /*
+         * Włączanie animacji biegania
+         */
+        animator.SetFloat("PlayerSpeed", Math.Abs(horizontalInput));
+        
+        /*
+         * Zmiana kierunku gracza
+         */
+        if ( Input.GetKeyDown( KeyCode.A ) && isPlayerFacedRight)
+        {
+            isPlayerFacedRight = false;
+        }
+        if ( Input.GetKeyDown( KeyCode.D ) && !isPlayerFacedRight)
+        {
+            isPlayerFacedRight = true;
+        }
+        gameObject.GetComponent<SpriteRenderer>().flipX = !isPlayerFacedRight;
     }
 
     private void jump()
