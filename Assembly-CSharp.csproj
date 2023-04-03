@@ -248,6 +248,7 @@
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6" />
      <Folder Include="Library\PackageCache\com.unity.ide.rider@3.0.18" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <Folder Include="Assets\Animations\Player" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Prefabs" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.1\Lib\Editor\PlasticSCM\localization\binmergetool.es.txt" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.1\Lib\Editor\PlasticSCM\localization\cm.ja.txt" />
@@ -287,6 +288,7 @@
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Textures" />
      <Folder Include="Assets\TextMesh Pro\Documentation" />
      <None Include="Library\PackageCache\com.unity.2d.animation@7.0.9\package.json" />
+     <Folder Include="Assets\Animations" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.1\Lib\Editor\PlasticSCM\localization\guihelp.es.txt" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.1\Lib\Editor\PlasticSCM\localization\differences.en.txt" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.0.1\Lib\Editor\PlasticSCM\localization\workspaceserver.ja.txt" />

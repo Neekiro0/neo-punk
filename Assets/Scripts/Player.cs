@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         isPlayerFacedRight = true;
         camera = transform.Find("Main Camera").gameObject;
     }
-
+    
     private void Update()
     {
         /*
@@ -50,10 +50,12 @@ public class Player : MonoBehaviour
         {
             jump();
         }
+        
         /*
-         * Włączanie animacji biegania
+         * Przesyłanie odpowiednich zmiennych do animatora
          */
         animator.SetFloat("PlayerSpeed", Math.Abs(horizontalInput));
+        animator.SetFloat("PlayerVelocity", gameObject.GetComponent<Rigidbody2D>().velocity.y );
         
         /*
          * Zmiana kierunku gracza
