@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -17,6 +19,18 @@ public class Player : MonoBehaviour
 
     public bool isPlayerFacedRight = true;
     public Animator animator;
+    public int attackState = 0; // Aktualny stan ataku
+    public bool isAttacking = false; // Czy trwa atak
+    private float attackTimeout = 0.8f; // Czas na zakończenie sekwencji ataku
+    private Coroutine attackCoroutine;
+    private AttackSequence currentAttack = AttackSequence.First;
+
+    private enum AttackSequence
+    {
+        First,
+        Second,
+        Third
+    }
     
     /*
      * Zmienne lokalne
@@ -40,46 +54,102 @@ public class Player : MonoBehaviour
          * przemieszczanie w osi x
          */
         float horizontalInput = Input.GetAxis("Horizontal");
-        Debug.Log(horizontalInput);
+        //Debug.Log(horizontalInput);
         transform.Translate(new Vector3(horizontalInput, 0, 0) * playerSpeed * Time.deltaTime);
-
-        /*
-         * skakanie
-         */
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
-        {
-            jump();
-        }
         
         /*
          * Przesyłanie odpowiednich zmiennych do animatora
          */
         animator.SetFloat("PlayerSpeed", Math.Abs(horizontalInput));
         animator.SetFloat("PlayerVelocity", gameObject.GetComponent<Rigidbody2D>().velocity.y );
-        
+
+        /*
+         * skakanie
+         */
+        if (Input.GetKeyDown(InputManager.JumpKey) || Input.GetButtonDown(InputManager.PadButtonJump))
+        {
+            Jump();
+        }
+
         /*
          * Zmiana kierunku gracza
          */
-        if ( Input.GetKeyDown( KeyCode.A ) && isPlayerFacedRight)
+        if ( Input.GetKeyDown(InputManager.MoveLeftKey) && isPlayerFacedRight && (Time.timeScale != 0 ))
         {
             isPlayerFacedRight = false;
         }
-        if ( Input.GetKeyDown( KeyCode.D ) && !isPlayerFacedRight)
+        if ( Input.GetKeyDown(InputManager.MoveRightKey) && !isPlayerFacedRight && (Time.timeScale != 0 ))
         {
             isPlayerFacedRight = true;
         }
         gameObject.GetComponent<SpriteRenderer>().flipX = !isPlayerFacedRight;
+        
+        /*
+         * Atak
+         */
+        if ( Input.GetKeyDown(InputManager.AttackKey) /*|| Input.GetKeyDown(InputManager.PadButtonAttack)*/ )
+        {
+            if (!isAttacking)
+            {
+                // Rozpocznij atak od początku sekwencji
+                StartAttack();
+            }
+            else
+            {
+                // Gracz kontynuuje sekwencję ataku
+                ContinueAttack();
+            }
+        }
     }
 
-    private void jump()
+    private void Jump()
     {
         Vector2 jumpVector = new Vector2(0, jumpForce * 10);
         float playerBodyVelocity = playerBody.GetPointVelocity(jumpVector).y;
-        
 
         if ( playerBodyVelocity == 0 && !playerEq.isEquipmentShown)
         {
             playerBody.AddForce(jumpVector, ForceMode2D.Impulse);
         }
+    }
+
+    private void StartAttack()
+    {
+        attackCoroutine = StartCoroutine(AttackTimeout());
+        isAttacking = true;
+        currentAttack = AttackSequence.First;
+        attackState = 1;
+    }
+
+    private void ContinueAttack()
+    {
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
+        attackCoroutine = StartCoroutine(AttackTimeout());
+
+        if (currentAttack == AttackSequence.Third)
+        {
+            // Gracz zaczyna nową sekwencję ataku
+            currentAttack = AttackSequence.First;
+            attackState = 1;
+        }
+        else
+        {
+            // Kontynuuj sekwencję ataku
+            currentAttack++;
+            attackState++;
+        }
+    }
+
+    private IEnumerator AttackTimeout()
+    {
+        yield return new WaitForSeconds(attackTimeout);
+
+        // Przerwanie ataku po timeout
+        isAttacking = false;
+        attackState = 0;
+        currentAttack = AttackSequence.First;
     }
 }

@@ -67,7 +67,7 @@ public class PlayerInventory : MonoBehaviour
 
     void Update()
     {
-        if ( Input.GetKeyDown( KeyCode.I ))
+        if ( Input.GetKeyDown( InputManager.InventoryMenuKey ))
         {
             if (isEquipmentShown == false)
             {
@@ -81,15 +81,19 @@ public class PlayerInventory : MonoBehaviour
 
         if (isEquipmentShown)
         {
-            if ( Input.GetKeyDown( KeyCode.A ))
+            if ( Input.GetKeyDown( InputManager.MoveLeftKey ))
             {
                 selectedItemIndex = (selectedItemIndex == 0)?3:selectedItemIndex-1;
                 UpdateEquipmentFrames();
             }
-            if ( Input.GetKeyDown( KeyCode.D ))
+            if ( Input.GetKeyDown( InputManager.MoveRightKey ) )
             {
                 selectedItemIndex = (selectedItemIndex == 3)?0:selectedItemIndex+1;
                 UpdateEquipmentFrames();
+            }
+            if ( Input.GetKeyDown( InputManager.PauseMenuKey ) )
+            {
+                HideEquipment();
             }
         }
     }
@@ -132,6 +136,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 selectedSlot.GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
                 MainUi.transform.Find("Items").GetChild(selectedItemIndex).GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
+                MainUi.transform.Find("Items").GetChild(selectedItemIndex).GetComponent<Image>().color = Color.white;
             }
         }
     }

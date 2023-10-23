@@ -17,7 +17,8 @@ public class CoinBehaviour : MonoBehaviour
         {
             entity.GetComponent<EntityStatus>().AddXp(13);
             entity.GetComponent<EntityStatus>().AddGold(1);
-            //Destroy(gameObject);
+            //_randomWalkMapGenerator.RunProceduralGeneration();
+            Destroy(gameObject);
         }
     }
 }
