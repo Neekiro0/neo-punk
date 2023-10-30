@@ -18,6 +18,7 @@ public static class InputManager
     public static KeyCode AttackKey { get; private set; } = KeyCode.Mouse0; // Domyślny klawisz ataku (lewy przycisk myszy)
     public static KeyCode MoveLeftKey { get; private set; } = KeyCode.A; // Klawisz poruszania się w lewo (domyślnie A)
     public static KeyCode MoveRightKey { get; private set; } = KeyCode.D; // Klawisz poruszania się w prawo (domyślnie D)
+    public static KeyCode MoveDownKey { get; private set; } = KeyCode.S; // Klawisz poruszania się w dół (domyślnie S)
     public static KeyCode DodgeKey { get; private set; } = KeyCode.LeftShift; // Klawisz uniku (domyślnie Shift)
 
     /*
@@ -35,6 +36,7 @@ public static class InputManager
     public static string PadButtonItem3 { get; private set; } = "Item3"; // Przycisk używania przedmiotu 3 na padzie (domyślnie "Item3")
     public static string PadButtonItem4 { get; private set; } = "Item4"; // Przycisk używania przedmiotu 4 na padzie (domyślnie "Item4")
     public static string PadButtonDodge { get; private set; } = "Dodge"; // Przycisk uniku na padzie (domyślnie "Dodge")
+    public static string PadMoveDownKey { get; private set; } = "Down"; // Klawisz poruszania się w dół (domyślnie S)
 
     
     /*
@@ -110,6 +112,11 @@ public static class InputManager
         DodgeKey = newKey;
     }
     
+    public static void ChangeMoveDownKey(KeyCode newKey)
+    {
+        MoveDownKey = newKey;
+    }
+    
     /*
      * Zmiana kontrolek dla padów:
      */
@@ -172,5 +179,10 @@ public static class InputManager
     public static void ChangePadButtonDodge(string newButton)
     {
         PadButtonDodge = newButton;
+    }
+    
+    public static void ChangePadButtonMoveDown(string newKey)
+    {
+        PadMoveDownKey = newKey;
     }
 }

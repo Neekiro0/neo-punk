@@ -21,9 +21,16 @@ public class Player : MonoBehaviour
     public Animator animator;
     public int attackState = 0; // Aktualny stan ataku
     public bool isAttacking = false; // Czy trwa atak
-    private float attackTimeout = 0.8f; // Czas na zakończenie sekwencji ataku
+    public bool isGrounded = false; // Czy dotyka ziemii
+    private float attackTimeout = 1f; // Czas na zakończenie sekwencji ataku
+    private float lastAttackTime = 0; // aktualny pomiędzy atakami
+    private float attackCooldown = 0.5f; // cooldown ponmiędzy atakami
     private Coroutine attackCoroutine;
     private AttackSequence currentAttack = AttackSequence.First;
+    private FloorDetector FloorDetector;
+    public LayerMask passThroughLayer;
+    private bool isPassingThrough = false;
+    private Collider2D ignoredObject;
 
     private enum AttackSequence
     {
@@ -46,22 +53,32 @@ public class Player : MonoBehaviour
         playerEq = gameObject.GetComponent<PlayerInventory>();
         isPlayerFacedRight = true;
         camera = transform.Find("Main Camera").gameObject;
+        FloorDetector = transform.Find("FloorDetector").gameObject.GetComponent<FloorDetector>();
     }
-    
+
+
     private void Update()
     {
-        /*
-         * przemieszczanie w osi x
-         */
+        isGrounded = FloorDetector.isPlayerNearGround;
+        
         float horizontalInput = Input.GetAxis("Horizontal");
-        //Debug.Log(horizontalInput);
-        transform.Translate(new Vector3(horizontalInput, 0, 0) * playerSpeed * Time.deltaTime);
         
         /*
          * Przesyłanie odpowiednich zmiennych do animatora
          */
         animator.SetFloat("PlayerSpeed", Math.Abs(horizontalInput));
         animator.SetFloat("PlayerVelocity", gameObject.GetComponent<Rigidbody2D>().velocity.y );
+        animator.SetInteger("PlayerAttackState", attackState );
+        animator.SetBool("IsPlayerAttacking", isAttacking );
+        animator.SetBool("IsGrounded", isGrounded );
+        
+        /*
+         * przemieszczanie w osi x
+         */
+        if (!isAttacking)
+        {
+            transform.Translate(new Vector3(horizontalInput, 0, 0) * playerSpeed * Time.deltaTime);
+        }
 
         /*
          * skakanie
@@ -78,7 +95,7 @@ public class Player : MonoBehaviour
         {
             isPlayerFacedRight = false;
         }
-        if ( Input.GetKeyDown(InputManager.MoveRightKey) && !isPlayerFacedRight && (Time.timeScale != 0 ))
+        if (  Input.GetKeyDown(InputManager.MoveRightKey) && !isPlayerFacedRight && (Time.timeScale != 0 ))
         {
             isPlayerFacedRight = true;
         }
@@ -87,8 +104,9 @@ public class Player : MonoBehaviour
         /*
          * Atak
          */
-        if ( Input.GetKeyDown(InputManager.AttackKey) /*|| Input.GetKeyDown(InputManager.PadButtonAttack)*/ )
+        if ( Input.GetKeyDown(InputManager.AttackKey) && isGrounded/*|| Input.GetKeyDown(InputManager.PadButtonAttack)*/ )
         {
+            
             if (!isAttacking)
             {
                 // Rozpocznij atak od początku sekwencji
@@ -99,6 +117,13 @@ public class Player : MonoBehaviour
                 // Gracz kontynuuje sekwencję ataku
                 ContinueAttack();
             }
+        }
+        /*
+         * Przejście przez podłoże
+         */
+        if ( FloorDetector.isFloorPassable && isGrounded && Input.GetKeyDown(InputManager.MoveDownKey) )
+        {
+            DisableCollisionForDuration(0.3f);
         }
     }
 
@@ -112,6 +137,21 @@ public class Player : MonoBehaviour
             playerBody.AddForce(jumpVector, ForceMode2D.Impulse);
         }
     }
+    
+    private void DisableCollisionForDuration(float duration)
+    {
+        ignoredObject = FloorDetector.collidingObject.GetComponent<Collider2D>();
+        
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), ignoredObject, true);
+        Invoke("EnableCollision", duration);
+    }
+
+    // Włączenie kolizji ponownie.
+    private void EnableCollision()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), ignoredObject, false);
+        ignoredObject = null;
+    }
 
     private void StartAttack()
     {
@@ -119,6 +159,7 @@ public class Player : MonoBehaviour
         isAttacking = true;
         currentAttack = AttackSequence.First;
         attackState = 1;
+        movePlayerOnAttack(0.3f);
     }
 
     private void ContinueAttack()
@@ -129,17 +170,25 @@ public class Player : MonoBehaviour
         }
         attackCoroutine = StartCoroutine(AttackTimeout());
 
-        if (currentAttack == AttackSequence.Third)
+        // Sprawdź, czy minęło wystarczająco dużo czasu między atakami
+        if (Time.time - lastAttackTime >= attackCooldown)
         {
-            // Gracz zaczyna nową sekwencję ataku
-            currentAttack = AttackSequence.First;
-            attackState = 1;
-        }
-        else
-        {
-            // Kontynuuj sekwencję ataku
-            currentAttack++;
-            attackState++;
+            if (currentAttack == AttackSequence.Third)
+            {
+                // Gracz zaczyna nową sekwencję ataku
+                currentAttack = AttackSequence.First;
+                attackState = 1;
+            }
+            else
+            {
+                // Kontynuuj sekwencję ataku
+                currentAttack++;
+                attackState++;
+                movePlayerOnAttack(0.3f);
+            }
+
+            // Aktualizuj czas ostatniego ataku
+            lastAttackTime = Time.time;
         }
     }
 
@@ -151,5 +200,13 @@ public class Player : MonoBehaviour
         isAttacking = false;
         attackState = 0;
         currentAttack = AttackSequence.First;
+    }
+
+    private void movePlayerOnAttack(float howFar)
+    {
+        // delikatne przesunięcie gracza po ataku
+        if (isPlayerFacedRight)
+        { transform.Translate(new Vector3(1.0f, 0, 0) * howFar * 100 * Time.deltaTime); }
+        else { transform.Translate(new Vector3(-1.0f, 0, 0) * howFar * 100 * Time.deltaTime); }
     }
 }
