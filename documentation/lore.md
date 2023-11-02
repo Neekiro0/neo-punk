@@ -1,7 +1,9 @@
 ﻿# Świat
 Świat jest [cyberpunkowym](https://pl.wikipedia.org/wiki/Cyberpunk) przedstawieniem przyszłości ziemii w 22 wieku.  
 Przez ludzkie działania, oraz niską demografię ilość ludzi drastycznie się skurczyła,  
-a żeby oszczędzić ograniczone zasoby starsi ludzie po osiągnięciu ustalonego przez rząd wieku 60 lat są przymusowo uśmiercani.  
+a żeby oszczędzić ograniczone zasoby starsi ludzie po osiągnięciu ustalonego przez rząd wieku około 50 lat są przymusowo uśmiercani.
+Ludzie ci znikają w niewyjaśnionych okolicznościach i wybierani są wyrywkowo wśród starców powyżej 50 lat.
+Dodatkowo przymuszonej eutanazji są poddawane dzieci rodzin z wyższych swer, które urodziły się niechciane, z defektami, czy uznane za nieidealne.
 Przez wiele lat trwał odpływ ludzi ze wsi do miast, co doprowadziło do totalnego zaniknięcia terenów pozamiejskich.  
 Na ten moment ludzkość mieszka w gigantycznych, samowystarczalnych miastach, gdzie każde z nich jest swoją własną stolicą, czyli tzw. Polis.  
 Miasta te czasem prowadzą ze sobą wojny na tle kulturowym i rasowym.  
@@ -62,3 +64,8 @@ Ważnym faktem jest także opracowanie technologii, która w trakcie trwania opo
 Technologia ta pozwalała na materializowanie duszy w postaci maziowatej niebieskiej substancji, która w domyśle miała być rozpusczona w specjalnym płynie łączącą dusze w zbiorową świadomość.  
 Natomiast porzucone i podnisczone dusze zaczęły się łączyć z krwią i odpadkami porzuconych ludzi na pustkowiu, tworząc w ten sposób własną, krawą zbiorową świadomość.  
 W ten sposób zaczęły powstawać demony.
+
+# Główny zły 
+Zbiorowa świadomość, która skłąda się ze zniszczonych fragmentów duszy, składających się głównie z negatywnych emocji obecnych przy uśmiercaniu ciała i odbieraniu duszy człowiekowi.  
+Świadomość ta posiada materialną formę składającą się posklejanych fragmentów ciał za pomocą zniszczoncych fragmentów duszy, która po zniszczeniu przybiera czarny kolor.
+Podczas walki z nim wydaje z siebie nienaturalne dźwięki/krzyki i ciężko mu skoordynować dokładnie ruchy kończyn.

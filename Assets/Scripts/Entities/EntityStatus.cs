@@ -14,6 +14,11 @@ public class EntityStatus : MonoBehaviour
     public float entityMaxHelath = 100.0f;
     public int gold = 0;
     public float AttackDamage = 0;
+    public float MovementSpeed = 0;
+    public bool isFacedRight = true;
+    public bool isEnemy = false;
+    public GameObject detectedTarget;
+    public float attackRange;
 
     private GameObject mainUserInterface;
 
@@ -21,7 +26,7 @@ public class EntityStatus : MonoBehaviour
     {
         mainUserInterface = GameObject.Find("Main User Interface");
     }
-
+    
     /*
      * Nazwa
      */
@@ -168,5 +173,17 @@ public class EntityStatus : MonoBehaviour
     public float GetAttackDamageCount()
     {
         return this.AttackDamage;
+    }
+
+    /*
+     * Prędkość ruchu
+     */
+    public void SetMovementSpeed(float MovementSpeed)
+    {
+        this.MovementSpeed = MovementSpeed;
+    }
+    public float GetMovementSpeed()
+    {
+        return this.MovementSpeed;
     }
 }

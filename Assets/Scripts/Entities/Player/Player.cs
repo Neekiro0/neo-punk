@@ -9,15 +9,10 @@ public class Player : MonoBehaviour
     /*
      * Zmienne dostępne w edytorze
      */
-    [Tooltip("Set player speed, between 0 and 10000.")]
-    [Range(0, 100)]
-    public float playerSpeed = 20f;
-    
     [Tooltip("Set player jump force, between 0 and 10000.")]
     [Range(0, 30)]
     public float jumpForce = 6f;
 
-    public bool isPlayerFacedRight = true;
     public Animator animator;
     public int attackState = 0; // Aktualny stan ataku
     public bool isAttacking = false; // Czy trwa atak
@@ -41,7 +36,7 @@ public class Player : MonoBehaviour
     private CapsuleCollider2D boxCollider;
     private GameObject rightSwordHitbox;
     private GameObject leftSwordHitbox;
-    private float playerCurrentSpeed;
+    private float playerCurrentSpeed = 1;
     private Vector3 previousPosition;
     private float attackTimeout = 0.8f; // Czas na zakończenie sekwencji ataku
     private float lastAttackTime = 0; // aktualny pomiędzy atakami
@@ -49,8 +44,8 @@ public class Player : MonoBehaviour
     private Coroutine attackCoroutine;
     private AttackSequence currentAttack = AttackSequence.First;
     private FloorDetector FloorDetector;
-    public bool isChargingAttack = false;
-    public float keyHoldTime = 0.0f;
+    private bool isChargingAttack = false;
+    private float keyHoldTime = 0.0f;
     float holdTimeThreshold = 1.7f;
     private EntityStatus playerStatus;
     
@@ -59,7 +54,6 @@ public class Player : MonoBehaviour
         // pobieranie rigidbody
         playerBody = GetComponent<Rigidbody2D>();
         playerEq = gameObject.GetComponent<PlayerInventory>();
-        isPlayerFacedRight = true;
         camera = transform.Find("Main Camera").gameObject;
         FloorDetector = transform.Find("FloorDetector").gameObject.GetComponent<FloorDetector>();
         boxCollider = GetComponent<CapsuleCollider2D>();
@@ -91,11 +85,11 @@ public class Player : MonoBehaviour
         animator.SetBool("IsChargingAttack", isChargingAttack );
         animator.SetFloat("ChargingTime", keyHoldTime );
         
-        if (isAttacking && (horizontalInput < 0 && isPlayerFacedRight))
+        if (isAttacking && (horizontalInput < 0 && playerStatus.isFacedRight))
         {
             horizontalInput = 0;
         }
-        if (isAttacking && (horizontalInput > 0 && !isPlayerFacedRight) )
+        if (isAttacking && (horizontalInput > 0 && !playerStatus.isFacedRight) )
         {
             
             horizontalInput = 0;
@@ -106,7 +100,7 @@ public class Player : MonoBehaviour
          */
         if ( keyHoldTime < 0.3f )
         {
-            transform.Translate(new Vector3(horizontalInput, 0, 0) * playerSpeed * Time.deltaTime);
+            transform.Translate(new Vector3(horizontalInput, 0, 0) * playerStatus.GetMovementSpeed() * Time.deltaTime);
         }
 
         // Oblicz prędkość poruszania się na podstawie zmiany pozycji między klatkami.
@@ -141,15 +135,16 @@ public class Player : MonoBehaviour
         /*
          * Zmiana kierunku gracza
          */
-        if ( Input.GetKey(InputManager.MoveLeftKey) && isPlayerFacedRight && (Time.timeScale != 0 ) && !isAttacking )
+        if (  playerCurrentSpeed > 0.1 )
         {
-            isPlayerFacedRight = false;
+            playerStatus.isFacedRight = true;
         }
-        if (  Input.GetKey(InputManager.MoveRightKey) && !isPlayerFacedRight && (Time.timeScale != 0 ) && !isAttacking )
+        else if (  playerCurrentSpeed < -0.1 )
         {
-            isPlayerFacedRight = true;
+            playerStatus.isFacedRight = false;
         }
-        gameObject.GetComponent<SpriteRenderer>().flipX = !isPlayerFacedRight;
+        
+        gameObject.GetComponent<SpriteRenderer>().flipX = !playerStatus.isFacedRight;
         
         
         if (Input.GetKey(InputManager.AttackKey) && !isAttacking)
@@ -237,7 +232,7 @@ public class Player : MonoBehaviour
 
     private void DealDamage(float damageToDeal)
     {
-        if (isPlayerFacedRight)
+        if (playerStatus.isFacedRight)
         {
             // sprawdzanie czy gracz atakuje przeciwnika
             GameObject collidingObject = rightSwordHitbox.gameObject.GetComponent<HitboxBehaviour>().collidingEnemyObject;
@@ -248,7 +243,7 @@ public class Player : MonoBehaviour
                 rightSwordHitbox.gameObject.GetComponent<ParticleSystem>().Play();
             }
         }
-        else if (!isPlayerFacedRight)
+        else if (!playerStatus.isFacedRight)
         {
             // sprawdzanie czy gracz atakuje przeciwnika
             GameObject collidingObject = leftSwordHitbox.gameObject.GetComponent<HitboxBehaviour>().collidingEnemyObject;
@@ -319,7 +314,7 @@ public class Player : MonoBehaviour
     private void movePlayerOnAttack(float howFar)
     {
         // delikatne przesunięcie gracza po ataku
-        if (isPlayerFacedRight)
+        if (playerStatus.isFacedRight)
         {
             Vector3 movement = new Vector3(1.0f * howFar * 1000, 0, 0);
             playerBody.AddForce(movement);
