@@ -65,6 +65,9 @@ Technologia ta pozwalała na materializowanie duszy w postaci maziowatej niebies
 Natomiast porzucone i podnisczone dusze zaczęły się łączyć z krwią i odpadkami porzuconych ludzi na pustkowiu, tworząc w ten sposób własną, krawą zbiorową świadomość.  
 W ten sposób zaczęły powstawać demony.
 
+Dusza podczas jej niszczenia jest przeistaczana w czarną maź która ma w sobie zapisane informacje.  
+Te informacje są losowymi fragmentami oryginalnej duszy uśmiercanego człowieka.  
+
 # Główny zły 
 Zbiorowa świadomość, która skłąda się ze zniszczonych fragmentów duszy, składających się głównie z negatywnych emocji obecnych przy uśmiercaniu ciała i odbieraniu duszy człowiekowi.  
 Świadomość ta posiada materialną formę składającą się posklejanych fragmentów ciał za pomocą zniszczoncych fragmentów duszy, która po zniszczeniu przybiera czarny kolor.

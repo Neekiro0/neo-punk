@@ -38,9 +38,9 @@ public class Player : MonoBehaviour
     private GameObject leftSwordHitbox;
     private float playerCurrentSpeed = 1;
     private Vector3 previousPosition;
-    private float attackTimeout = 0.8f; // Czas na zakończenie sekwencji ataku
+    private float attackTimeout = 0.6f; // Czas na zakończenie sekwencji ataku
     private float lastAttackTime = 0; // aktualny pomiędzy atakami
-    private float attackCooldown = 0.4f; // cooldown ponmiędzy atakami
+    private float attackCooldown = 0.3f; // cooldown ponmiędzy atakami
     private Coroutine attackCoroutine;
     private AttackSequence currentAttack = AttackSequence.First;
     private FloorDetector FloorDetector;
@@ -135,13 +135,13 @@ public class Player : MonoBehaviour
         /*
          * Zmiana kierunku gracza
          */
-        if (  playerCurrentSpeed > 0.1 )
-        {
-            playerStatus.isFacedRight = true;
-        }
-        else if (  playerCurrentSpeed < -0.1 )
+        if ( Input.GetKey(InputManager.MoveLeftKey) && playerStatus.isFacedRight && (Time.timeScale != 0 ) && !isAttacking )
         {
             playerStatus.isFacedRight = false;
+        }
+        if (  Input.GetKey(InputManager.MoveRightKey) && !playerStatus.isFacedRight && (Time.timeScale != 0 ) && !isAttacking )
+        {
+            playerStatus.isFacedRight = true;
         }
         
         gameObject.GetComponent<SpriteRenderer>().flipX = !playerStatus.isFacedRight;
@@ -255,6 +255,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+    
 
     private void StartAttack()
     {
@@ -325,4 +326,6 @@ public class Player : MonoBehaviour
             playerBody.AddForce(movement);
         }
     }
+    
+    
 }

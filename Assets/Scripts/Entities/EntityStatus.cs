@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using Unity.Collections;
 using UnityEngine;
@@ -19,12 +20,17 @@ public class EntityStatus : MonoBehaviour
     public bool isEnemy = false;
     public GameObject detectedTarget;
     public float attackRange;
+    public Color lightDamageColor;
+    public Color heavyDamageColor;
+    public Color deathColor;
 
     private GameObject mainUserInterface;
+    private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
         mainUserInterface = GameObject.Find("Main User Interface");
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
     
     /*
@@ -113,13 +119,43 @@ public class EntityStatus : MonoBehaviour
         if ( damage >= GetHp() )
         {
             // Encja ginie
-            Debug.Log(entityName+" ginie!");
-            Destroy(gameObject);
+            StartCoroutine(DeathAnimation(deathColor, 0.1f));
         } else if (damage < GetHp())
         {
             // encja otrzymuje obrażenia
             SetHp(GetHp() - damage);
-            Debug.Log("Otrzymano " +damage.ToString()+ " obrażeń. Pozostało " +GetHp().ToString()+ "HP" );
+            
+            if (damage >= ( GetHp() / 2 ) ) StartCoroutine(ChangeColorForInterval(heavyDamageColor, 0.05f));
+            else StartCoroutine(ChangeColorForInterval(lightDamageColor, 0.12f));
+        }
+    }
+    
+    private IEnumerator ChangeColorForInterval(Color color, float duration)
+    {
+        if (spriteRenderer)
+        {
+            spriteRenderer.color = color;
+            yield return new WaitForSeconds(duration);
+            spriteRenderer.color = Color.white;
+        }
+        else
+        {
+            Debug.Log("Nie wykryto spriteRenderer");
+        }
+    }
+    
+    private IEnumerator DeathAnimation(Color color, float duration)
+    {
+        if (spriteRenderer)
+        {
+            spriteRenderer.color = color;
+            yield return new WaitForSeconds(duration);
+            spriteRenderer.color = Color.white;
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("Nie wykryto spriteRenderer");
         }
     }
     
