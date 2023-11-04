@@ -23,6 +23,7 @@ public class EntityStatus : MonoBehaviour
     public Color lightDamageColor;
     public Color heavyDamageColor;
     public Color deathColor;
+    private GameObject entityObject;
 
     private GameObject mainUserInterface;
     private SpriteRenderer spriteRenderer;
@@ -116,18 +117,97 @@ public class EntityStatus : MonoBehaviour
 
     public void DealDamage(float damage)
     {
-        if ( damage >= GetHp() )
+        if (gameObject.CompareTag("Player"))
         {
-            // Encja ginie
-            StartCoroutine(DeathAnimation(deathColor, 0.1f));
-        } else if (damage < GetHp())
-        {
-            // encja otrzymuje obrażenia
-            SetHp(GetHp() - damage);
-            
-            if (damage >= ( GetHp() / 2 ) ) StartCoroutine(ChangeColorForInterval(heavyDamageColor, 0.05f));
-            else StartCoroutine(ChangeColorForInterval(lightDamageColor, 0.12f));
+            bool isBLocking = gameObject.GetComponent<Player>().isBlocking;
+            bool isParrying = gameObject.GetComponent<Player>().isParrying;
+
+            if (isParrying)
+            {
+                // gracz sparował cios
+                float parryingDamageReduction = 0f; // 0 = 100% redukji
+                if ( damage * parryingDamageReduction >= GetHp() )
+                {
+                    /*
+                     * Gracz ginie
+                     * TODO: animacja śmierci
+                     */
+                    PlayerDeathEvent();
+                } else if (damage * parryingDamageReduction < GetHp())
+                {
+                    // gracz otrzymuje obrażenia
+                    GettingDamageEvent(damage * parryingDamageReduction);
+                    
+                }
+                // odgrywanie animacji po sparowaniu
+                gameObject.GetComponent<Animator>().Play("parryAttack");
+                
+                
+            } else if (isBLocking)
+            {
+                // gracz zablokował cios
+                float blockingDamageReduction = 0.6f; // 0.6 = 40% redukji
+                if ( damage * blockingDamageReduction >= GetHp() )
+                {
+                    /*
+                     * Gracz ginie
+                     * TODO: animacja śmierci
+                     */
+                    PlayerDeathEvent();
+                } else if (damage * blockingDamageReduction < GetHp())
+                {
+                    // gracz otrzymuje obrażenia
+                    GettingDamageEvent(damage * blockingDamageReduction);
+                }
+            }
+            else
+            {
+                // gracz nie sparował, ani nie zablokował ciosu
+                if ( damage >= GetHp() )
+                {
+                    /*
+                     * Gracz ginie
+                     * TODO: animacja śmierci
+                     */
+                    PlayerDeathEvent();
+                } else if (damage < GetHp())
+                {
+                    // gracz otrzymuje obrażenia
+                    GettingDamageEvent(damage);
+                }
+            }
         }
+        else
+        {
+            // Kod dla wszystkich encji poza graczem
+            if ( damage >= GetHp() )
+            {
+                // Encja ginie
+                DeathEvent();
+            } else if (damage < GetHp())
+            {
+                // encja otrzymuje obrażenia
+                GettingDamageEvent(damage);
+            }
+        }
+    }
+
+    void DeathEvent()
+    {
+        StartCoroutine(DeathAnimation(deathColor, 0.1f));
+    }
+
+    void PlayerDeathEvent()
+    {
+        StartCoroutine(DeathAnimation(deathColor, 0.1f));
+    }
+    
+    void GettingDamageEvent( float damage)
+    {
+        SetHp(GetHp() - damage);
+            
+        if (damage >= ( GetHp() / 2 ) ) StartCoroutine(ChangeColorForInterval(heavyDamageColor, 0.05f));
+        else StartCoroutine(ChangeColorForInterval(lightDamageColor, 0.12f));
     }
     
     private IEnumerator ChangeColorForInterval(Color color, float duration)

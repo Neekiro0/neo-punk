@@ -48,6 +48,10 @@ public class Player : MonoBehaviour
     private float keyHoldTime = 0.0f;
     float holdTimeThreshold = 1.7f;
     private EntityStatus playerStatus;
+    [SerializeField] private float parryWindow;
+    public bool isBlocking;
+    public bool isParrying;
+    private bool canBlock = true;
     
     private void Awake()
     {
@@ -84,12 +88,16 @@ public class Player : MonoBehaviour
         animator.SetBool("IsGrounded", isGrounded );
         animator.SetBool("IsChargingAttack", isChargingAttack );
         animator.SetFloat("ChargingTime", keyHoldTime );
+        animator.SetBool("IsBlocking", isBlocking );
         
-        if (isAttacking && (horizontalInput < 0 && playerStatus.isFacedRight))
+        /*
+         * Blokowanie chodzenia do tyłu, gdy gracz atakuje, lub blokuje
+         */
+        if ( ( isAttacking || isBlocking ) && (horizontalInput < 0 && playerStatus.isFacedRight))
         {
             horizontalInput = 0;
         }
-        if (isAttacking && (horizontalInput > 0 && !playerStatus.isFacedRight) )
+        if (( isAttacking || isBlocking ) && (horizontalInput > 0 && !playerStatus.isFacedRight) )
         {
             
             horizontalInput = 0;
@@ -98,7 +106,7 @@ public class Player : MonoBehaviour
         /*
          * przemieszczanie w osi x
          */
-        if ( keyHoldTime < 0.3f )
+        if ( keyHoldTime < 0.3f && !isBlocking )
         {
             transform.Translate(new Vector3(horizontalInput, 0, 0) * playerStatus.GetMovementSpeed() * Time.deltaTime);
         }
@@ -127,7 +135,7 @@ public class Player : MonoBehaviour
         /*
          * skakanie
          */
-        if ( (Input.GetKeyDown(InputManager.JumpKey) || Input.GetButtonDown(InputManager.PadButtonJump) ) && !isAttacking)
+        if ( (Input.GetKeyDown(InputManager.JumpKey) || Input.GetButtonDown(InputManager.PadButtonJump) ) && !isAttacking && !isBlocking)
         {
             Jump();
         }
@@ -135,19 +143,20 @@ public class Player : MonoBehaviour
         /*
          * Zmiana kierunku gracza
          */
-        if ( Input.GetKey(InputManager.MoveLeftKey) && playerStatus.isFacedRight && (Time.timeScale != 0 ) && !isAttacking )
+        if ( Input.GetKey(InputManager.MoveLeftKey) && playerStatus.isFacedRight && (Time.timeScale != 0 ) && !isAttacking && !isBlocking )
         {
             playerStatus.isFacedRight = false;
         }
-        if (  Input.GetKey(InputManager.MoveRightKey) && !playerStatus.isFacedRight && (Time.timeScale != 0 ) && !isAttacking )
+        if (  Input.GetKey(InputManager.MoveRightKey) && !playerStatus.isFacedRight && (Time.timeScale != 0 ) && !isAttacking && !isBlocking )
         {
             playerStatus.isFacedRight = true;
         }
-        
         gameObject.GetComponent<SpriteRenderer>().flipX = !playerStatus.isFacedRight;
         
-        
-        if (Input.GetKey(InputManager.AttackKey) && !isAttacking)
+        /*
+         * Atak, oraz charge attack
+         */
+        if (Input.GetKey(InputManager.AttackKey) && !isAttacking && !isBlocking)
         {
             if (keyHoldTime < holdTimeThreshold)
             {
@@ -155,7 +164,6 @@ public class Player : MonoBehaviour
                 isChargingAttack = true;
             }
         }
-
         if (Input.GetKeyUp(InputManager.AttackKey))
         {
             if (isChargingAttack)
@@ -180,6 +188,27 @@ public class Player : MonoBehaviour
         }
         
         /*
+         * Parowanie
+         */
+        if ( !isAttacking && !isChargingAttack && Input.GetKeyDown(InputManager.BlockKey) )
+        {
+            isParrying = true;
+            canBlock = false;
+            StartCoroutine(Parry());
+        }
+
+        /*
+         * Blokowanie
+         */
+        if (Input.GetKey(InputManager.BlockKey))
+        {
+            isBlocking = true;
+        }
+        else { isBlocking = false;}
+        
+
+        if (isBlocking) Debug.Log("Blokuję!");
+        /*
          * Przejście przez podłoże
          */
         if ( FloorDetector.isFloorPassable && isGrounded && Input.GetKeyDown(InputManager.MoveDownKey) )
@@ -198,6 +227,14 @@ public class Player : MonoBehaviour
             playerBody.AddForce(jumpVector, ForceMode2D.Impulse);
         }
     }
+
+    private IEnumerator Parry()
+    {
+        yield return new WaitForSeconds(parryWindow);
+        isParrying = false;
+        canBlock = true;
+    }
+    
     private void PerformChargeAttack()
     {
         if (isChargingAttack && ( keyHoldTime >= holdTimeThreshold ) )
