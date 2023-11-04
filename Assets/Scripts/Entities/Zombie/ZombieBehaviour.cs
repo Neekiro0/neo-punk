@@ -12,8 +12,8 @@ public class ZombieBehaviour : MonoBehaviour
     private EntityStatus entityStatus;
     private Vector3 playerVector3;
     private bool isChasingPlayer;
-    private float previousPlayerDetectorRange;
-    private CircleCollider2D playerDetector;
+    private Vector2 previousPlayerDetectorRange;
+    private BoxCollider2D playerDetector;
     private Vector3 previousPosition;
     public float currentSpeed;
     public bool isPlayerInAttackRange;
@@ -30,8 +30,8 @@ public class ZombieBehaviour : MonoBehaviour
         entityStatus = gameObject.GetComponent<EntityStatus>();
         EntitySpeed = entityStatus.GetMovementSpeed();
 
-        playerDetector = gameObject.transform.Find("PlayerDetector").gameObject.GetComponent<CircleCollider2D>();
-        previousPlayerDetectorRange = playerDetector.radius;
+        playerDetector = gameObject.transform.Find("PlayerDetector").gameObject.GetComponent<BoxCollider2D>();
+        previousPlayerDetectorRange = playerDetector.size;
         animator = gameObject.GetComponent<Animator>();
     }
     
@@ -40,7 +40,7 @@ public class ZombieBehaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !hasTouchedPlayer)
         {
             EntityStatus playerStatus = collision.gameObject.GetComponent<EntityStatus>();
-            playerStatus.DealDamage(entityStatus.GetAttackDamageCount());
+            playerStatus.DealDamage(entityStatus.GetAttackDamageCount(), gameObject);
         }
     }
     
@@ -58,8 +58,13 @@ public class ZombieBehaviour : MonoBehaviour
         currentSpeed = speedVector.x;
         previousPosition = currentPosition;
         
+        animator.SetFloat("CurrentSpeed", currentSpeed );
+        animator.SetBool("IsPlayerInAttackRange", isPlayerInAttackRange );
+        
         if (currentSpeed > 0) entityStatus.isFacedRight = true; 
         else if (currentSpeed < 0) entityStatus.isFacedRight = false; 
+        
+        //if (currentSpeed != 0) animator.Play("walkingAnimation");
         
         /*
          * Obracanie 
@@ -131,6 +136,7 @@ public class ZombieBehaviour : MonoBehaviour
 
     void Attack()
     {
+        animator.Play("attackAnimation");
         Rigidbody2D zombieRigidbody = gameObject.GetComponent<Rigidbody2D>();
         if (entityStatus.detectedTarget.transform.position.x < gameObject.transform.position.x)
         {
@@ -142,21 +148,8 @@ public class ZombieBehaviour : MonoBehaviour
             Vector3 movement = new Vector3(1 * entityStatus.attackRange * 500, 700, 0);
             zombieRigidbody.AddForce(movement);
         }
-        
-        //if (zombieRigidbody.)
-        animator.Play("Idle");
     }
     
-    /*IEnumerator AttackCourutine(int direction)
-    {
-        isAttacking = true;
-        
-        
-        animator.Play("Idle");
-        yield return new WaitForSeconds(2.0f);
-        
-        isAttacking = false;
-    }*/
     private IEnumerator AttackCooldown()
     {
         yield return new WaitForSeconds(2f); // Czas cooldownu (2 sekundy w przykładzie)
@@ -167,10 +160,9 @@ public class ZombieBehaviour : MonoBehaviour
     {
         while (isPlayerInAttackRange)
         {
-            animator.Play("ZombieAttackAnimation");
+            animator.Play("attackAnimation");
             isAttacking = true;
             Attack(); // Wywołaj atak
-            animator.Play("Idle");
 
             // Rozpocznij coroutine do obsługi cooldownu
             StartCoroutine(AttackCooldown());
@@ -184,7 +176,7 @@ public class ZombieBehaviour : MonoBehaviour
     {
         if (isChasingPlayer && playerDetector && didRaycastFoundPlayer)
         {
-            playerDetector.radius = previousPlayerDetectorRange * 1.6f;
+            playerDetector.size = new Vector2(previousPlayerDetectorRange.x * 1.4f, previousPlayerDetectorRange.y * 1.2f) ;
         }
         
         // Niezakłócony ruch dopóki nie wykryto gracza

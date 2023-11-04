@@ -115,14 +115,27 @@ public class EntityStatus : MonoBehaviour
         return this.entityMaxHelath;
     }
 
-    public void DealDamage(float damage)
+    public void DealDamage(float damage, GameObject attackingEntity = null)
     {
+        // zawsze podawać attackingEntity, gdy przeciwnik atakuej gracza
         if (gameObject.CompareTag("Player"))
         {
             bool isBLocking = gameObject.GetComponent<Player>().isBlocking;
             bool isParrying = gameObject.GetComponent<Player>().isParrying;
+            bool isPlayerFacedToEnemy = false;
+            
+            if (attackingEntity)
+            {
+                EntityStatus playerStatus = gameObject.GetComponent<EntityStatus>();
+                EntityStatus enemyStatus = attackingEntity.GetComponent<EntityStatus>();
+                isPlayerFacedToEnemy = (playerStatus.isFacedRight && !enemyStatus.isFacedRight) ||
+                                       (!playerStatus.isFacedRight && enemyStatus.isFacedRight);
+            }
+            /*Debug.Log(isPlayerFacedToEnemy);
+            Debug.Log(gameObject.GetComponent<EntityStatus>().isFacedRight);
+            Debug.Log(gameObject.GetComponent<EntityStatus>().isFacedRight);*/
 
-            if (isParrying)
+            if (isParrying && isPlayerFacedToEnemy)
             {
                 // gracz sparował cios
                 float parryingDamageReduction = 0f; // 0 = 100% redukji
@@ -143,7 +156,7 @@ public class EntityStatus : MonoBehaviour
                 gameObject.GetComponent<Animator>().Play("parryAttack");
                 
                 
-            } else if (isBLocking)
+            } else if (isBLocking && isPlayerFacedToEnemy)
             {
                 // gracz zablokował cios
                 float blockingDamageReduction = 0.6f; // 0.6 = 40% redukji

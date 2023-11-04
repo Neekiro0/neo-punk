@@ -99,7 +99,6 @@ public class Player : MonoBehaviour
         }
         if (( isAttacking || isBlocking ) && (horizontalInput > 0 && !playerStatus.isFacedRight) )
         {
-            
             horizontalInput = 0;
         }
         
@@ -206,8 +205,6 @@ public class Player : MonoBehaviour
         }
         else { isBlocking = false;}
         
-
-        if (isBlocking) Debug.Log("Blokuję!");
         /*
          * Przejście przez podłoże
          */
