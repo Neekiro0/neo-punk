@@ -95,6 +95,7 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Scenes" />
+     <Folder Include="Assets\Scenes\TestingGroundScene" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <Folder Include="Library\PackageCache\com.unity.test-framework@1.1.33" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Sprites" />
@@ -118,6 +119,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\package.json" />
      <Folder Include="Library\PackageCache\com.unity.visualscripting@1.9.1\Graphics" />
+     <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Materials" />
      <Folder Include="Library\PackageCache\com.unity.burst@1.8.9\Tests" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5\Gizmos" />
@@ -150,6 +152,7 @@
      <Folder Include="Assets\EntitiesSprites\MainCharacter" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\PackageConversionData.json" />
      <Folder Include="Library\PackageCache\com.unity.ext.nunit@1.0.6" />
+     <Folder Include="Assets\EveldTech\DynamicCamera\Documentation" />
      <Folder Include="Library\PackageCache\com.unity.2d.animation@9.0.4\IK" />
      <Folder Include="Library\PackageCache\com.unity.burst@1.8.9" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5\Tests" />
@@ -158,7 +161,9 @@
      <Folder Include="Library\PackageCache\com.unity.2d.common@8.0.1" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\ValidationExceptions.json" />
      <Folder Include="Assets\TextMesh Pro" />
+     <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Models" />
      <None Include="Library\PackageCache\com.unity.ide.rider@3.0.25\package.json" />
+     <Folder Include="Assets\EveldTech\DynamicCamera" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts" />
      <None Include="Library\PackageCache\com.unity.test-framework@1.1.33\package.json" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Resources" />
@@ -168,6 +173,7 @@
      <Folder Include="Library\PackageCache\com.unity.inputsystem@1.7.0" />
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5" />
      <Folder Include="Assets\StaticSprites" />
+     <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Prefabs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
      <Folder Include="Assets\StaticSprites\UI\Keys" />
      <None Include="Library\PackageCache\com.unity.visualscripting@1.9.1\ValidationExceptions.json" />
@@ -181,10 +187,12 @@
      <Folder Include="Assets\Scripts\DataHandlers" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\EveldTech\DynamicCamera\readme.txt" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Textures" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Library\PackageCache\com.unity.cinemachine@2.9.5\license.txt" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts" />
+     <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets" />
      <Folder Include="Library\PackageCache\com.unity.mathematics@1.2.6" />
      <Folder Include="Assets\EntitiesSprites" />
      <Folder Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.2" />
@@ -202,6 +210,7 @@
      <None Include="Library\PackageCache\com.unity.cinemachine@2.9.5\package.json" />
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5\EditorResources\Overlay" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6" />
+     <Folder Include="Assets\EveldTech" />
      <Folder Include="Library\PackageCache\com.unity.ide.rider@3.0.25" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <Folder Include="Assets\EntitiesSprites\Animations\Player" />
@@ -216,6 +225,7 @@
      <Folder Include="Library\PackageCache\com.unity.ide.vscode@1.2.5" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Tests" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders\TMP_Properties.cginc" />
+     <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Scenes" />
      <Folder Include="Assets\StaticSprites\Items" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders\TMP_SDF Internal Editor.shader" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5\Presets" />
@@ -258,6 +268,7 @@
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Resources\Fonts &amp; Materials" />
      <None Include="Library\PackageCache\com.unity.burst@1.8.9\package.json" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Resources\Color Gradient Presets" />
+     <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Sprites" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5\Presets\Noise" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne.json" />
      <Folder Include="Library\PackageCache\com.unity.2d.spriteshape@9.0.2" />
@@ -917,6 +928,10 @@
       <Project>{fc0791ab-f908-1fe9-ee87-bb1529314d97}</Project>
       <Name>Unity.Burst.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Eveld.DynamicCamera.csproj">
+      <Project>{add6a964-bb3b-4a92-61a6-8d22f04bbbb6}</Project>
+      <Name>Eveld.DynamicCamera</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.2D.Common.Path.Editor.csproj">
       <Project>{464cf689-75b2-25b9-86e5-5f791c97a91e}</Project>
       <Name>Unity.2D.Common.Path.Editor</Name>
@@ -1092,6 +1107,10 @@
     <ProjectReference Include="Unity.2D.Animation.Editor.csproj">
       <Project>{dd2d8499-d638-37e5-1cba-35e66549a23a}</Project>
       <Name>Unity.2D.Animation.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Eveld.DynamicCamera.Editor.csproj">
+      <Project>{8f527baa-16ce-ad4a-6e9f-669cee1aaef0}</Project>
+      <Name>Eveld.DynamicCamera.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.IK.Editor.csproj">
       <Project>{82fde6f3-cef8-4780-b232-a2afa2283ea8}</Project>
