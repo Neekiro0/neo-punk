@@ -26,7 +26,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\Assembly-CSharp\</OutputPath>
-    <DefineConstants>UNITY_2022_3_12;UNITY_2022_3;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_INITIALIZES_MEMORY_MANAGER_EXPLICITLY;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_2022_3_12;UNITY_2022_3;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_INITIALIZES_MEMORY_MANAGER_EXPLICITLY;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;UNITY_SERVER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169,0649</NoWarn>
@@ -45,40 +45,45 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.12f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\MenuBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Items\ItemData.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
      <Compile Include="Assets\Scripts\Items\CoinBehaviour.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+     <Compile Include="Assets\Scripts\Entities\Player\FloorDetector.cs" />
+     <Compile Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core\AotStubs.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+     <Compile Include="Assets\Scripts\Entities\Player\HitboxBehaviour.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+     <Compile Include="Assets\Scripts\Entities\Player\Player.cs" />
+     <Compile Include="Assets\Scripts\MenuBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Items\ItemData.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\HealthBarController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\PlayerInventory.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
      <Compile Include="Assets\Scripts\DataHandlers\InputManager.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
-     <Compile Include="Assets\Scripts\Entities\Player\FloorDetector.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
      <Compile Include="Assets\Scripts\Entities\EntityStatus.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
      <Compile Include="Assets\Scripts\Entities\EntityUniversalAi.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
@@ -87,38 +92,55 @@
      <Compile Include="Assets\Scripts\Entities\PlayerDetector.cs" />
      <Compile Include="Assets\Scripts\Items\VoodooDoll.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
-     <Compile Include="Assets\Scripts\Entities\Player\HitboxBehaviour.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
-     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
      <Compile Include="Assets\Scripts\Entities\Zombie\ZombieBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Entities\Player\Player.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Scenes" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\StdLib.hlsl" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Waveform.shader" />
      <Folder Include="Assets\Scenes\TestingGroundScene" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <Folder Include="Library\PackageCache\com.unity.test-framework@1.1.33" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\MultiScaleVOUpsample.compute" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Sprites" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Textures\LensDirt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Distortion.hlsl" />
      <Folder Include="Assets\TextMesh Pro\Sprites" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\ExposureHistogram.hlsl" />
      <None Include="Library\PackageCache\com.unity.inputsystem@1.7.0\package.json" />
      <Folder Include="Library\PackageCache\com.unity.2d.tilemap.extras@3.1.2" />
      <None Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\README.txt" />
      <None Include="Library\PackageCache\com.unity.inputsystem@1.7.0\ValidationConfig.json" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Texture3DLerp.compute" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\DeferredFog.shader" />
      <None Include="Library\PackageCache\com.unity.cinemachine@2.9.5\ValidationExceptions.json" />
      <Folder Include="Assets\TextMesh Pro\Resources\Sprite Assets" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\TemporalAntialiasing.shader" />
      <None Include="Library\PackageCache\com.unity.ext.nunit@1.0.6\package.json" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\FastApproximateAntialiasing.hlsl" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\SubpixelMorphologicalAntialiasing.shader" />
      <Folder Include="Library\PackageCache\com.unity.ide.rider@3.0.25\Rider" />
      <Folder Include="Library\PackageCache\com.unity.2d.pixel-perfect@5.0.3" />
      <Folder Include="Library\PackageCache\com.unity.2d.pixel-perfect@5.0.3\Tests" />
      <None Include="Library\PackageCache\com.unity.2d.pixel-perfect@5.0.3\package.json" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Dithering.hlsl" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Bloom.shader" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources" />
      <Folder Include="Library\PackageCache\com.unity.2d.common@8.0.1\Tests" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Vectorscope.compute" />
      <Folder Include="Library\PackageCache\com.unity.inputsystem@1.7.0\Tests" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Sampling.hlsl" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\CopyStdFromTexArray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\package.json" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Textures\Cubes" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Lut3DBaker.compute" />
      <Folder Include="Library\PackageCache\com.unity.visualscripting@1.9.1\Graphics" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Gizmos" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Waveform.compute" />
      <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Materials" />
      <Folder Include="Library\PackageCache\com.unity.burst@1.8.9\Tests" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
@@ -126,6 +148,7 @@
      <None Include="Library\PackageCache\com.unity.burst@1.8.9\ValidationConfig.json" />
      <None Include="Library\PackageCache\com.unity.timeline@1.7.6\package.json" />
      <Folder Include="Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\PSSL.hlsl" />
      <Folder Include="Assets\StaticSprites\Backgounds" />
      <Folder Include="Library\PackageCache\com.unity.2d.aseprite@1.0.1" />
      <Folder Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport" />
@@ -136,24 +159,35 @@
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5\Gizmos" />
      <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.21\ValidationConfig.json" />
      <Folder Include="Library\PackageCache\com.unity.ext.nunit@1.0.6\net35" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\LightMeter.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
      <None Include="Library\PackageCache\com.unity.mathematics@1.2.6\package.json" />
      <Folder Include="Library\PackageCache\com.unity.2d.animation@9.0.4\Tests" />
      <Folder Include="Assets\EntitiesSprites\Enemies\Zombie\animations" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
      <Folder Include="Assets\TextMesh Pro\Resources" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\AutoExposure.compute" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\MultiScaleVORender.compute" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Texture2DLerp.shader" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\SubpixelMorphologicalAntialiasingBridge.hlsl" />
      <None Include="Library\PackageCache\com.unity.visualscripting@1.9.1\package.json" />
      <None Include="Library\PackageCache\com.unity.timeline@1.7.6\ValidationExceptions.json" />
      <None Include="Library\PackageCache\com.unity.collab-proxy@2.2.0\package.json" />
      <Folder Include="Assets\Scripts\Items" />
      <Folder Include="Library\PackageCache\com.unity.timeline@1.7.6" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\DiskKernels.hlsl" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Textures\BlueNoise256px" />
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5\Tests" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\D3D11.hlsl" />
      <Folder Include="Assets\Scripts" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\MultiScaleVODownsample2.compute" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\ScalableAO.hlsl" />
      <Folder Include="Assets\EntitiesSprites\MainCharacter" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\PackageConversionData.json" />
      <Folder Include="Library\PackageCache\com.unity.ext.nunit@1.0.6" />
      <Folder Include="Assets\EveldTech\DynamicCamera\Documentation" />
      <Folder Include="Library\PackageCache\com.unity.2d.animation@9.0.4\IK" />
+     <Folder Include="Assets\Materials" />
      <Folder Include="Library\PackageCache\com.unity.burst@1.8.9" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5\Tests" />
      <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.21\package.json" />
@@ -163,20 +197,36 @@
      <Folder Include="Assets\TextMesh Pro" />
      <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Models" />
      <None Include="Library\PackageCache\com.unity.ide.rider@3.0.25\package.json" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders" />
      <Folder Include="Assets\EveldTech\DynamicCamera" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts" />
      <None Include="Library\PackageCache\com.unity.test-framework@1.1.33\package.json" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Resources" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Scripts" />
      <Folder Include="Library\PackageCache\com.unity.visualscripting@1.9.1\Runtime" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\package.json" />
      <Folder Include="Library\PackageCache\com.unity.2d.common@8.0.1\Path" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Textures\SpectralLUTs" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\MultiScaleVO.shader" />
      <Folder Include="Library\PackageCache\com.unity.inputsystem@1.7.0" />
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Vectorscope.shader" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\D3D9.hlsl" />
      <Folder Include="Assets\StaticSprites" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\ScalableAO.shader" />
      <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Prefabs" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\ACES.hlsl" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\FinalPass.shader" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Histogram.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Histogram.compute" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\Switch.hlsl" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Textures" />
      <Folder Include="Assets\StaticSprites\UI\Keys" />
      <None Include="Library\PackageCache\com.unity.visualscripting@1.9.1\ValidationExceptions.json" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\Metal.hlsl" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Uber.shader" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Textures\SMAA" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Materials" />
@@ -184,29 +234,40 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
      <Folder Include="Assets\Resources" />
      <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.21\ValidationExceptions.json" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\Tests" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\xRLib.hlsl" />
      <Folder Include="Assets\Scripts\DataHandlers" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\EveldTech\DynamicCamera\readme.txt" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\CopyStdFromDoubleWide.shader" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Textures" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Library\PackageCache\com.unity.cinemachine@2.9.5\license.txt" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts" />
      <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Textures\LUTs" />
      <Folder Include="Library\PackageCache\com.unity.mathematics@1.2.6" />
      <Folder Include="Assets\EntitiesSprites" />
      <Folder Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.2" />
      <Folder Include="Assets\Unity.VisualScripting.Generated" />
      <None Include="Library\PackageCache\com.unity.2d.tilemap.extras@3.1.2\package.json" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Overlays.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\PSP2.hlsl" />
      <None Include="Library\PackageCache\com.unity.inputsystem@1.7.0\ValidationExceptions.json" />
      <Folder Include="Assets\TextMesh Pro\Shaders" />
      <Folder Include="Assets\EntitiesSprites\Enemies\Zombie" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Gizmos" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\ScreenSpaceReflections.shader" />
      <Folder Include="Library\PackageCache\com.unity.collab-proxy@2.2.0" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Resources\Sprite Assets" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\DepthOfField.hlsl" />
      <Folder Include="Assets\TextMesh Pro\Resources\Style Sheets" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\DiscardAlpha.shader" />
      <Folder Include="Assets\TextMesh Pro\Fonts" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\OpenGL.hlsl" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Lut2DBaker.shader" />
      <None Include="Library\PackageCache\com.unity.cinemachine@2.9.5\package.json" />
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5\EditorResources\Overlay" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6" />
@@ -214,6 +275,7 @@
      <Folder Include="Library\PackageCache\com.unity.ide.rider@3.0.25" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <Folder Include="Assets\EntitiesSprites\Animations\Player" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\CopyStd.shader" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Prefabs" />
      <Folder Include="Assets\Animations" />
      <Folder Include="Assets\Scripts\Entities\Player" />
@@ -224,29 +286,44 @@
      <None Include="Library\PackageCache\com.unity.ai.navigation@1.1.5\package.json" />
      <Folder Include="Library\PackageCache\com.unity.ide.vscode@1.2.5" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Tests" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\MotionBlur.shader" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders\TMP_Properties.cginc" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\MultiScaleVODownsample1.compute" />
      <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Scenes" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Fog.hlsl" />
      <Folder Include="Assets\StaticSprites\Items" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\ExposureHistogram.compute" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders\TMP_SDF Internal Editor.shader" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5\Presets" />
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5\EditorResources" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <Folder Include="Library\PackageCache\com.unity.collab-proxy@2.2.0\Lib" />
      <None Include="Library\PackageCache\com.unity.2d.aseprite@1.0.1\package.json" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API" />
      <None Include="Library\PackageCache\com.unity.ide.vscode@1.2.5\ValidationExceptions.json" />
      <None Include="Library\PackageCache\com.unity.visualscripting@1.9.1\ValidationConfig.json" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\GrainBaker.shader" />
      <Folder Include="Assets\Resources\Items" />
      <Folder Include="Assets\EntitiesSprites\Enemies" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders" />
      <Folder Include="Assets\Scripts\Entities" />
      <Folder Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Flow" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\GaussianDownsample.compute" />
      <Folder Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.21" />
      <Folder Include="Assets\EntitiesSprites\MainCharacter\Animations" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\ScreenSpaceReflections.hlsl" />
      <None Include="Library\PackageCache\com.unity.collections@1.2.4\package.json" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\XboxOne.hlsl" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Copy.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\D3D12.hlsl" />
      <Folder Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Core" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\DepthOfField.shader" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\PackageConversionData_Assets.json" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\SubpixelMorphologicalAntialiasing.hlsl" />
      <None Include="Library\PackageCache\com.unity.2d.spriteshape@9.0.2\package.json" />
      <None Include="Library\PackageCache\com.unity.mathematics@1.2.6\ValidationExceptions.json" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Package Resources" />
@@ -260,15 +337,18 @@
      <Folder Include="Assets\EntitiesSprites\Animations" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras" />
      <Folder Include="Assets\Scripts\Entities\Zombie" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Textures\BlueNoise64px" />
      <None Include="Library\PackageCache\com.unity.collections@1.2.4\ValidationExceptions.json" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
      <Folder Include="Library\PackageCache\com.unity.2d.aseprite@1.0.1\Tests" />
      <None Include="Library\PackageCache\com.unity.burst@1.8.9\Unity.Burst.Unsafe.xml" />
      <None Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.2\package.json" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\Vulkan.hlsl" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Resources\Fonts &amp; Materials" />
      <None Include="Library\PackageCache\com.unity.burst@1.8.9\package.json" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Resources\Color Gradient Presets" />
      <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Sprites" />
+     <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Colors.hlsl" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5\Presets\Noise" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne.json" />
      <Folder Include="Library\PackageCache\com.unity.2d.spriteshape@9.0.2" />
@@ -276,6 +356,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
      <Folder Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.2\Tests" />
+     <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2" />
      <None Include="Library\PackageCache\com.unity.ide.vscode@1.2.5\package.json" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.12f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -928,6 +1009,10 @@
       <Project>{fc0791ab-f908-1fe9-ee87-bb1529314d97}</Project>
       <Name>Unity.Burst.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
+      <Project>{cd21aab2-0638-aa4a-ce75-67b8624bf08e}</Project>
+      <Name>Unity.Postprocessing.Runtime</Name>
+    </ProjectReference>
     <ProjectReference Include="Eveld.DynamicCamera.csproj">
       <Project>{add6a964-bb3b-4a92-61a6-8d22f04bbbb6}</Project>
       <Name>Eveld.DynamicCamera</Name>
@@ -1075,6 +1160,10 @@
     <ProjectReference Include="Unity.VisualScripting.State.Editor.csproj">
       <Project>{7ad6dfe3-6465-a2e7-9b68-d216d55a8fc2}</Project>
       <Name>Unity.VisualScripting.State.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Postprocessing.Editor.csproj">
+      <Project>{be8ddaa1-9085-9a2e-9e2e-add02abdc878}</Project>
+      <Name>Unity.Postprocessing.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Mathematics.csproj">
       <Project>{65682419-d940-0943-7b96-341b81aec20b}</Project>

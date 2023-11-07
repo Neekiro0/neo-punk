@@ -93,17 +93,17 @@ public class Player : MonoBehaviour
         /*
          * Nieznaczne wydłużanie hitboxa ataków podczas biegu
          */
-        if ( (Mathf.Abs(playerBody.velocity.x) > 10) || ( horizontalInput != 0 && isChargingAttack) )
+        if ( (Mathf.Abs(playerBody.velocity.x) >= playerStatus.GetMovementSpeed()) || ( horizontalInput != 0 && isChargingAttack) )
         {
             BoxCollider2D swordCollider = swordHitbox.GetComponent<BoxCollider2D>();
-            swordCollider.size = new Vector2(1f, 0.25f);
-            swordCollider.offset = new Vector2(0.5f, 0f);
+            swordCollider.size = new Vector2(playerStatus.attackRange * 1.5f, 0.3f);
+            swordCollider.offset = new Vector2(playerStatus.attackRange, 0f);
         }
         else
         {
             BoxCollider2D swordCollider = swordHitbox.GetComponent<BoxCollider2D>();
-            swordCollider.size = new Vector2(0.35f, 0.25f);
-            swordCollider.offset = new Vector2(0.18f, 0f);
+            swordCollider.size = new Vector2(playerStatus.attackRange, 0.3f);
+            swordCollider.offset = new Vector2(playerStatus.attackRange / 2, 0f);
         }
 
         /*
