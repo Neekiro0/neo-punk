@@ -151,9 +151,9 @@ public class EntityStatus : MonoBehaviour
                     // gracz otrzymuje obrażenia
                     GettingDamageEvent(damage * parryingDamageReduction);
                     
+                    // odgrywanie animacji po sparowaniu
+                    gameObject.GetComponent<Animator>().Play("parryAttack");
                 }
-                // odgrywanie animacji po sparowaniu
-                gameObject.GetComponent<Animator>().Play("parryAttack");
                 
                 
             } else if (isBLocking && isPlayerFacedToEnemy)

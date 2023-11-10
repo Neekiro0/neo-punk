@@ -72,23 +72,20 @@ public class Player : MonoBehaviour
         /*
          * Blokowanie chodzenia do tyłu, gdy gracz atakuje, lub blokuje
          */
-        if ( ( isAttacking || isBlocking ) && (horizontalInput < 0 && playerStatus.isFacedRight))
+        if ( isAttacking && 
+             ( (horizontalInput < 0 && playerStatus.isFacedRight) || 
+               (horizontalInput > 0 && !playerStatus.isFacedRight) ) )
         {
             horizontalInput = 0;
-        }
-        if (( isAttacking || isBlocking ) && (horizontalInput > 0 && !playerStatus.isFacedRight) )
-        {
-            horizontalInput = 0;
-        }
+        } else if (isBlocking) horizontalInput = 0;
+        
+        // TODO: problem z animacją, nie zmienia się od razu po bloku
         
         /*
          * przemieszczanie w osi x
          */
-        if (keyHoldTime < 0.3f && !isBlocking)
-        {
-            Vector2 movement = new Vector2(horizontalInput * playerStatus.GetMovementSpeed(), playerBody.velocity.y);
-            playerBody.velocity = movement;
-        }
+        Vector2 movement = new Vector2(horizontalInput * playerStatus.GetMovementSpeed(), playerBody.velocity.y);
+        playerBody.velocity = movement;
         
         /*
          * Nieznaczne wydłużanie hitboxa ataków podczas biegu
@@ -169,17 +166,20 @@ public class Player : MonoBehaviour
         {
             isParrying = true;
             canBlock = false;
+            animator.Play("parryAttack");
             StartCoroutine(Parry());
         }
 
         /*
          * Blokowanie
          */
-        if (Input.GetKey(InputManager.BlockKey))
-        {
-            isBlocking = true;
-        }
-        else { isBlocking = false;}
+        if (Input.GetKey(InputManager.BlockKey)) isBlocking = true;
+        else isBlocking = false;
+        
+        /*
+         * Przełączanie animacj blokowania
+         */
+        if (isBlocking) animator.Play("blockAttack");
         
         /*
          * Przejście przez podłoże
