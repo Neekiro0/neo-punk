@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ZombieBehaviour : MonoBehaviour
@@ -22,7 +24,8 @@ public class ZombieBehaviour : MonoBehaviour
     public LayerMask warstwaPrzeszkod;
     private bool didRaycastFoundPlayer = false;
     public bool isAttacking = false;
-    private bool hasTouchedPlayer = false; // Zmienna, która będzie przechowywać informację o dotknięciu gracza
+    public bool canAttack = false; // Zmienna, która będzie przechowywać informację o dotknięciu gracza
+    public GameObject collidingPlayer;
 
     void Start()
     {
@@ -37,13 +40,24 @@ public class ZombieBehaviour : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !hasTouchedPlayer)
+        if (collision.gameObject.CompareTag("Player"))
         {
+            canAttack = false;
             EntityStatus playerStatus = collision.gameObject.GetComponent<EntityStatus>();
             playerStatus.DealDamage(entityStatus.GetAttackDamageCount(), gameObject);
         }
     }
     
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && canAttack )
+        {
+            canAttack = false;
+            EntityStatus playerStatus = collision.gameObject.GetComponent<EntityStatus>();
+            playerStatus.DealDamage(entityStatus.GetAttackDamageCount(), gameObject);
+        }
+    }
+
     void  Update()
     {
         if (!isAttacking) MoveZombie();
@@ -69,17 +83,20 @@ public class ZombieBehaviour : MonoBehaviour
         /*
          * Obracanie 
          */
-        if (!entityStatus.isFacedRight)
+        if (!isAttacking)
         {
-            Vector3 newRotation = transform.eulerAngles;
-            newRotation.y = 180;
-            transform.eulerAngles = newRotation;
-        }
-        else
-        {
-            Vector3 newRotation = transform.eulerAngles;
-            newRotation.y = 0;
-            transform.eulerAngles = newRotation;
+            if (!entityStatus.isFacedRight)
+            {
+                Vector3 newRotation = transform.eulerAngles;
+                newRotation.y = 180;
+                transform.eulerAngles = newRotation;
+            }
+            else
+            {
+                Vector3 newRotation = transform.eulerAngles;
+                newRotation.y = 0;
+                transform.eulerAngles = newRotation;
+            }
         }
 
         /*
@@ -136,26 +153,19 @@ public class ZombieBehaviour : MonoBehaviour
 
     void Attack()
     {
-        animator.Play("attackAnimation");
+        
         Rigidbody2D zombieRigidbody = gameObject.GetComponent<Rigidbody2D>();
-        if (entityStatus.detectedTarget.transform.position.x < gameObject.transform.position.x)
-        {
-            Vector3 movement = new Vector3(-1 * entityStatus.attackRange * 500, 700, 0);
-            zombieRigidbody.AddForce(movement);
-        }
-        else
-        {
-            Vector3 movement = new Vector3(1 * entityStatus.attackRange * 500, 700, 0);
-            zombieRigidbody.AddForce(movement);
-        }
+        
+        canAttack = true;
+        
+        float attackDirection = (entityStatus.detectedTarget.transform.position.x < gameObject.transform.position.x)
+            ? -1
+            : 1;
+        
+        Vector3 movement = new Vector3(attackDirection * entityStatus.attackRange * 500, 900, 0);
+        zombieRigidbody.AddForce(movement);
     }
     
-    private IEnumerator AttackCooldown()
-    {
-        yield return new WaitForSeconds(2f); // Czas cooldownu (2 sekundy w przykładzie)
-
-        isAttacking = false;
-    }
     private IEnumerator PerformAttack()
     {
         while (isPlayerInAttackRange)
@@ -163,10 +173,7 @@ public class ZombieBehaviour : MonoBehaviour
             animator.Play("attackAnimation");
             isAttacking = true;
             Attack(); // Wywołaj atak
-
-            // Rozpocznij coroutine do obsługi cooldownu
-            StartCoroutine(AttackCooldown());
-
+            
             yield return new WaitForSeconds(2f); // Poczekaj na zakończenie ataku
             isAttacking = false;
         }
@@ -174,8 +181,10 @@ public class ZombieBehaviour : MonoBehaviour
 
     void MoveZombie()
     {
-        if (isChasingPlayer && playerDetector && didRaycastFoundPlayer)
+        // gdy wykryto gracza w polu playerDetector, lub otrzymano jakiekolwiek obrażenia
+        if ( (isChasingPlayer && playerDetector && didRaycastFoundPlayer) || entityStatus.GetMaxHp() > entityStatus.GetHp() )
         {
+            // zwiększ hitbox playerDetector
             playerDetector.size = new Vector2(previousPlayerDetectorRange.x * 1.4f, previousPlayerDetectorRange.y * 1.2f) ;
         }
         

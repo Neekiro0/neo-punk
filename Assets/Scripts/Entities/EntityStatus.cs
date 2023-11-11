@@ -24,6 +24,7 @@ public class EntityStatus : MonoBehaviour
     public Color heavyDamageColor;
     public Color deathColor;
     private GameObject entityObject;
+    public GameObject healthBar;
 
     private GameObject mainUserInterface;
     private SpriteRenderer spriteRenderer;
@@ -151,9 +152,9 @@ public class EntityStatus : MonoBehaviour
                     // gracz otrzymuje obrażenia
                     GettingDamageEvent(damage * parryingDamageReduction);
                     
+                    // odgrywanie animacji po sparowaniu
+                    gameObject.GetComponent<Animator>().Play("parryAttack");
                 }
-                // odgrywanie animacji po sparowaniu
-                gameObject.GetComponent<Animator>().Play("parryAttack");
                 
                 
             } else if (isBLocking && isPlayerFacedToEnemy)
@@ -175,6 +176,7 @@ public class EntityStatus : MonoBehaviour
             }
             else
             {
+                StartCoroutine(SygnalizeGettingDamage());
                 // gracz nie sparował, ani nie zablokował ciosu
                 if ( damage >= GetHp() )
                 {
@@ -187,6 +189,8 @@ public class EntityStatus : MonoBehaviour
                 {
                     // gracz otrzymuje obrażenia
                     GettingDamageEvent(damage);
+                    
+                    // animacja paska hp sygnalizująca otrzymanie obrażeń
                 }
             }
         }
@@ -221,6 +225,40 @@ public class EntityStatus : MonoBehaviour
             
         if (damage >= ( GetHp() / 2 ) ) StartCoroutine(ChangeColorForInterval(heavyDamageColor, 0.05f));
         else StartCoroutine(ChangeColorForInterval(lightDamageColor, 0.12f));
+    }
+
+    private IEnumerator SygnalizeGettingDamage()
+    {
+        // w tym momencie gameObject musi być graczem
+        Color currentColor = healthBar.GetComponent<Image>().color;
+        
+        // animacja otrzymania obrażeń
+        healthBar.GetComponent<Image>().color = Color.red;
+
+        MoveHpBar(0, 3);
+        yield return new WaitForSeconds(0.05f);
+        MoveHpBar(0, -6);
+        yield return new WaitForSeconds(0.05f);
+        MoveHpBar(0, 6);
+        yield return new WaitForSeconds(0.05f);
+        MoveHpBar(0, -6);
+        yield return new WaitForSeconds(0.05f);
+        MoveHpBar(0, 3);
+        
+        healthBar.GetComponent<Image>().color = currentColor;
+    }
+    
+    void MoveHpBar(float xOffset, float yOffset)
+    {
+        // Pobierz bieżące pozycje
+        Vector3 currentPosition = healthBar.transform.localPosition;
+
+        // Dodaj przesunięcie
+        currentPosition.x += xOffset;
+        currentPosition.y += yOffset;
+
+        // Ustaw nową pozycję
+        healthBar.transform.localPosition = currentPosition;
     }
     
     private IEnumerator ChangeColorForInterval(Color color, float duration)

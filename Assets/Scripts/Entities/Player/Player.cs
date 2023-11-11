@@ -38,7 +38,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float parryWindow;
     public bool isBlocking;
     public bool isParrying;
+    public float cooldownBetweenBlocks;
     private bool canBlock = true;
+    private PauseMenuBehaviour pauseMenu;
     
     private void Awake()
     {
@@ -49,6 +51,8 @@ public class Player : MonoBehaviour
         boxCollider = GetComponent<CapsuleCollider2D>();
         playerStatus = GetComponent<EntityStatus>();
         swordHitbox = transform.Find("SwordHitbox").gameObject;
+
+        pauseMenu = GameObject.Find("Pause Menu Interface").GetComponent<PauseMenuBehaviour>();
     }
 
     private void Update()
@@ -72,22 +76,23 @@ public class Player : MonoBehaviour
         /*
          * Blokowanie chodzenia do tyłu, gdy gracz atakuje, lub blokuje
          */
-        if ( ( isAttacking || isBlocking ) && (horizontalInput < 0 && playerStatus.isFacedRight))
+        if ( isAttacking && 
+             ( (horizontalInput < 0 && playerStatus.isFacedRight) || 
+               (horizontalInput > 0 && !playerStatus.isFacedRight) ) )
         {
             horizontalInput = 0;
-        }
-        if (( isAttacking || isBlocking ) && (horizontalInput > 0 && !playerStatus.isFacedRight) )
-        {
-            horizontalInput = 0;
-        }
+        } else if (isBlocking) horizontalInput = 0;
         
         /*
-         * przemieszczanie w osi x
+         * przemieszczanie w osi x, prędkość poruszania się zależna od tego czy gracz atakuje
          */
-        if (keyHoldTime < 0.3f && !isBlocking)
+        if (!isAttacking)
         {
-            Vector2 movement = new Vector2(horizontalInput * playerStatus.GetMovementSpeed(), playerBody.velocity.y);
-            playerBody.velocity = movement;
+            playerBody.velocity = new Vector2(horizontalInput * playerStatus.GetMovementSpeed(), playerBody.velocity.y);
+        }
+        else
+        {
+            playerBody.velocity = new Vector2(horizontalInput * playerStatus.GetMovementSpeed() * 0.6f, playerBody.velocity.y);
         }
         
         /*
@@ -131,7 +136,7 @@ public class Player : MonoBehaviour
         /*
          * Atak, oraz charge attack
          */
-        if (Input.GetKey(InputManager.AttackKey) && !isAttacking && !isBlocking)
+        if (Input.GetKey(InputManager.AttackKey) && !isAttacking && !isBlocking && !pauseMenu.IsGamePaused )
         {
             if (keyHoldTime < holdTimeThreshold)
             {
@@ -139,7 +144,7 @@ public class Player : MonoBehaviour
                 isChargingAttack = true;
             }
         }
-        if (Input.GetKeyUp(InputManager.AttackKey))
+        if (Input.GetKeyUp(InputManager.AttackKey) && !pauseMenu.IsGamePaused)
         {
             if (isChargingAttack)
             {
@@ -161,25 +166,34 @@ public class Player : MonoBehaviour
             isChargingAttack = false;
             keyHoldTime = 0.0f;
         }
-        
-        /*
-         * Parowanie
-         */
-        if ( !isAttacking && !isChargingAttack && Input.GetKeyDown(InputManager.BlockKey) )
-        {
-            isParrying = true;
-            canBlock = false;
-            StartCoroutine(Parry());
-        }
 
-        /*
-         * Blokowanie
-         */
-        if (Input.GetKey(InputManager.BlockKey))
+        if (canBlock)
         {
-            isBlocking = true;
+            /*
+             * Parowanie
+             */
+            if ( !isAttacking && !isChargingAttack && Input.GetKeyDown(InputManager.BlockKey) && !pauseMenu.IsGamePaused)
+            {
+                isParrying = true;
+                StartCoroutine(Parry());
+            }
+
+            /*
+             * Blokowanie
+             */
+            if (Input.GetKey(InputManager.BlockKey) && !pauseMenu.IsGamePaused)
+            {
+                isBlocking = true;
+                canBlock = false;
+                StartCoroutine(EnableBlockingAfterDuration(cooldownBetweenBlocks));
+            }
+            else isBlocking = false;
+        
+            /*
+             * Przełączanie animacji blokowania
+             */
+            if (Input.GetKeyDown(InputManager.BlockKey) && !pauseMenu.IsGamePaused) animator.Play("blockAttack");
         }
-        else { isBlocking = false;}
         
         /*
          * Przejście przez podłoże
@@ -188,6 +202,13 @@ public class Player : MonoBehaviour
         {
             DisableCollisionForDuration(0.3f);
         }
+    }
+
+    private IEnumerator EnableBlockingAfterDuration(float duration)
+    {
+        // małe okno pomiędzy parowaniami
+        yield return new WaitForSeconds(duration);
+        canBlock = true;
     }
 
     private void Jump()
@@ -204,8 +225,8 @@ public class Player : MonoBehaviour
     private IEnumerator Parry()
     {
         yield return new WaitForSeconds(parryWindow);
-        isParrying = false;
-        canBlock = true;
+        isParrying = false;        
+        
     }
     
     private void PerformChargeAttack()
