@@ -21,6 +21,7 @@ public class PlayerInventory : MonoBehaviour
     private GameObject fields;
     private GameObject selectedItemDesc;
     private GameObject incomingItemInfo;
+    private List<TextMeshProUGUI> itemsCooldowns = new List<TextMeshProUGUI>();
     public void AddItem(ItemData itemData, GameObject objectToDelete)
     {
         isPlayerPickingItem = true;
@@ -35,18 +36,35 @@ public class PlayerInventory : MonoBehaviour
             SetIncomingItemInfo(itemData);
             if (Input.GetKey(KeyCode.E))
             {
-                items.Insert(selectedItemIndex, itemData);
-                SetImageAtSlot(itemData);
-                SetIncomingItemInfo(new ItemData("", "", "", "", ""));
-                Destroy(pickedObject);
-                HideEquipment();
-                isPlayerPickingItem = false;
+                List<ItemData> matchingItemsList = items.FindAll(obj => obj.itemName == itemData.itemName);
+                
+                Debug.Log(matchingItemsList.Count);
+                /*if ((items[selectedItemIndex].itemName == itemData.itemName))
+                {
+                    Debug.Log("Dodajesz item na to samo miejsce");
+                }*/
+                
+                if (matchingItemsList.Count > 0 && (items[selectedItemIndex].itemName != itemData.itemName))
+                {
+                    Debug.Log("Istnieje już taki item w ekwipunku");
+                }
+                else
+                {
+                    items[selectedItemIndex] = itemData;
+                    SetImageAtSlot(itemData);
+                    SetIncomingItemInfo(itemData);
+                    Destroy(pickedObject);
+                
+                    HideEquipment();
+                    isPlayerPickingItem = false;
+                }
+                
             }
             yield return null;
         }
     }
 
-    public void Start()
+    public void Awake()
     {
         MainUi = GameObject.Find("Main User Interface");
         InventoryUi = GameObject.Find("Equipment Interface");
@@ -57,16 +75,53 @@ public class PlayerInventory : MonoBehaviour
         
         fields = InventoryUi.transform.Find("ItemsFields").gameObject;
         
+        
         // ustawianie wyekwipowanych itemów na starcie gry
         ItemData emptyItemsData = new ItemData("", "", "", "", "");
         items.Add( emptyItemsData );
         items.Add( emptyItemsData );
         items.Add( emptyItemsData );
         items.Add( emptyItemsData );
+        
+        
+        GameObject itemsCooldownsParent = MainUi.transform.Find("ItemsCooldowns").gameObject;
+
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject itemCooldownObject = itemsCooldownsParent.transform.GetChild(i).gameObject;
+            TextMeshProUGUI itemCooldownTextComponent = itemCooldownObject.GetComponent<TextMeshProUGUI>();
+
+            itemsCooldowns.Add(itemCooldownTextComponent);
+        }
     }
 
     void Update()
     {
+        /*
+         * Używanie przedmiotów
+         */
+        if (Input.GetKeyDown(KeyCode.Alpha1)) UseItem(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) UseItem(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) UseItem(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4)) UseItem(3);
+        
+        /*
+         * Zdolności pasywne
+         */
+        UsePassive(0);
+        UsePassive(1);
+        UsePassive(2);
+        UsePassive(3);
+        
+        /*
+         * Aktualizacja timera cooldownu
+         */
+        UpdateCooldownTimer(0);
+        UpdateCooldownTimer(1);
+        UpdateCooldownTimer(2);
+        UpdateCooldownTimer(3);
+        
+        
         if ( Input.GetKeyDown( InputManager.InventoryMenuKey ))
         {
             if (isEquipmentShown == false)
@@ -95,6 +150,65 @@ public class PlayerInventory : MonoBehaviour
             {
                 HideEquipment();
             }
+        }
+    }
+
+    public void UseItem(int ItemPos)
+    {
+        ItemData usedItem = items[ItemPos];
+        if ( !(usedItem.GetCurrentCooldown() > 0) )
+        {
+            usedItem.UseItem();
+            usedItem.SetCurrentCooldown(usedItem.GetCooldown());
+            StartCoroutine(CooldownTimer(usedItem, ItemPos));
+            
+            // wyczernienie przedmiotu
+            try
+            {
+                Image itemImage = MainUi.transform.Find("Items").transform.GetChild(ItemPos).GetComponent<Image>();
+
+                itemImage.color = new Color32(55, 55, 55, 255);
+
+            } catch (Exception) {}
+        }
+    }
+    
+    private IEnumerator CooldownTimer(ItemData item, int ItemPos)
+    {
+        while (item.GetCurrentCooldown() > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            item.SetCurrentCooldown( item.GetCurrentCooldown() - 1.0f );
+        }
+        item.SetCurrentCooldown(0);
+        try
+        {
+            Image itemImage = MainUi.transform.Find("Items").transform.GetChild(ItemPos).GetComponent<Image>();
+
+            itemImage.color = Color.white;
+
+        } catch (Exception) {}
+    }
+
+    public void UsePassive(int itemPos)
+    {
+        ItemData usedItem = items[itemPos];
+        usedItem.PassiveAbility();
+    }
+
+    /*
+     * Metoda aktualizująca timer na UI
+     */
+    private void UpdateCooldownTimer(int itemPos)
+    {
+        ItemData item = items[itemPos];
+        if ( item.GetCurrentCooldown() <= item.GetCooldown() && item.GetCurrentCooldown() > 0 )
+        {
+            itemsCooldowns[itemPos].text = item.GetCurrentCooldown().ToString();
+        }
+        else
+        {
+            itemsCooldowns[itemPos].text = "";
         }
     }
 
@@ -137,6 +251,26 @@ public class PlayerInventory : MonoBehaviour
                 selectedSlot.GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
                 MainUi.transform.Find("Items").GetChild(selectedItemIndex).GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
                 MainUi.transform.Find("Items").GetChild(selectedItemIndex).GetComponent<Image>().color = Color.white;
+            }
+        }
+    }
+    
+    /*
+     * Metoda do dynamicznej aktualizacji obrazka
+     */
+    public void SetImageAtSlotByIndex(String imagePath, String itemName)
+    {
+        int itemIndex = items.FindIndex(obj => obj.itemName == itemName);
+        
+        if (imagePath != "")
+        {
+            GameObject selectedSlot = fields.transform.GetChild(itemIndex).Find("ItemImage").gameObject;
+
+            Texture2D texture2D = Resources.Load<Texture2D>(imagePath);
+            if (texture2D != null)
+            {
+                selectedSlot.GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
+                MainUi.transform.Find("Items").GetChild(itemIndex).GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
             }
         }
     }

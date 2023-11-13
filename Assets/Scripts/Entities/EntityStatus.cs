@@ -214,7 +214,7 @@ public class EntityStatus : MonoBehaviour
         StartCoroutine(DeathAnimation(deathColor, 0.1f));
     }
 
-    void PlayerDeathEvent()
+    public void PlayerDeathEvent()
     {
         StartCoroutine(DeathAnimation(deathColor, 0.1f));
     }
