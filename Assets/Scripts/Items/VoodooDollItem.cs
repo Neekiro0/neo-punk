@@ -43,7 +43,7 @@ namespace Items
                 needleStacks += 1;
                 lastNoticedPlayerHp = playerStatus.GetHp();
                 
-                playerInventory.SetImageAtSlotByIndex("Items/voodoo_doll_"+needleStacks.ToString(), itemName);
+                playerInventory.SetImageAtSlotByIndex("Items/VoodooDoll/VoodooDoll_"+needleStacks.ToString(), itemName);
             }
 
             if (needleStacks > 3)
@@ -91,7 +91,7 @@ namespace Items
                 "Gives 40% more damage on use, but if you get hit, doll gets a needle stack. If you get hit when Doll have 3 stacks you will die.",
                 "Lore",
                 "Common",
-                "Items/voodoo_doll",
+                "Items/VoodooDoll/VoodooDoll",
                 30.0f, 
                 0.0f
             );
