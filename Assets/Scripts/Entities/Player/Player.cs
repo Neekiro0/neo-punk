@@ -1,14 +1,36 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    /*
+     * Zmienna listowa przechowująca aktualne typy obrażeń
+     */
+    [Serializable]
+    public class ElementalType
+    {
+        [SerializeField]
+        public string name;
+        public Sprite icon;
+    }
     
+    [Header("Elemental Types")]
+    public List<ElementalType> ElementalTypes = new List<ElementalType>();
+  
+    public int UsedElementalTypeId = 0;
+    [ReadOnly]
+    public String UsedElementalName = "Normal";
+
     /*
      * Zmienne dostępne w edytorze
      */
+    [Header("Player variables")]
     public float jumpForce = 6f;
 
     public Animator animator;
@@ -41,6 +63,7 @@ public class Player : MonoBehaviour
     public float cooldownBetweenBlocks;
     private bool canBlock = true;
     private PauseMenuBehaviour pauseMenu;
+    private GameObject elementalIconObject;
     
     private void Awake()
     {
@@ -53,6 +76,8 @@ public class Player : MonoBehaviour
         swordHitbox = transform.Find("SwordHitbox").gameObject;
 
         pauseMenu = GameObject.Find("Pause Menu Interface").GetComponent<PauseMenuBehaviour>();
+
+        elementalIconObject = GameObject.Find("Main User Interface").transform.Find("Elemental").transform.Find("ElementalIcon").gameObject;
     }
 
     private void Update()
@@ -339,4 +364,56 @@ public class Player : MonoBehaviour
             playerBody.AddForce(movement);
         }
     }
+
+    public void ChangeElementalType(int TypeId)
+    {
+        if (TypeId >= 0 && TypeId <= ElementalTypes.Count)
+        {
+            String elementalName = ElementalTypes[TypeId].name;
+            UsedElementalTypeId = TypeId;
+            UsedElementalName = elementalName;
+            
+            elementalIconObject.GetComponent<Image>().sprite = ElementalTypes[TypeId].icon;
+        }
+    }
 }
+#if UNITY_EDITOR
+
+[CustomEditor(typeof(Player))]
+public class TwojaKlasaEditor : Editor
+{
+    private SerializedProperty selectedElementalTypeProp;
+
+    private void OnEnable()
+    {
+        selectedElementalTypeProp = serializedObject.FindProperty("UsedElementalTypeId");
+    }
+
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
+
+        // Sprawdzenie, czy edytowany obiekt jest jednym obiektem
+        if (serializedObject.isEditingMultipleObjects)
+        {
+            EditorGUILayout.HelpBox("Multi-object editing not supported", MessageType.Error);
+            return;
+        }
+
+        // Wyświetlanie listy rozwijanej z numerami od 0 do 5
+        selectedElementalTypeProp.intValue = EditorGUILayout.Popup("Choose elemental type", selectedElementalTypeProp.intValue, new string[] { "0", "1", "2", "3", "4", "5" });
+
+        // Przycisk do zmiany rodzaju elementu
+        if (GUILayout.Button("Change elemental"))
+        {
+            Player script = (Player)target;
+            script.ChangeElementalType(selectedElementalTypeProp.intValue);
+        }
+
+        serializedObject.ApplyModifiedProperties();
+
+        // Reszta standardowego interfejsu
+        DrawDefaultInspector();
+    }
+}
+#endif

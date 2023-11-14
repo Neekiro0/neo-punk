@@ -1,64 +1,39 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
-using static ItemData;
 
 namespace Items
 {
-    internal class VoodooDoll : ItemData
+    internal class DemonBell : ItemData
     {
-        private float needleStacks;
-        private float lastNoticedPlayerHp;
         public EntityStatus playerStatus;
         public PlayerInventory playerInventory;
-        
-        private float baseDamage; // Bazowa wartość obrażeń
-        private float damageIncreasePercentage = 0.4f; // Procent zwiększenia obrażeń o 40%
+        public Player player;
+
         private float effectDuration = 10.0f; // Czas trwania efektu w sekundach
 
         private bool isEffectActive = false; // Czy efekt jest aktywny
         private float effectEndTime = 0.0f; // Czas zakończenia efektu
-
-        public VoodooDoll(string itemName, string passiveDescription, string activeDescription, string rarity,
+        private int lastElementalType; // ostatnio używany element
+        public DemonBell(string itemName, string passiveDescription, string activeDescription, string rarity,
             string imagePath = "", float cooldown = 0, float currentCooldown = 0, float minPlayerLvl = 0, int needleStacks = 0, EntityStatus playerStatus = null, PlayerInventory playerInventory = null)
             : base(itemName, passiveDescription, activeDescription, rarity, imagePath, cooldown, currentCooldown, minPlayerLvl)
         {
-            this.needleStacks = needleStacks;
             this.playerStatus = GameObject.Find("Player").GetComponent<EntityStatus>();
             this.playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
-            
-            this.lastNoticedPlayerHp = this.playerStatus.GetHp();
-            
-            baseDamage = this.playerStatus.GetAttackDamageCount();
+            this.player = GameObject.Find("Player").GetComponent<Player>();
+            Debug.Log(this.playerStatus);
         }
 
         public override void PassiveAbility()
         {
-            if (playerStatus.GetHp() < lastNoticedPlayerHp)
+            
+            // część UseItem
+            if (isEffectActive && !(Time.time < effectEndTime))
             {
-                needleStacks += 1;
-                lastNoticedPlayerHp = playerStatus.GetHp();
-                
-                playerInventory.SetImageAtSlotByIndex("Items/VoodooDoll/VoodooDoll_"+needleStacks.ToString(), "Voodoo Doll");
-            }
-
-            if (needleStacks > 3)
-            {
-                playerStatus.PlayerDeathEvent();
-            }
-
-            if (isEffectActive && Time.time < effectEndTime)
-            {
-                // Zwiększamy obrażenia o 40% podczas trwania efektu
-                float currentDamage = baseDamage * (1.0f + damageIncreasePercentage);
-                playerStatus.SetAttackDamageCount(currentDamage);
-            }
-            else if (isEffectActive)
-            {
-                // Po zakończeniu efektu przywracamy normalne obrażenia
-                playerStatus.SetAttackDamageCount(baseDamage);
+                // po zakończeniu UseItem
+                player.ChangeElementalType(0);
 
                 isEffectActive = false; // Wyłączamy flagę aktywności efektu
             }
@@ -71,30 +46,34 @@ namespace Items
                 // Rozpoczynamy efekt zwiększenia obrażeń
                 isEffectActive = true;
                 effectEndTime = Time.time + effectDuration;
+                lastElementalType = player.UsedElementalTypeId;
+                player.ChangeElementalType(5);
             }
         }
     }
-    public class VoodooDollItem : MonoBehaviour
+
+    public class DemonBellItem : MonoBehaviour
     {
+        
         private GameObject titleObject;
         private GameObject player;
         public bool _isPlayerInsideOfRange = false;
-        private VoodooDoll voodooDoll; 
+        private DemonBell demonBell; 
         
-        void Awake()
+        void Start()
         {
-            voodooDoll = new VoodooDoll(
-                "Voodoo Doll",
-                "If you get hit, doll gets a needle stack. If you get hit when Doll have 3 stacks you will die.",
-                "Amplifies damage by 40% for 10 seconds.",
+            demonBell = new DemonBell(
+                "Demon Bell",
+                "Player takes 35% more damage, but also deals 25% more.",
+                "Overrides damage type to Bloody for 10 seconds.",
                 "Common",
-                "Items/VoodooDoll/VoodooDoll",
-                30.0f,
+                "Items/DemonBell/DemonBell",
+                40.0f,
                 0.0f );
             
             titleObject = gameObject.transform.Find("Title").gameObject;
             titleObject.GetComponent<Renderer>().enabled = false;
-            titleObject.GetComponent<TextMesh>().text = voodooDoll.GetName();
+            titleObject.GetComponent<TextMesh>().text = demonBell.GetName();
         }
 
         private void OnTriggerEnter2D(Collider2D col)
@@ -125,7 +104,7 @@ namespace Items
             {
                 // dodawanie do ekwipunku
                 try {
-                    player.GetComponent<PlayerInventory>().AddItem(voodooDoll, gameObject);
+                    player.GetComponent<PlayerInventory>().AddItem(demonBell, gameObject);
                 } catch (Exception) {
                     Debug.Log("Wystąpił błąd");
                 }

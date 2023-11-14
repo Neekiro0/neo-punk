@@ -5,34 +5,25 @@ using UnityEngine.PlayerLoop;
 
 public class ItemData : MonoBehaviour
 {
-    public string itemName;
-    private string damageType;
-    private string description;
-    private string lore;
+    private string itemName;
+    private string passiveDescription;
+    private string activeDescription;
     private float cooldown;
     private float currentCooldown;
     private string rarity;
-    private double damage;
-    private double minPlayerLvl;
+    private float minPlayerLvl;
     private string imagePath;
 
-    public ItemData(string itemName, string damageType, string description, string Lore, string rarity, string imagePath = "", float cooldown = 0, float currentCooldown = 0, double damage = 0, double minPlayerLvl = 0 )
+    public ItemData(string itemName, string passiveDescription, string activeDescription, string rarity, string imagePath = "", float cooldown = 0, float currentCooldown = 0, float minPlayerLvl = 0 )
     {
         this.itemName = itemName;
-        this.damageType = damageType;
-        this.description = description;
-        this.lore = Lore;
+        this.passiveDescription = passiveDescription;
+        this.activeDescription = activeDescription;
         this.cooldown = cooldown;
         this.currentCooldown = currentCooldown;
         this.imagePath = imagePath;
-        this.damage = damage;
         this.rarity = rarity;
         this.minPlayerLvl = minPlayerLvl;
-    }
-
-    public void Update()
-    {
-        PassiveAbility();
     }
 
     /*
@@ -48,39 +39,27 @@ public class ItemData : MonoBehaviour
     }
 
     /*
-     * Damage type
+     * passiveDescription
      */
-    public void SetDamageType(string damageType)
+    public void SetPassiveDescription(string passiveDescription)
     {
-        this.damageType = damageType;
+        this.passiveDescription = passiveDescription;
     }
-    public string GetDamageType()
+    public string GetPassiveDescription()
     {
-        return this.damageType;
+        return this.passiveDescription;
     }
 
     /*
-     * Description
+     * activeDecription
      */
-    public void SetDescription(string description)
+    public void SetActiveDescription(string activeDescription)
     {
-        this.description = description;
+        this.activeDescription = activeDescription;
     }
-    public string GetDescription()
+    public string GetActiveDescription()
     {
-        return this.description;
-    }
-
-    /*
-     * Lore
-     */
-    public void SetLore(string lore)
-    {
-        this.lore = lore;
-    }
-    public string GetLore()
-    {
-        return this.lore;
+        return this.activeDescription;
     }
 
     /*
@@ -105,6 +84,30 @@ public class ItemData : MonoBehaviour
     public float GetCurrentCooldown()
     {
         return this.currentCooldown;
+    }
+
+    /*
+     * rzadkość przedmiotu
+     */
+    public void SetRarity(string rarity)
+    {
+        this.rarity = rarity;
+    }
+    public string GetRarity()
+    {
+        return this.rarity;
+    }
+
+    /*
+     * Minimalny poziom gracza do podniesienia
+     */
+    public void SetMinlvl(float minLvl)
+    {
+        this.minPlayerLvl = minLvl;
+    }
+    public float GetMinlvl()
+    {
+        return this.minPlayerLvl;
     }
 
     /*

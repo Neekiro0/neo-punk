@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
+    
     public bool isEquipmentShown = false;
     public bool isPlayerPickingItem = false;
     public List<ItemData> items = new List<ItemData>();
@@ -22,6 +23,7 @@ public class PlayerInventory : MonoBehaviour
     private GameObject selectedItemDesc;
     private GameObject incomingItemInfo;
     private List<TextMeshProUGUI> itemsCooldowns = new List<TextMeshProUGUI>();
+
     public void AddItem(ItemData itemData, GameObject objectToDelete)
     {
         isPlayerPickingItem = true;
@@ -36,7 +38,7 @@ public class PlayerInventory : MonoBehaviour
             SetIncomingItemInfo(itemData);
             if (Input.GetKey(KeyCode.E))
             {
-                List<ItemData> matchingItemsList = items.FindAll(obj => obj.itemName == itemData.itemName);
+                List<ItemData> matchingItemsList = items.FindAll(obj => obj.GetName() == itemData.GetName());
                 
                 Debug.Log(matchingItemsList.Count);
                 /*if ((items[selectedItemIndex].itemName == itemData.itemName))
@@ -44,7 +46,7 @@ public class PlayerInventory : MonoBehaviour
                     Debug.Log("Dodajesz item na to samo miejsce");
                 }*/
                 
-                if (matchingItemsList.Count > 0 && (items[selectedItemIndex].itemName != itemData.itemName))
+                if (matchingItemsList.Count > 0 && (items[selectedItemIndex].GetName() != itemData.GetName()))
                 {
                     Debug.Log("Istnieje już taki item w ekwipunku");
                 }
@@ -260,7 +262,7 @@ public class PlayerInventory : MonoBehaviour
      */
     public void SetImageAtSlotByIndex(String imagePath, String itemName)
     {
-        int itemIndex = items.FindIndex(obj => obj.itemName == itemName);
+        int itemIndex = items.FindIndex(obj => obj.GetName() == itemName);
         
         if (imagePath != "")
         {
@@ -322,8 +324,8 @@ public class PlayerInventory : MonoBehaviour
         {
             //Ustawianie opisu przedmiotu
             selectedItemDesc.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
-            selectedItemDesc.transform.Find("Description").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetDescription();
-            selectedItemDesc.transform.Find("Lore").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetLore();
+            selectedItemDesc.transform.Find("Description").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetActiveDescription();
+            selectedItemDesc.transform.Find("Lore").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
         }
     }
     private void SetIncomingItemInfo(ItemData itemData)
@@ -332,8 +334,8 @@ public class PlayerInventory : MonoBehaviour
         {
             //Ustawianie opisu przedmiotu
             incomingItemInfo.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
-            incomingItemInfo.transform.Find("Description").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetDescription();
-            incomingItemInfo.transform.Find("Lore").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetLore();
+            incomingItemInfo.transform.Find("Description").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetActiveDescription();
+            incomingItemInfo.transform.Find("Lore").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
         }
     }
 }
