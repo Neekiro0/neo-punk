@@ -14,6 +14,7 @@ public class EntityStatus : MonoBehaviour
     public float entityHealthPoints = 100.0f;
     public float entityMaxHelath = 100.0f;
     public int gold = 0;
+    private float BaseAttackDamage = 0;
     public float AttackDamage = 0;
     public float MovementSpeed = 0;
     public bool isFacedRight = true;
@@ -28,11 +29,19 @@ public class EntityStatus : MonoBehaviour
 
     private GameObject mainUserInterface;
     private SpriteRenderer spriteRenderer;
+    
 
+    // Wartość wyrażona w procentach, która odpowiada za % otrzymywanych obrażeń
+    public float incomingDamagePercent = 1.0f;
+    /*
+     * TODO: dodać base ad, oraz hp, aby uniknąć możliwości zmieniania statystyk w nieskończoność
+     */
     private void Awake()
     {
         mainUserInterface = GameObject.Find("Main User Interface");
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        BaseAttackDamage = AttackDamage;
     }
     
     /*
@@ -140,17 +149,17 @@ public class EntityStatus : MonoBehaviour
             {
                 // gracz sparował cios
                 float parryingDamageReduction = 0f; // 0 = 100% redukji
-                if ( damage * parryingDamageReduction >= GetHp() )
+                if ( damage * parryingDamageReduction * incomingDamagePercent >= GetHp() )
                 {
                     /*
                      * Gracz ginie
                      * TODO: animacja śmierci
                      */
                     PlayerDeathEvent();
-                } else if (damage * parryingDamageReduction < GetHp())
+                } else if (damage * parryingDamageReduction * incomingDamagePercent < GetHp())
                 {
                     // gracz otrzymuje obrażenia
-                    GettingDamageEvent(damage * parryingDamageReduction);
+                    GettingDamageEvent(damage * parryingDamageReduction * incomingDamagePercent);
                     
                     // odgrywanie animacji po sparowaniu
                     gameObject.GetComponent<Animator>().Play("parryAttack");
@@ -161,34 +170,34 @@ public class EntityStatus : MonoBehaviour
             {
                 // gracz zablokował cios
                 float blockingDamageReduction = 0.6f; // 0.6 = 40% redukji
-                if ( damage * blockingDamageReduction >= GetHp() )
+                if ( damage * blockingDamageReduction * incomingDamagePercent >= GetHp() )
                 {
                     /*
                      * Gracz ginie
                      * TODO: animacja śmierci
                      */
                     PlayerDeathEvent();
-                } else if (damage * blockingDamageReduction < GetHp())
+                } else if (damage * blockingDamageReduction * incomingDamagePercent < GetHp())
                 {
                     // gracz otrzymuje obrażenia
-                    GettingDamageEvent(damage * blockingDamageReduction);
+                    GettingDamageEvent(damage * blockingDamageReduction * incomingDamagePercent);
                 }
             }
             else
             {
                 StartCoroutine(SygnalizeGettingDamage());
                 // gracz nie sparował, ani nie zablokował ciosu
-                if ( damage >= GetHp() )
+                if ( damage * incomingDamagePercent >= GetHp() )
                 {
                     /*
                      * Gracz ginie
                      * TODO: animacja śmierci
                      */
                     PlayerDeathEvent();
-                } else if (damage < GetHp())
+                } else if (damage * incomingDamagePercent < GetHp())
                 {
                     // gracz otrzymuje obrażenia
-                    GettingDamageEvent(damage);
+                    GettingDamageEvent(damage * incomingDamagePercent);
                     
                     // animacja paska hp sygnalizująca otrzymanie obrażeń
                 }
@@ -197,11 +206,11 @@ public class EntityStatus : MonoBehaviour
         else
         {
             // Kod dla wszystkich encji poza graczem
-            if ( damage >= GetHp() )
+            if ( damage * incomingDamagePercent >= GetHp() )
             {
                 // Encja ginie
                 DeathEvent();
-            } else if (damage < GetHp())
+            } else if (damage * incomingDamagePercent < GetHp())
             {
                 // encja otrzymuje obrażenia
                 GettingDamageEvent(damage);
@@ -300,6 +309,11 @@ public class EntityStatus : MonoBehaviour
     public int GetExpToNextLVl()
     {
         return this.entityExperienceToNextLvl;
+    }
+
+    public float GetBaseAttackDamage()
+    {
+        return this.BaseAttackDamage;
     }
     
     /*

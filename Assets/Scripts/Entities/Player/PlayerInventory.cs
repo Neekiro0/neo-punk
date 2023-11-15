@@ -52,6 +52,7 @@ public class PlayerInventory : MonoBehaviour
                 }
                 else
                 {
+                    items[selectedItemIndex].OnItemDisband();
                     items[selectedItemIndex] = itemData;
                     SetImageAtSlot(itemData);
                     SetIncomingItemInfo(itemData);
@@ -196,6 +197,12 @@ public class PlayerInventory : MonoBehaviour
     {
         ItemData usedItem = items[itemPos];
         usedItem.PassiveAbility();
+    }
+
+    public void OnItemDisband(int itemPos)
+    {
+        ItemData usedItem = items[itemPos];
+        usedItem.OnItemDisband();
     }
 
     /*

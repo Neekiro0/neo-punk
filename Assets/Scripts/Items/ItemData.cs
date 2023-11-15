@@ -124,5 +124,6 @@ public class ItemData : MonoBehaviour
 
     public virtual void UseItem() {}
     public virtual void PassiveAbility() {}
+    public virtual void OnItemDisband() {}
 }
 

@@ -13,6 +13,7 @@ namespace Items
         private float lastNoticedPlayerHp;
         public EntityStatus playerStatus;
         public PlayerInventory playerInventory;
+        private bool isItemInInventory = true;
         
         private float baseDamage; // Bazowa wartość obrażeń
         private float damageIncreasePercentage = 0.4f; // Procent zwiększenia obrażeń o 40%
@@ -29,13 +30,20 @@ namespace Items
             this.playerStatus = GameObject.Find("Player").GetComponent<EntityStatus>();
             this.playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
             
-            this.lastNoticedPlayerHp = this.playerStatus.GetHp();
             
             baseDamage = this.playerStatus.GetAttackDamageCount();
         }
 
         public override void PassiveAbility()
         {
+
+            if (isItemInInventory)
+            {
+                lastNoticedPlayerHp = playerStatus.GetHp();
+                needleStacks = 0;
+                isItemInInventory = false;
+            }
+            
             if (playerStatus.GetHp() < lastNoticedPlayerHp)
             {
                 needleStacks += 1;
@@ -72,6 +80,12 @@ namespace Items
                 isEffectActive = true;
                 effectEndTime = Time.time + effectDuration;
             }
+        }
+
+        public override void OnItemDisband()
+        {
+            isItemInInventory = false;
+            playerStatus.SetAttackDamageCount(baseDamage);
         }
     }
     public class VoodooDollItem : MonoBehaviour

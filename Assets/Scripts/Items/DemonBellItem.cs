@@ -8,32 +8,57 @@ namespace Items
     internal class DemonBell : ItemData
     {
         public EntityStatus playerStatus;
-        public PlayerInventory playerInventory;
+        public GameObject playerEntity;
         public Player player;
-
+        private HitboxBehaviour swordHitbox;
+        
         private float effectDuration = 10.0f; // Czas trwania efektu w sekundach
 
         private bool isEffectActive = false; // Czy efekt jest aktywny
         private float effectEndTime = 0.0f; // Czas zakończenia efektu
         private int lastElementalType; // ostatnio używany element
+
+        private float additionalDamage = 0.25f;
+        private float addedDamage = 0.0f;
+
+        private float defenceLoweringPercent = 0.35f;
+        private float loweredDefence = 0.0f;
+        
+        
+        
+        private bool isDamageBonusGranted = false;
+        
         public DemonBell(string itemName, string passiveDescription, string activeDescription, string rarity,
             string imagePath = "", float cooldown = 0, float currentCooldown = 0, float minPlayerLvl = 0, int needleStacks = 0, EntityStatus playerStatus = null, PlayerInventory playerInventory = null)
             : base(itemName, passiveDescription, activeDescription, rarity, imagePath, cooldown, currentCooldown, minPlayerLvl)
         {
-            this.playerStatus = GameObject.Find("Player").GetComponent<EntityStatus>();
-            this.playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
+            this.playerEntity = GameObject.Find("Player").gameObject;
+            this.playerStatus = playerEntity.GetComponent<EntityStatus>();
             this.player = GameObject.Find("Player").GetComponent<Player>();
-            Debug.Log(this.playerStatus);
+            this.swordHitbox = player.transform.Find("SwordHitbox").gameObject.GetComponent<HitboxBehaviour>();
         }
 
         public override void PassiveAbility()
         {
+            /*
+             * Zainicjowanie pasywnych bonusów
+             */
+            if (!isDamageBonusGranted)
+            {
+                addedDamage = playerStatus.GetBaseAttackDamage() * additionalDamage;
+                loweredDefence = playerStatus.incomingDamagePercent * defenceLoweringPercent;
+
+                playerStatus.AttackDamage = playerStatus.GetBaseAttackDamage() + addedDamage;
+                playerStatus.incomingDamagePercent += loweredDefence;
+                
+                isDamageBonusGranted = true;
+            }
             
             // część UseItem
             if (isEffectActive && !(Time.time < effectEndTime))
             {
                 // po zakończeniu UseItem
-                player.ChangeElementalType(0);
+                player.ChangeElementalType(lastElementalType);
 
                 isEffectActive = false; // Wyłączamy flagę aktywności efektu
             }
@@ -49,6 +74,15 @@ namespace Items
                 lastElementalType = player.UsedElementalTypeId;
                 player.ChangeElementalType(5);
             }
+        }
+
+        public override void OnItemDisband()
+        {
+            playerStatus.AttackDamage = playerStatus.AttackDamage - addedDamage;
+            playerStatus.incomingDamagePercent -= loweredDefence;
+            
+            isDamageBonusGranted = false;
+            player.ChangeElementalType(lastElementalType);
         }
     }
 
