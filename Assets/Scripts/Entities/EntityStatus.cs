@@ -239,10 +239,11 @@ public class EntityStatus : MonoBehaviour
     private IEnumerator SygnalizeGettingDamage()
     {
         // w tym momencie gameObject musi być graczem
-        Color currentColor = healthBar.GetComponent<Image>().color;
+        Image healthBarImage = healthBar.GetComponent<Image>();
+        Color currentColor = healthBarImage.color;
         
         // animacja otrzymania obrażeń
-        healthBar.GetComponent<Image>().color = Color.red;
+        healthBarImage.color = Color.red;
 
         MoveHpBar(0, 3);
         yield return new WaitForSeconds(0.05f);
@@ -254,7 +255,7 @@ public class EntityStatus : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         MoveHpBar(0, 3);
         
-        healthBar.GetComponent<Image>().color = currentColor;
+        healthBarImage.color = currentColor;
     }
     
     void MoveHpBar(float xOffset, float yOffset)

@@ -67,7 +67,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public void Awake()
+    public void Start()
     {
         MainUi = GameObject.Find("Main User Interface");
         InventoryUi = GameObject.Find("Equipment Interface");
@@ -327,22 +327,17 @@ public class PlayerInventory : MonoBehaviour
 
     private void SetSelectedItemInfo(ItemData itemData)
     {
-        if (itemData != null)
-        {
-            //Ustawianie opisu przedmiotu
-            selectedItemDesc.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
-            selectedItemDesc.transform.Find("Description").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetActiveDescription();
-            selectedItemDesc.transform.Find("Lore").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
-        }
+        Debug.Log("Ustawienie opisu przedmiotu");
+        //Ustawianie opisu przedmiotu
+        selectedItemDesc.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
+        selectedItemDesc.transform.Find("ActiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetActiveDescription();
+        selectedItemDesc.transform.Find("PassiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
     }
     private void SetIncomingItemInfo(ItemData itemData)
     {
-        if (itemData != null)
-        {
-            //Ustawianie opisu przedmiotu
-            incomingItemInfo.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
-            incomingItemInfo.transform.Find("Description").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetActiveDescription();
-            incomingItemInfo.transform.Find("Lore").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
-        }
+        //Ustawianie opisu przedmiotu
+        incomingItemInfo.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
+        incomingItemInfo.transform.Find("ActiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetActiveDescription();
+        incomingItemInfo.transform.Find("PassiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
     }
 }

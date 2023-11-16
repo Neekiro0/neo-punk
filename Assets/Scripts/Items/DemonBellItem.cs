@@ -96,8 +96,9 @@ namespace Items
         
         void Start()
         {
+            // ReSharper disable once Unity.IncorrectMonoBehaviourInstantiation
             demonBell = new DemonBell(
-                "Demon Bell",
+                "Demon bell",
                 "Player takes 35% more damage, but also deals 25% more.",
                 "Overrides damage type to Bloody for 10 seconds.",
                 "Common",

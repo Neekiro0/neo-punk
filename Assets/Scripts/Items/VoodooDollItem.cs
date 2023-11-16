@@ -97,8 +97,9 @@ namespace Items
         
         void Awake()
         {
+            // ReSharper disable once Unity.IncorrectMonoBehaviourInstantiation
             voodooDoll = new VoodooDoll(
-                "Voodoo Doll",
+                "Voodoo doll",
                 "If you get hit, doll gets a needle stack. If you get hit when Doll have 3 stacks you will die.",
                 "Amplifies damage by 40% for 10 seconds.",
                 "Common",
