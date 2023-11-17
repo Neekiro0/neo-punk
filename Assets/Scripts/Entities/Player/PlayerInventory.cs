@@ -12,7 +12,7 @@ public class PlayerInventory : MonoBehaviour
     
     public bool isEquipmentShown = false;
     public bool isPlayerPickingItem = false;
-    public List<ItemData> items = new List<ItemData>();
+    public bool isInspectingItems = false;
     public int selectedItemIndex = 0;
     public Sprite fieldImage;
     public Sprite selectedFieldImage;
@@ -22,109 +22,24 @@ public class PlayerInventory : MonoBehaviour
     private GameObject fields;
     private GameObject selectedItemDesc;
     private GameObject incomingItemInfo;
-    private List<TextMeshProUGUI> itemsCooldowns = new List<TextMeshProUGUI>();
-
-    public void AddItem(ItemData itemData, GameObject objectToDelete)
-    {
-        isPlayerPickingItem = true;
-        StartCoroutine(WaitForAction(itemData, objectToDelete));
-    }
-    
-    private IEnumerator WaitForAction(ItemData itemData, GameObject pickedObject)
-    {
-        ShowEquipment();
-        while (isEquipmentShown)
-        {
-            SetIncomingItemInfo(itemData);
-            if (Input.GetKey(KeyCode.E))
-            {
-                List<ItemData> matchingItemsList = items.FindAll(obj => obj.GetName() == itemData.GetName());
-                
-                Debug.Log(matchingItemsList.Count);
-                /*if ((items[selectedItemIndex].itemName == itemData.itemName))
-                {
-                    Debug.Log("Dodajesz item na to samo miejsce");
-                }*/
-                
-                if (matchingItemsList.Count > 0 && (items[selectedItemIndex].GetName() != itemData.GetName()))
-                {
-                    Debug.Log("Istnieje już taki item w ekwipunku");
-                }
-                else
-                {
-                    items[selectedItemIndex].OnItemDisband();
-                    items[selectedItemIndex] = itemData;
-                    SetImageAtSlot(itemData);
-                    SetIncomingItemInfo(itemData);
-                    Destroy(pickedObject);
-                
-                    HideEquipment();
-                    isPlayerPickingItem = false;
-                }
-                
-            }
-            yield return null;
-        }
-    }
+    private ItemsHandler itemsHandler;
+    private EntityStatus playerStatus;
 
     public void Start()
     {
         MainUi = GameObject.Find("Main User Interface");
         InventoryUi = GameObject.Find("Equipment Interface");
-        selectedItemDesc = GameObject.Find("SelectedItemInfo").gameObject;
-        incomingItemInfo = GameObject.Find("IncomingItemInfo").gameObject;
-        MainUi.SetActive(true);
-        InventoryUi.SetActive(false);
-        
+        //selectedItemDesc = GameObject.Find("SelectedItemInfo").gameObject;
+        incomingItemInfo = InventoryUi.transform.Find("IncomingItemInfo").gameObject;
         fields = InventoryUi.transform.Find("ItemsFields").gameObject;
+        itemsHandler = gameObject.GetComponent<ItemsHandler>();
+        playerStatus = gameObject.GetComponent<EntityStatus>();
         
-        
-        // ustawianie wyekwipowanych itemów na starcie gry
-        ItemData emptyItemsData = new ItemData("", "", "", "", "");
-        items.Add( emptyItemsData );
-        items.Add( emptyItemsData );
-        items.Add( emptyItemsData );
-        items.Add( emptyItemsData );
-        
-        
-        GameObject itemsCooldownsParent = MainUi.transform.Find("ItemsCooldowns").gameObject;
-
-        for (int i = 0; i < 4; i++)
-        {
-            GameObject itemCooldownObject = itemsCooldownsParent.transform.GetChild(i).gameObject;
-            TextMeshProUGUI itemCooldownTextComponent = itemCooldownObject.GetComponent<TextMeshProUGUI>();
-
-            itemsCooldowns.Add(itemCooldownTextComponent);
-        }
+        HideEquipment();
     }
 
     void Update()
     {
-        /*
-         * Używanie przedmiotów
-         */
-        if (Input.GetKeyDown(KeyCode.Alpha1)) UseItem(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) UseItem(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) UseItem(2);
-        if (Input.GetKeyDown(KeyCode.Alpha4)) UseItem(3);
-        
-        /*
-         * Zdolności pasywne
-         */
-        UsePassive(0);
-        UsePassive(1);
-        UsePassive(2);
-        UsePassive(3);
-        
-        /*
-         * Aktualizacja timera cooldownu
-         */
-        UpdateCooldownTimer(0);
-        UpdateCooldownTimer(1);
-        UpdateCooldownTimer(2);
-        UpdateCooldownTimer(3);
-        
-        
         if ( Input.GetKeyDown( InputManager.InventoryMenuKey ))
         {
             if (isEquipmentShown == false)
@@ -139,12 +54,13 @@ public class PlayerInventory : MonoBehaviour
 
         if (isEquipmentShown)
         {
-            if ( Input.GetKeyDown( InputManager.MoveLeftKey ))
+            float verticalInput = Input.GetAxis("Vertical");
+            if ( verticalInput < 0)
             {
                 selectedItemIndex = (selectedItemIndex == 0)?3:selectedItemIndex-1;
                 UpdateEquipmentFrames();
             }
-            if ( Input.GetKeyDown( InputManager.MoveRightKey ) )
+            if ( verticalInput > 0 )
             {
                 selectedItemIndex = (selectedItemIndex == 3)?0:selectedItemIndex+1;
                 UpdateEquipmentFrames();
@@ -153,85 +69,38 @@ public class PlayerInventory : MonoBehaviour
             {
                 HideEquipment();
             }
-        }
-    }
-
-    public void UseItem(int ItemPos)
-    {
-        ItemData usedItem = items[ItemPos];
-        if ( !(usedItem.GetCurrentCooldown() > 0) )
-        {
-            usedItem.UseItem();
-            usedItem.SetCurrentCooldown(usedItem.GetCooldown());
-            StartCoroutine(CooldownTimer(usedItem, ItemPos));
             
-            // wyczernienie przedmiotu
-            try
+            // Zmiana rodzaju menu eq przeglądanie przedmiotów / wszystko
+            float horizontalInput = Input.GetAxis("Horizontal");
+            if (horizontalInput > 0)
             {
-                Image itemImage = MainUi.transform.Find("Items").transform.GetChild(ItemPos).GetComponent<Image>();
-
-                itemImage.color = new Color32(55, 55, 55, 255);
-
-            } catch (Exception) {}
-        }
-    }
-    
-    private IEnumerator CooldownTimer(ItemData item, int ItemPos)
-    {
-        while (item.GetCurrentCooldown() > 0)
-        {
-            yield return new WaitForSeconds(1.0f);
-            item.SetCurrentCooldown( item.GetCurrentCooldown() - 1.0f );
-        }
-        item.SetCurrentCooldown(0);
-        try
-        {
-            Image itemImage = MainUi.transform.Find("Items").transform.GetChild(ItemPos).GetComponent<Image>();
-
-            itemImage.color = Color.white;
-
-        } catch (Exception) {}
-    }
-
-    public void UsePassive(int itemPos)
-    {
-        ItemData usedItem = items[itemPos];
-        usedItem.PassiveAbility();
-    }
-
-    public void OnItemDisband(int itemPos)
-    {
-        ItemData usedItem = items[itemPos];
-        usedItem.OnItemDisband();
-    }
-
-    /*
-     * Metoda aktualizująca timer na UI
-     */
-    private void UpdateCooldownTimer(int itemPos)
-    {
-        ItemData item = items[itemPos];
-        if ( item.GetCurrentCooldown() <= item.GetCooldown() && item.GetCurrentCooldown() > 0 )
-        {
-            itemsCooldowns[itemPos].text = item.GetCurrentCooldown().ToString();
-        }
-        else
-        {
-            itemsCooldowns[itemPos].text = "";
+                isInspectingItems = true;
+            }
+            else if (horizontalInput < 0)
+            {
+                isInspectingItems = false;
+            }
         }
     }
 
     /*
      * Metoda chowająca ekwipunek
      */
-    private void ShowEquipment()
+    public void ShowEquipment()
     {
         isEquipmentShown = true;
+        isInspectingItems = false;
+        isPlayerPickingItem = false;
         Time.timeScale = 0;
         selectedItemIndex = 0;
-        UpdateEquipmentFrames();
+        //UpdateEquipmentFrames();
         MainUi.SetActive(false);
         InventoryUi.SetActive(true);
+
+        UpdateHp();
+        UpdateGold();
+        UpdateElemental();
+        UpdateExperience();
     }
     
     /*
@@ -245,10 +114,114 @@ public class PlayerInventory : MonoBehaviour
         InventoryUi.SetActive(false);
     }
 
+    public void UpdateHp()
+    {
+        /*try
+        {*/
+            GameObject healthObject = InventoryUi.transform.Find("Health").gameObject;
+
+            if (healthObject)
+            {
+                GameObject healthPoints = healthObject.transform.Find("HP").gameObject;
+                GameObject maxHealth = healthObject.transform.Find("MaxHP").gameObject;
+
+                if (healthPoints && maxHealth)
+                {
+                    healthPoints.GetComponent<TextMeshProUGUI>().text = playerStatus.GetHp().ToString();
+                    maxHealth.GetComponent<TextMeshProUGUI>().text = " / " + playerStatus.GetMaxHp().ToString() + "HP";
+                }
+            }
+        /*}
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }*/
+    }
+    public void UpdateGold()
+    {
+        try
+        {
+            TextMeshProUGUI goldCount = InventoryUi.transform.Find("Gold").transform.Find("Count").gameObject.GetComponent<TextMeshProUGUI>();
+
+            if (goldCount)
+            {
+                goldCount.text = playerStatus.GetGold().ToString() + " g";
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+    public void UpdateExperience()
+    {
+        try
+        {
+            GameObject experienceObject = InventoryUi.transform.Find("Experience").gameObject;
+
+            if (experienceObject)
+            {
+                GameObject level = experienceObject.transform.Find("Level").gameObject;
+                GameObject currentXp = experienceObject.transform.Find("Xp").transform.Find("CurrentXp").gameObject;
+                GameObject maxXp = experienceObject.transform.Find("Xp").transform.Find("MaxXp").gameObject;
+
+                if (level && currentXp && maxXp)
+                {
+                    level.GetComponent<TextMeshProUGUI>().text = playerStatus.GetLevel().ToString() + " lvl";
+                    currentXp.GetComponent<TextMeshProUGUI>().text = playerStatus.GetXp().ToString();
+                    maxXp.GetComponent<TextMeshProUGUI>().text = " / " + playerStatus.GetExpToNextLVl().ToString() + "xp";
+                }
+                else
+                {
+                    Debug.Log("Nie znaleziono elementu dziecka w Experience");
+                }
+            }
+            else
+            {
+                Debug.Log("Nie znaleziono Experience");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+    public void UpdateElemental()
+    {
+        try
+        {
+            GameObject elementalParent = InventoryUi.transform.Find("Elemental").gameObject;
+            
+            // szukanie elementu gracza
+            List<Player.ElementalType> elementals = gameObject.GetComponent<Player>().ElementalTypes;
+            int UsedElementalTypeId = gameObject.GetComponent<Player>().UsedElementalTypeId;
+
+            Player.ElementalType usedElemental = elementals[UsedElementalTypeId];
+            
+            if (elementalParent && null != usedElemental)
+            {
+                GameObject ElementalImage = elementalParent.transform.Find("ElementalImage").gameObject;
+                GameObject ElementalName = elementalParent.transform.Find("ElementalName").gameObject;
+
+                if (ElementalImage && ElementalName)
+                {
+                    ElementalImage.GetComponent<Image>().sprite = usedElemental.icon;
+                    ElementalName.GetComponent<TextMeshProUGUI>().text = usedElemental.name;
+                    ElementalName.GetComponent<TextMeshProUGUI>().color = usedElemental.elementalColor;
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
     /*
      * Metoda aktualizująca obrazek w UI, na podstawie podanych danych
      */
-    private void SetImageAtSlot(ItemData itemData)
+    public void SetImageAtSlot(ItemData itemData)
     {
         if (itemData.GetImagePath() != "")
         {
@@ -269,7 +242,7 @@ public class PlayerInventory : MonoBehaviour
      */
     public void SetImageAtSlotByIndex(String imagePath, String itemName)
     {
-        int itemIndex = items.FindIndex(obj => obj.GetName() == itemName);
+        int itemIndex = itemsHandler.items.FindIndex(obj => obj.GetName() == itemName);
         
         if (imagePath != "")
         {
@@ -321,7 +294,7 @@ public class PlayerInventory : MonoBehaviour
                 }
             }
 
-            SetSelectedItemInfo(items[selectedItemIndex]);
+            //SetSelectedItemInfo(items[selectedItemIndex]);
         }
     }
 

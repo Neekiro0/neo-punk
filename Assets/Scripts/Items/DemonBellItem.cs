@@ -139,7 +139,7 @@ namespace Items
             {
                 // dodawanie do ekwipunku
                 try {
-                    player.GetComponent<PlayerInventory>().AddItem(demonBell, gameObject);
+                    player.GetComponent<ItemsHandler>().AddItem(demonBell, gameObject);
                 } catch (Exception) {
                     Debug.Log("Wystąpił błąd");
                 }

@@ -186,7 +186,7 @@ namespace Items
             {
                 // dodawanie do ekwipunku
                 try {
-                    player.GetComponent<PlayerInventory>().AddItem(handsWiring, gameObject);
+                    player.GetComponent<ItemsHandler>().AddItem(handsWiring, gameObject);
                 } catch (Exception) {
                     Debug.Log("Wystąpił błąd");
                 }

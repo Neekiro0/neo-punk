@@ -140,7 +140,7 @@ namespace Items
             {
                 // dodawanie do ekwipunku
                 try {
-                    player.GetComponent<PlayerInventory>().AddItem(voodooDoll, gameObject);
+                    player.GetComponent<ItemsHandler>().AddItem(voodooDoll, gameObject);
                 } catch (Exception) {
                     Debug.Log("Wystąpił błąd");
                 }

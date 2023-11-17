@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
         [SerializeField]
         public string name;
         public Sprite icon;
+        public Color elementalColor;
     }
     
     [Header("Elemental Types")]
