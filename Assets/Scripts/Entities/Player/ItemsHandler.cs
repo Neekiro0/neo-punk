@@ -78,7 +78,7 @@ public class ItemsHandler : MonoBehaviour
             {
                 List<ItemData> matchingItemsList = items.FindAll(obj => obj.GetName() == itemData.GetName());
                 
-                Debug.Log(matchingItemsList.Count);
+                //Debug.Log(matchingItemsList.Count);
                 /*if ((items[selectedItemIndex].itemName == itemData.itemName))
                 {
                     Debug.Log("Dodajesz item na to samo miejsce");

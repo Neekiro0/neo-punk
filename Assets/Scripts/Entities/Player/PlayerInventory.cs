@@ -16,6 +16,8 @@ public class PlayerInventory : MonoBehaviour
     public int selectedItemIndex = 0;
     public Sprite fieldImage;
     public Sprite selectedFieldImage;
+    public Color secondaryEqColor;
+    public Color secondaryItemsListColor;
 
     private GameObject MainUi;
     private GameObject InventoryUi;
@@ -24,20 +26,33 @@ public class PlayerInventory : MonoBehaviour
     private GameObject incomingItemInfo;
     private ItemsHandler itemsHandler;
     private EntityStatus playerStatus;
+    private bool isVerticalInputPressed = false;
+    private float ItemsListInitialWidth;
+    private Texture rawImage1;
+    private Texture rawImage2;
+    private bool areImagesSwapped = false;
+    private Color primaryEqColor;
+    private Color primaryItemsListColor;
 
     public void Start()
     {
         MainUi = GameObject.Find("Main User Interface");
         InventoryUi = GameObject.Find("Equipment Interface");
-        //selectedItemDesc = GameObject.Find("SelectedItemInfo").gameObject;
+        selectedItemDesc = InventoryUi.transform.Find("SelectedItemInfo").gameObject;
         incomingItemInfo = InventoryUi.transform.Find("IncomingItemInfo").gameObject;
         fields = InventoryUi.transform.Find("ItemsFields").gameObject;
         itemsHandler = gameObject.GetComponent<ItemsHandler>();
         playerStatus = gameObject.GetComponent<EntityStatus>();
+        ItemsListInitialWidth = InventoryUi.transform.Find("ItemsFields").GetComponent<RectTransform>().offsetMin.x;
         
+        rawImage1 = InventoryUi.GetComponent<RawImage>().texture;
+        rawImage2 = InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().texture;
+        primaryEqColor = InventoryUi.GetComponent<RawImage>().color;
+        primaryItemsListColor = InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().color;
+            
         HideEquipment();
     }
-
+    
     void Update()
     {
         if ( Input.GetKeyDown( InputManager.InventoryMenuKey ))
@@ -54,31 +69,70 @@ public class PlayerInventory : MonoBehaviour
 
         if (isEquipmentShown)
         {
-            float verticalInput = Input.GetAxis("Vertical");
-            if ( verticalInput < 0)
+            float verticalInput = Input.GetAxisRaw("Vertical");
+
+            if (verticalInput < 0 && !isVerticalInputPressed)
             {
-                selectedItemIndex = (selectedItemIndex == 0)?3:selectedItemIndex-1;
-                UpdateEquipmentFrames();
+                selectedItemIndex = (selectedItemIndex == 0) ? 3 : selectedItemIndex - 1;
+                //UpdateEquipmentFrames();
+                isVerticalInputPressed = true;
             }
-            if ( verticalInput > 0 )
+            else if (verticalInput > 0 && !isVerticalInputPressed)
             {
-                selectedItemIndex = (selectedItemIndex == 3)?0:selectedItemIndex+1;
-                UpdateEquipmentFrames();
+                selectedItemIndex = (selectedItemIndex == 3) ? 0 : selectedItemIndex + 1;
+                //UpdateEquipmentFrames();
+                isVerticalInputPressed = true;
             }
-            if ( Input.GetKeyDown( InputManager.PauseMenuKey ) )
+
+            if (verticalInput == 0)
             {
-                HideEquipment();
+                isVerticalInputPressed = false;
             }
             
             // Zmiana rodzaju menu eq przeglądanie przedmiotów / wszystko
-            float horizontalInput = Input.GetAxis("Horizontal");
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
             if (horizontalInput > 0)
             {
                 isInspectingItems = true;
+                
+                // zmiana stanu menu z Inventory na InspectingItem
+                selectedItemDesc.SetActive(true);
+                InventoryUi.transform.Find("MissionInfo").gameObject.SetActive(false);
+                InventoryUi.transform.Find("Elemental").gameObject.SetActive(false);
+                
+                // wydłużenie width pasku itemów
+                RectTransform rectTransform = InventoryUi.transform.Find("ItemsFields").GetComponent<RectTransform>();
+                Vector2 offsetMin = rectTransform.offsetMin;
+                offsetMin.x = ItemsListInitialWidth - 300.0f; // Ustawienie wartości 'left' na 50
+                rectTransform.offsetMin = offsetMin;
+
+                // zamiana tła menu z listą itemów
+                InventoryUi.GetComponent<RawImage>().texture = rawImage2;
+                InventoryUi.GetComponent<RawImage>().color = secondaryEqColor;
+                
+                InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().texture = rawImage1;
+                InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().color = secondaryItemsListColor;
             }
             else if (horizontalInput < 0)
             {
                 isInspectingItems = false;
+                // zmiana stanu menu z InspectingItem na Inventory
+                selectedItemDesc.SetActive(false);
+                InventoryUi.transform.Find("MissionInfo").gameObject.SetActive(true);
+                InventoryUi.transform.Find("Elemental").gameObject.SetActive(true);
+                
+                // skrócenie width pasku itemów
+                RectTransform rectTransform = InventoryUi.transform.Find("ItemsFields").GetComponent<RectTransform>();
+                Vector2 offsetMin = rectTransform.offsetMin;
+                offsetMin.x = ItemsListInitialWidth; // Ustawienie wartości 'left' na 50
+                rectTransform.offsetMin = offsetMin;
+                
+                // zamiana tła menu z listą itemów
+                InventoryUi.GetComponent<RawImage>().texture = rawImage1;
+                InventoryUi.GetComponent<RawImage>().color = primaryEqColor;
+                
+                InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().texture = rawImage2;
+                InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().color = primaryItemsListColor;
             }
         }
     }
@@ -96,6 +150,8 @@ public class PlayerInventory : MonoBehaviour
         //UpdateEquipmentFrames();
         MainUi.SetActive(false);
         InventoryUi.SetActive(true);
+        selectedItemDesc.SetActive(false);
+        incomingItemInfo.SetActive(false);
 
         UpdateHp();
         UpdateGold();
@@ -116,8 +172,8 @@ public class PlayerInventory : MonoBehaviour
 
     public void UpdateHp()
     {
-        /*try
-        {*/
+        try
+        {
             GameObject healthObject = InventoryUi.transform.Find("Health").gameObject;
 
             if (healthObject)
@@ -131,11 +187,11 @@ public class PlayerInventory : MonoBehaviour
                     maxHealth.GetComponent<TextMeshProUGUI>().text = " / " + playerStatus.GetMaxHp().ToString() + "HP";
                 }
             }
-        /*}
+        }
         catch (Exception e)
         {
             Console.WriteLine(e);
-        }*/
+        }
     }
     public void UpdateGold()
     {

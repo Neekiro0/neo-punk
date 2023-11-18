@@ -107,7 +107,8 @@ public class Player : MonoBehaviour
                (horizontalInput > 0 && !playerStatus.isFacedRight) ) )
         {
             horizontalInput = 0;
-        } else if (isBlocking) horizontalInput = 0;
+        } 
+        else if (isBlocking) horizontalInput = 0;
         
         /*
          * przemieszczanie w osi x, prędkość poruszania się zależna od tego czy gracz atakuje
