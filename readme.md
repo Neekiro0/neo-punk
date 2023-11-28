@@ -66,9 +66,10 @@ Historia będzie dość przejrzysta, lecz, aby zwiększyć nieco zainteresowanie
 
 ## Roadmap:
 1. [x] Podstawowe animacje gracza, poruszanie się i walka
-2. [ ] Podstawowy przeciwnik, do testów
-3. [ ] Pierwsze w pełni zaimplementowane przedmioty (na okres tutoriala 4)
-2. [ ] Podstawowi przeciwnicy (3: demon, człowiek, robot)
-4. [ ] Lokalna baza danych zawierająca podpowiedzi, oraz mechanika wyświetlania podpowiedzi.
-5. [ ] Pierwszy poziom (tutorial)
-6. [ ] system dialogów
+2. [x] Podstawowy przeciwnik, do testów
+3. [x] Pierwsze w pełni zaimplementowane przedmioty (na okres tutoriala 4)
+4. [ ] Przebudowa ekwipunku
+5. [ ] Podstawowi przeciwnicy (3: demon, człowiek, robot)
+6. [ ] Lokalna baza danych zawierająca podpowiedzi, oraz mechanika wyświetlania podpowiedzi.
+7. [ ] Pierwszy poziom (tutorial)
+8. [ ] system dialogów
