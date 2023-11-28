@@ -185,11 +185,11 @@ namespace Items
             if ( entity.CompareTag("Player") && ( Input.GetKey( KeyCode.F ) ) )
             {
                 // dodawanie do ekwipunku
-                try {
+                /*try {*/
                     player.GetComponent<ItemsHandler>().AddItem(handsWiring, gameObject);
-                } catch (Exception) {
+                /*} catch (Exception) {
                     Debug.Log("Wystąpił błąd");
-                }
+                }*/
             }
         }
     }

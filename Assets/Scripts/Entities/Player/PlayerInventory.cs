@@ -22,8 +22,9 @@ public class PlayerInventory : MonoBehaviour
     private GameObject MainUi;
     private GameObject InventoryUi;
     private GameObject fields;
-    private GameObject selectedItemDesc;
-    private GameObject incomingItemInfo;
+    public GameObject selectedItemDesc;
+    public GameObject incomingItemInfo;
+    private GameObject arrowTooltip;
     private ItemsHandler itemsHandler;
     private EntityStatus playerStatus;
     private bool isVerticalInputPressed = false;
@@ -33,6 +34,7 @@ public class PlayerInventory : MonoBehaviour
     private bool areImagesSwapped = false;
     private Color primaryEqColor;
     private Color primaryItemsListColor;
+    private bool isButtonDown = false;
 
     public void Start()
     {
@@ -40,6 +42,7 @@ public class PlayerInventory : MonoBehaviour
         InventoryUi = GameObject.Find("Equipment Interface");
         selectedItemDesc = InventoryUi.transform.Find("SelectedItemInfo").gameObject;
         incomingItemInfo = InventoryUi.transform.Find("IncomingItemInfo").gameObject;
+        arrowTooltip = InventoryUi.transform.Find("ArrowTooltip").gameObject;
         fields = InventoryUi.transform.Find("ItemsFields").gameObject;
         itemsHandler = gameObject.GetComponent<ItemsHandler>();
         playerStatus = gameObject.GetComponent<EntityStatus>();
@@ -69,70 +72,38 @@ public class PlayerInventory : MonoBehaviour
 
         if (isEquipmentShown)
         {
-            float verticalInput = Input.GetAxisRaw("Vertical");
+            if (isInspectingItems)
+            {
+                float verticalInput = Input.GetAxisRaw("Vertical");
 
-            if (verticalInput < 0 && !isVerticalInputPressed)
-            {
-                selectedItemIndex = (selectedItemIndex == 0) ? 3 : selectedItemIndex - 1;
-                //UpdateEquipmentFrames();
-                isVerticalInputPressed = true;
-            }
-            else if (verticalInput > 0 && !isVerticalInputPressed)
-            {
-                selectedItemIndex = (selectedItemIndex == 3) ? 0 : selectedItemIndex + 1;
-                //UpdateEquipmentFrames();
-                isVerticalInputPressed = true;
-            }
+                if (verticalInput > 0 && !isButtonDown)
+                {
+                    isButtonDown = true;
+                    selectedItemIndex = (selectedItemIndex == 0) ? 3 : selectedItemIndex - 1;
+                    UpdateEquipmentFrames();
+                }
+                else if (verticalInput < 0 && !isButtonDown)
+                {
+                    isButtonDown = true;
+                    selectedItemIndex = (selectedItemIndex == 3) ? 0 : selectedItemIndex + 1;
+                    UpdateEquipmentFrames();
+                }
 
-            if (verticalInput == 0)
-            {
-                isVerticalInputPressed = false;
+                if (verticalInput == 0)
+                {
+                    isButtonDown = false;
+                }
             }
             
             // Zmiana rodzaju menu eq przeglądanie przedmiotów / wszystko
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             if (horizontalInput > 0)
             {
-                isInspectingItems = true;
-                
-                // zmiana stanu menu z Inventory na InspectingItem
-                selectedItemDesc.SetActive(true);
-                InventoryUi.transform.Find("MissionInfo").gameObject.SetActive(false);
-                InventoryUi.transform.Find("Elemental").gameObject.SetActive(false);
-                
-                // wydłużenie width pasku itemów
-                RectTransform rectTransform = InventoryUi.transform.Find("ItemsFields").GetComponent<RectTransform>();
-                Vector2 offsetMin = rectTransform.offsetMin;
-                offsetMin.x = ItemsListInitialWidth - 300.0f; // Ustawienie wartości 'left' na 50
-                rectTransform.offsetMin = offsetMin;
-
-                // zamiana tła menu z listą itemów
-                InventoryUi.GetComponent<RawImage>().texture = rawImage2;
-                InventoryUi.GetComponent<RawImage>().color = secondaryEqColor;
-                
-                InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().texture = rawImage1;
-                InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().color = secondaryItemsListColor;
+                showItemInspector();
             }
             else if (horizontalInput < 0)
             {
-                isInspectingItems = false;
-                // zmiana stanu menu z InspectingItem na Inventory
-                selectedItemDesc.SetActive(false);
-                InventoryUi.transform.Find("MissionInfo").gameObject.SetActive(true);
-                InventoryUi.transform.Find("Elemental").gameObject.SetActive(true);
-                
-                // skrócenie width pasku itemów
-                RectTransform rectTransform = InventoryUi.transform.Find("ItemsFields").GetComponent<RectTransform>();
-                Vector2 offsetMin = rectTransform.offsetMin;
-                offsetMin.x = ItemsListInitialWidth; // Ustawienie wartości 'left' na 50
-                rectTransform.offsetMin = offsetMin;
-                
-                // zamiana tła menu z listą itemów
-                InventoryUi.GetComponent<RawImage>().texture = rawImage1;
-                InventoryUi.GetComponent<RawImage>().color = primaryEqColor;
-                
-                InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().texture = rawImage2;
-                InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().color = primaryItemsListColor;
+                hideItemInspector();
             }
         }
     }
@@ -152,6 +123,7 @@ public class PlayerInventory : MonoBehaviour
         InventoryUi.SetActive(true);
         selectedItemDesc.SetActive(false);
         incomingItemInfo.SetActive(false);
+        arrowTooltip.SetActive(false);
 
         UpdateHp();
         UpdateGold();
@@ -164,10 +136,64 @@ public class PlayerInventory : MonoBehaviour
      */
     public void HideEquipment()
     {
+        ResetItemsFields();
+        hideItemInspector();
+        
         isEquipmentShown = false;
         Time.timeScale = 1;
         MainUi.SetActive(true);
         InventoryUi.SetActive(false);
+    }
+
+    private void showItemInspector()
+    {
+        isInspectingItems = true;
+                
+        // zmiana stanu menu z Inventory na InspectingItem
+        selectedItemDesc.SetActive(true);
+        InventoryUi.transform.Find("MissionInfo").gameObject.SetActive(false);
+        InventoryUi.transform.Find("Elemental").gameObject.SetActive(false);
+                
+        // wydłużenie width pasku itemów
+        RectTransform rectTransform = InventoryUi.transform.Find("ItemsFields").GetComponent<RectTransform>();
+        Vector2 offsetMin = rectTransform.offsetMin;
+        offsetMin.x = ItemsListInitialWidth - 300.0f; // Ustawienie wartości 'left' na 50
+        rectTransform.offsetMin = offsetMin;
+
+        // zamiana tła menu z listą itemów
+        InventoryUi.GetComponent<RawImage>().texture = rawImage2;
+        InventoryUi.GetComponent<RawImage>().color = secondaryEqColor;
+                
+        InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().texture = rawImage1;
+        InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().color = secondaryItemsListColor;
+
+        UpdateEquipmentFrames();
+    }
+
+    private void hideItemInspector()
+    {
+        isInspectingItems = false;
+        // zmiana stanu menu z InspectingItem na Inventory
+        selectedItemDesc.SetActive(false);
+        InventoryUi.transform.Find("MissionInfo").gameObject.SetActive(true);
+        InventoryUi.transform.Find("Elemental").gameObject.SetActive(true);
+                
+        // skrócenie width pasku itemów
+        RectTransform rectTransform = InventoryUi.transform.Find("ItemsFields").GetComponent<RectTransform>();
+        Vector2 offsetMin = rectTransform.offsetMin;
+        offsetMin.x = ItemsListInitialWidth; // Ustawienie wartości 'left' na 50
+        rectTransform.offsetMin = offsetMin;
+                
+        // zamiana tła menu z listą itemów
+        InventoryUi.GetComponent<RawImage>().texture = rawImage1;
+        InventoryUi.GetComponent<RawImage>().color = primaryEqColor;
+                
+        InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().texture = rawImage2;
+        InventoryUi.transform.Find("ItemsFields").GetComponent<RawImage>().color = primaryItemsListColor;
+                
+        // Reset pól wyświetlających itemy
+        ResetItemsFields();
+        selectedItemIndex = 0;
     }
 
     public void UpdateHp()
@@ -316,22 +342,7 @@ public class PlayerInventory : MonoBehaviour
     private void UpdateEquipmentFrames()
     {
         // zwaracnie wszystkich pól eq do podstawowego stanu
-        foreach (Transform child in fields.transform)
-        {
-            // resetowanie obramowania wszystkich pól
-            Image image = child.transform.Find("Frame").GetComponent<Image>();
-            if (image != null)
-            {
-                image.sprite = fieldImage;
-            }
-
-            // ukrywanie przycisków do zmiany eq
-            GameObject actionButtonImage = child.transform.Find("ActionButtonImage").gameObject;
-            if (actionButtonImage != null)
-            {
-                actionButtonImage.SetActive(false);
-            }
-        }
+        ResetItemsFields();
 
         // odpowiednie ustawienie pola wybranego
         GameObject selectedField = fields.transform.GetChild(selectedItemIndex).gameObject;
@@ -340,33 +351,70 @@ public class PlayerInventory : MonoBehaviour
             // ustawienie obramowania dla wybranego pola
             selectedField.transform.Find("Frame").GetComponent<Image>().sprite = selectedFieldImage;
             
+            // Pokazanie strzałki
+            selectedField.transform.Find("Arrow").gameObject.SetActive(true);
+            
             // pokazywanie przycisku do zmiany ekwipunku
-            if (isPlayerPickingItem)
+            /*if (isPlayerPickingItem)
             {
                 GameObject actionButtonImage = selectedField.transform.Find("ActionButtonImage").gameObject;
                 if (actionButtonImage != null)
                 {
                     actionButtonImage.SetActive(true);
                 }
-            }
+            }*/
 
-            //SetSelectedItemInfo(items[selectedItemIndex]);
+            SetItemInfo(itemsHandler.items[selectedItemIndex], selectedItemDesc);
         }
     }
 
-    private void SetSelectedItemInfo(ItemData itemData)
+    private void ResetItemsFields()
     {
-        Debug.Log("Ustawienie opisu przedmiotu");
-        //Ustawianie opisu przedmiotu
-        selectedItemDesc.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
-        selectedItemDesc.transform.Find("ActiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetActiveDescription();
-        selectedItemDesc.transform.Find("PassiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
+        foreach (Transform child in fields.transform)
+        {
+            // resetowanie obramowania pola
+            Image image = child.transform.Find("Frame").GetComponent<Image>();
+            if (image != null)
+            {
+                image.sprite = fieldImage;
+            }
+            
+            // ukrywanie strzałki przedmiotu
+            GameObject arrow = child.transform.Find("Arrow").gameObject;
+            if (arrow != null)
+            {
+                arrow.SetActive(false);
+            }
+        }
     }
-    private void SetIncomingItemInfo(ItemData itemData)
+
+    public void SetItemInfo(ItemData itemData, GameObject UiParent)
     {
         //Ustawianie opisu przedmiotu
-        incomingItemInfo.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
-        incomingItemInfo.transform.Find("ActiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetActiveDescription();
-        incomingItemInfo.transform.Find("PassiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
+        GameObject header = UiParent.transform.Find("Header").gameObject;
+        GameObject passive = UiParent.transform.Find("Passive").gameObject;
+        GameObject active = UiParent.transform.Find("Active").gameObject;
+        
+        if (header)
+        {
+            // Tytuł przedmiotu
+            header.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
+            
+            // Ikona przedmiotu
+            Sprite itemSprite = Resources.Load<Sprite>(itemData.GetImagePath());
+            header.transform.Find("ItemIcon").gameObject.GetComponent<Image>().sprite = itemSprite;
+        }
+        
+        if (passive)
+        {
+            // Pasywka przedmiotu
+            passive.transform.Find("PassiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
+        }
+        
+        if (active)
+        {
+            // Zdolność aktywna przedmiotu
+            active.transform.Find("ActiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetActiveDescription();
+        }
     }
 }

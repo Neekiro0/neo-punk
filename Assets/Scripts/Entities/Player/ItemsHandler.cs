@@ -64,16 +64,23 @@ public class ItemsHandler : MonoBehaviour
     
     public void AddItem(ItemData itemData, GameObject objectToDelete)
     {
-        playerInventory.isPlayerPickingItem = true;
+        /*if (playerInventory)
+        {*/
+        gameObject.GetComponent<PlayerInventory>().isPlayerPickingItem = true;
         StartCoroutine(WaitForAction(itemData, objectToDelete));
+        /*}
+        else
+        {
+            Debug.LogError("Nie znaleziono PlayerInventory");
+        }*/
     }
     
     private IEnumerator WaitForAction(ItemData itemData, GameObject pickedObject)
     {
-        playerInventory.ShowEquipment();
-        while (playerInventory.isEquipmentShown)
+        gameObject.GetComponent<PlayerInventory>().ShowEquipment();
+        while (gameObject.GetComponent<PlayerInventory>().isEquipmentShown)
         {
-            //SetIncomingItemInfo(itemData);
+            gameObject.GetComponent<PlayerInventory>().SetItemInfo(itemData, gameObject.GetComponent<PlayerInventory>().incomingItemInfo);
             if (Input.GetKey(KeyCode.E))
             {
                 List<ItemData> matchingItemsList = items.FindAll(obj => obj.GetName() == itemData.GetName());
