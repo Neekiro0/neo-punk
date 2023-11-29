@@ -64,15 +64,16 @@ public class ItemsHandler : MonoBehaviour
     
     public void AddItem(ItemData itemData, GameObject objectToDelete)
     {
-        /*if (playerInventory)
-        {*/
-        gameObject.GetComponent<PlayerInventory>().isPlayerPickingItem = true;
-        StartCoroutine(WaitForAction(itemData, objectToDelete));
-        /*}
+        playerInventory = gameObject.GetComponent<PlayerInventory>();   
+        if (playerInventory)
+        {
+            playerInventory.isPlayerPickingItem = true;
+            StartCoroutine(WaitForAction(itemData, objectToDelete));
+        }
         else
         {
             Debug.LogError("Nie znaleziono PlayerInventory");
-        }*/
+        }
     }
     
     private IEnumerator WaitForAction(ItemData itemData, GameObject pickedObject)
@@ -80,17 +81,15 @@ public class ItemsHandler : MonoBehaviour
         gameObject.GetComponent<PlayerInventory>().ShowEquipment();
         while (gameObject.GetComponent<PlayerInventory>().isEquipmentShown)
         {
-            gameObject.GetComponent<PlayerInventory>().SetItemInfo(itemData, gameObject.GetComponent<PlayerInventory>().incomingItemInfo);
+            /*
+             * Wyświetlenie podnoszonego przedmiotu na UI
+             */
+            playerInventory.PickupItem(itemData);
+            
             if (Input.GetKey(KeyCode.E))
             {
+                
                 List<ItemData> matchingItemsList = items.FindAll(obj => obj.GetName() == itemData.GetName());
-                
-                //Debug.Log(matchingItemsList.Count);
-                /*if ((items[selectedItemIndex].itemName == itemData.itemName))
-                {
-                    Debug.Log("Dodajesz item na to samo miejsce");
-                }*/
-                
                 if (matchingItemsList.Count > 0 && (items[playerInventory.selectedItemIndex].GetName() != itemData.GetName()))
                 {
                     Debug.Log("Istnieje już taki item w ekwipunku");
@@ -100,7 +99,8 @@ public class ItemsHandler : MonoBehaviour
                     items[playerInventory.selectedItemIndex].OnItemDisband();
                     items[playerInventory.selectedItemIndex] = itemData;
                     playerInventory.SetImageAtSlot(itemData);
-                    //SetIncomingItemInfo(itemData);
+                    
+                    playerInventory.EndPickingItem();
                     Destroy(pickedObject);
                 
                     playerInventory.HideEquipment();

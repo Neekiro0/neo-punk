@@ -72,7 +72,7 @@ public class PlayerInventory : MonoBehaviour
 
         if (isEquipmentShown)
         {
-            if (isInspectingItems)
+            if (isInspectingItems || isPlayerPickingItem)
             {
                 float verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -94,16 +94,19 @@ public class PlayerInventory : MonoBehaviour
                     isButtonDown = false;
                 }
             }
-            
-            // Zmiana rodzaju menu eq przeglądanie przedmiotów / wszystko
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            if (horizontalInput > 0)
+
+            if (!isPlayerPickingItem)
             {
-                showItemInspector();
-            }
-            else if (horizontalInput < 0)
-            {
-                hideItemInspector();
+                // Zmiana rodzaju menu eq przeglądanie przedmiotów / wszystko
+                float horizontalInput = Input.GetAxisRaw("Horizontal");
+                if (horizontalInput > 0)
+                {
+                    ShowItemInspector();
+                }
+                else if (horizontalInput < 0)
+                {
+                    HideItemInspector();
+                }
             }
         }
     }
@@ -113,6 +116,11 @@ public class PlayerInventory : MonoBehaviour
      */
     public void ShowEquipment()
     {
+        InventoryUi.transform.Find("Gold").gameObject.SetActive(true);
+        InventoryUi.transform.Find("Health").gameObject.SetActive(true);
+        InventoryUi.transform.Find("Experience").gameObject.SetActive(true);
+        InventoryUi.transform.Find("ArrowTooltip").gameObject.SetActive(false);
+        
         isEquipmentShown = true;
         isInspectingItems = false;
         isPlayerPickingItem = false;
@@ -132,12 +140,34 @@ public class PlayerInventory : MonoBehaviour
     }
     
     /*
+     * Metoda służąca do podnoszenia przedmiotów
+     */
+    public void PickupItem(ItemData itemData)
+    {
+        InventoryUi.transform.Find("Gold").gameObject.SetActive(false);
+        InventoryUi.transform.Find("Health").gameObject.SetActive(false);
+        InventoryUi.transform.Find("Experience").gameObject.SetActive(false);
+        InventoryUi.transform.Find("ArrowTooltip").gameObject.SetActive(true);
+        
+        ShowItemInspector();
+        SetItemInfo(itemData, incomingItemInfo);
+        incomingItemInfo.SetActive(true);
+    }
+
+    public void EndPickingItem()
+    {
+        InventoryUi.transform.Find("Experience").gameObject.SetActive(false);
+        HideItemInspector();
+        incomingItemInfo.SetActive(false);
+    }
+    
+    /*
      * Metoda pokazująca ekwipunek
      */
     public void HideEquipment()
     {
         ResetItemsFields();
-        hideItemInspector();
+        HideItemInspector();
         
         isEquipmentShown = false;
         Time.timeScale = 1;
@@ -145,7 +175,7 @@ public class PlayerInventory : MonoBehaviour
         InventoryUi.SetActive(false);
     }
 
-    private void showItemInspector()
+    private void ShowItemInspector()
     {
         isInspectingItems = true;
                 
@@ -170,7 +200,7 @@ public class PlayerInventory : MonoBehaviour
         UpdateEquipmentFrames();
     }
 
-    private void hideItemInspector()
+    private void HideItemInspector()
     {
         isInspectingItems = false;
         // zmiana stanu menu z InspectingItem na Inventory
@@ -310,11 +340,16 @@ public class PlayerInventory : MonoBehaviour
             GameObject selectedSlot = fields.transform.GetChild(selectedItemIndex).Find("ItemImage").gameObject;
 
             Texture2D texture2D = Resources.Load<Texture2D>(itemData.GetImagePath());
-            if (texture2D != null)
+            if (texture2D != null && selectedSlot)
             {
                 selectedSlot.GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
+                
                 MainUi.transform.Find("Items").GetChild(selectedItemIndex).GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
                 MainUi.transform.Find("Items").GetChild(selectedItemIndex).GetComponent<Image>().color = Color.white;
+            }
+            else
+            {
+                Debug.LogError("Wystąpił problem przy ładowaniu ikony przedmiotu");
             }
         }
     }
@@ -353,16 +388,6 @@ public class PlayerInventory : MonoBehaviour
             
             // Pokazanie strzałki
             selectedField.transform.Find("Arrow").gameObject.SetActive(true);
-            
-            // pokazywanie przycisku do zmiany ekwipunku
-            /*if (isPlayerPickingItem)
-            {
-                GameObject actionButtonImage = selectedField.transform.Find("ActionButtonImage").gameObject;
-                if (actionButtonImage != null)
-                {
-                    actionButtonImage.SetActive(true);
-                }
-            }*/
 
             SetItemInfo(itemsHandler.items[selectedItemIndex], selectedItemDesc);
         }
