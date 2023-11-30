@@ -275,16 +275,19 @@ public class Player : MonoBehaviour
     
     private void DisableCollisionForDuration(float duration)
     {
-        ignoredObject = FloorDetector.collidingObject.GetComponent<Collider2D>();
+        if (!playerEq.isPickingItem)
+        {
+            ignoredObject = FloorDetector.collidingObject.GetComponent<Collider2D>();
         
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), ignoredObject, true);
-        Invoke("EnableCollision", duration);
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), ignoredObject, true);
+            Invoke("EnableCollision", duration);
+        }
     }
 
     // Włączenie kolizji ponownie.
     private void EnableCollision()
     {
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), ignoredObject, false);
+        Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), ignoredObject, false);
         ignoredObject = null;
     }
 

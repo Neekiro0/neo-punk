@@ -35,6 +35,7 @@ public class PlayerInventory : MonoBehaviour
     private Color primaryEqColor;
     private Color primaryItemsListColor;
     private bool isButtonDown = false;
+    public bool isPickingItem = false;
 
     public void Start()
     {
@@ -152,6 +153,7 @@ public class PlayerInventory : MonoBehaviour
         ShowItemInspector();
         SetItemInfo(itemData, incomingItemInfo);
         incomingItemInfo.SetActive(true);
+        isPickingItem = true;
     }
 
     public void EndPickingItem()
@@ -159,6 +161,7 @@ public class PlayerInventory : MonoBehaviour
         InventoryUi.transform.Find("Experience").gameObject.SetActive(false);
         HideItemInspector();
         incomingItemInfo.SetActive(false);
+        isPickingItem = false;
     }
     
     /*
@@ -180,7 +183,7 @@ public class PlayerInventory : MonoBehaviour
         isInspectingItems = true;
                 
         // zmiana stanu menu z Inventory na InspectingItem
-        selectedItemDesc.SetActive(true);
+        selectedItemDesc.SetActive(false);
         InventoryUi.transform.Find("MissionInfo").gameObject.SetActive(false);
         InventoryUi.transform.Find("Elemental").gameObject.SetActive(false);
                 
@@ -203,6 +206,7 @@ public class PlayerInventory : MonoBehaviour
     private void HideItemInspector()
     {
         isInspectingItems = false;
+        
         // zmiana stanu menu z InspectingItem na Inventory
         selectedItemDesc.SetActive(false);
         InventoryUi.transform.Find("MissionInfo").gameObject.SetActive(true);
@@ -359,9 +363,9 @@ public class PlayerInventory : MonoBehaviour
      */
     public void SetImageAtSlotByIndex(String imagePath, String itemName)
     {
-        int itemIndex = itemsHandler.items.FindIndex(obj => obj.GetName() == itemName);
+        int itemIndex = itemsHandler.items.FindIndex(obj => string.Equals(obj.GetName(), itemName, StringComparison.OrdinalIgnoreCase));
         
-        if (imagePath != "")
+        if (imagePath != "" || itemIndex == -1 )
         {
             GameObject selectedSlot = fields.transform.GetChild(itemIndex).Find("ItemImage").gameObject;
 
@@ -388,8 +392,17 @@ public class PlayerInventory : MonoBehaviour
             
             // Pokazanie strzałki
             selectedField.transform.Find("Arrow").gameObject.SetActive(true);
-
-            SetItemInfo(itemsHandler.items[selectedItemIndex], selectedItemDesc);
+            
+            ItemData selectedItem = itemsHandler.items[selectedItemIndex];
+            if (selectedItem.GetName() != "")
+            {
+                SetItemInfo(itemsHandler.items[selectedItemIndex], selectedItemDesc);
+                selectedItemDesc.SetActive(true);
+            }
+            else
+            {
+                selectedItemDesc.SetActive(false);
+            }
         }
     }
 
@@ -419,23 +432,23 @@ public class PlayerInventory : MonoBehaviour
         GameObject header = UiParent.transform.Find("Header").gameObject;
         GameObject passive = UiParent.transform.Find("Passive").gameObject;
         GameObject active = UiParent.transform.Find("Active").gameObject;
-        
+    
         if (header)
         {
             // Tytuł przedmiotu
             header.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
-            
+        
             // Ikona przedmiotu
             Sprite itemSprite = Resources.Load<Sprite>(itemData.GetImagePath());
             header.transform.Find("ItemIcon").gameObject.GetComponent<Image>().sprite = itemSprite;
         }
-        
+    
         if (passive)
         {
             // Pasywka przedmiotu
             passive.transform.Find("PassiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
         }
-        
+    
         if (active)
         {
             // Zdolność aktywna przedmiotu

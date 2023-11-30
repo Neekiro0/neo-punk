@@ -21,7 +21,7 @@ public class ItemsHandler : MonoBehaviour
         items.Add( emptyItemsData );
         items.Add( emptyItemsData );
         
-        
+        MainUi = GameObject.Find("Main User Interface");
         GameObject itemsCooldownsParent = MainUi.transform.Find("ItemsCooldowns").gameObject;
 
         for (int i = 0; i < 4; i++)
@@ -48,18 +48,18 @@ public class ItemsHandler : MonoBehaviour
         /*
          * Zdolności pasywne
          */
-        /*UsePassive(0);
+        UsePassive(0);
         UsePassive(1);
         UsePassive(2);
-        UsePassive(3);*/
+        UsePassive(3);
         
         /*
          * Aktualizacja timera cooldownu
          */
-        /*UpdateCooldownTimer(0);
+        UpdateCooldownTimer(0);
         UpdateCooldownTimer(1);
         UpdateCooldownTimer(2);
-        UpdateCooldownTimer(3);*/
+        UpdateCooldownTimer(3);
     }
     
     public void AddItem(ItemData itemData, GameObject objectToDelete)
