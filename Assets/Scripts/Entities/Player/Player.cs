@@ -75,7 +75,8 @@ public class Player : MonoBehaviour
         boxCollider = GetComponent<CapsuleCollider2D>();
         playerStatus = GetComponent<EntityStatus>();
         swordHitbox = transform.Find("SwordHitbox").gameObject;
-
+        animator = GetComponent<Animator>();
+        
         pauseMenu = GameObject.Find("Pause Menu Interface").GetComponent<PauseMenuBehaviour>();
 
         elementalIconObject = GameObject.Find("Main User Interface").transform.Find("Elemental").transform.Find("ElementalIcon").gameObject;

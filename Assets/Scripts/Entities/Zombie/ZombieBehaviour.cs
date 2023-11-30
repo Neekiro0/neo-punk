@@ -193,7 +193,7 @@ public class ZombieBehaviour : MonoBehaviour
         {
             isChasingPlayer = false;
             distanceToPlayer = 0;
-            if (transform.position == NextPosition.position )
+            if (Math.Abs(transform.position.x - NextPosition.position.x) < 0.1 )
             {
                 NextPositionIndex++;
                 if (NextPositionIndex >= Positions.Length)

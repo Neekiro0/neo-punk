@@ -13,6 +13,7 @@ public class EntityStatus : MonoBehaviour
     [ReadOnly] public int entityExperienceToNextLvl = 50;
     public float entityHealthPoints = 100.0f;
     public float entityMaxHelath = 100.0f;
+    public int droppedXp = 0;
     public int gold = 0;
     private float BaseAttackDamage = 0;
     public float AttackDamage = 0;
@@ -29,6 +30,7 @@ public class EntityStatus : MonoBehaviour
 
     private GameObject mainUserInterface;
     private SpriteRenderer spriteRenderer;
+    private GameObject player;
     
 
     // Wartość wyrażona w procentach, która odpowiada za % otrzymywanych obrażeń
@@ -39,6 +41,7 @@ public class EntityStatus : MonoBehaviour
     private void Awake()
     {
         mainUserInterface = GameObject.Find("Main User Interface");
+        player = GameObject.Find("Player");
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         BaseAttackDamage = AttackDamage;
@@ -220,11 +223,18 @@ public class EntityStatus : MonoBehaviour
 
     void DeathEvent()
     {
+        player.GetComponent<EntityStatus>().AddXp(droppedXp);
         StartCoroutine(DeathAnimation(deathColor, 0.1f));
     }
 
     public void PlayerDeathEvent()
     {
+        EntityStatus playerStatus = player.GetComponent<EntityStatus>();
+        
+        // przelanie expa z gracza na przeciwnika
+        AddXp(playerStatus.GetXp());
+        playerStatus.SetXp( 0 );
+        
         StartCoroutine(DeathAnimation(deathColor, 0.1f));
     }
     

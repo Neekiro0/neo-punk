@@ -15,7 +15,6 @@ public class CoinBehaviour : MonoBehaviour
         GameObject entity = col.gameObject;
         if (entity.CompareTag("Player"))
         {
-            entity.GetComponent<EntityStatus>().AddXp(13);
             entity.GetComponent<EntityStatus>().AddGold(1);
             //_randomWalkMapGenerator.RunProceduralGeneration();
             Destroy(gameObject);
