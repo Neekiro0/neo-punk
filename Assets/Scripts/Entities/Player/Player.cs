@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
         /*
          * Atak, oraz charge attack
          */
-        if (Input.GetKey(InputManager.AttackKey) && !isAttacking && !isBlocking && !pauseMenu.IsGamePaused )
+        if ( !playerEq.isEquipmentShown && Input.GetKey(InputManager.AttackKey) && !isAttacking && !isBlocking && !pauseMenu.IsGamePaused )
         {
             if (keyHoldTime < holdTimeThreshold)
             {
@@ -172,7 +172,7 @@ public class Player : MonoBehaviour
                 isChargingAttack = true;
             }
         }
-        if (Input.GetKeyUp(InputManager.AttackKey) && !pauseMenu.IsGamePaused)
+        if ( !playerEq.isEquipmentShown && Input.GetKeyUp(InputManager.AttackKey) && !pauseMenu.IsGamePaused)
         {
             if (isChargingAttack)
             {
@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
             keyHoldTime = 0.0f;
         }
 
-        if (canBlock)
+        if ( !playerEq.isEquipmentShown && canBlock)
         {
             /*
              * Parowanie
@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
         /*
          * Przejście przez podłoże
          */
-        if ( FloorDetector.isFloorPassable && isGrounded && Input.GetKeyDown(InputManager.MoveDownKey) )
+        if ( !playerEq.isEquipmentShown && FloorDetector.isFloorPassable && isGrounded && Input.GetKeyDown(InputManager.MoveDownKey) )
         {
             DisableCollisionForDuration(0.3f);
         }

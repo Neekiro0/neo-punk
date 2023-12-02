@@ -9,6 +9,7 @@ public class PauseMenuBehaviour : MonoBehaviour
 
     private GameObject PauseUi;
     private GameObject PauseUiCanvas;
+    private PlayerInventory PlayerInv;
 
     private GameObject MainUi;
     public bool IsGamePaused;
@@ -19,26 +20,26 @@ public class PauseMenuBehaviour : MonoBehaviour
         PauseUi = gameObject;
         PauseUiCanvas = PauseUi.transform.GetChild(0).gameObject;
         PauseUiCanvas.SetActive(false);
+        PlayerInv = GameObject.Find("Player").GetComponent<PlayerInventory>();
         
         MainUi = GameObject.Find("Main User Interface");
     }
 
     void Update()
     {
-        if ( IsGamePaused && (Input.GetKeyDown(InputManager.PauseMenuKey) || Input.GetKeyDown(KeyCode.Escape)) )
+        if ( !PlayerInv.isEquipmentShown && IsGamePaused && (Input.GetKeyDown(InputManager.PauseMenuKey) || Input.GetKeyDown(KeyCode.Escape) ) )
         {
-            IsGamePaused = false;
             buttonResume();
         }
-        else if (Input.GetKeyDown(InputManager.PauseMenuKey) || Input.GetKeyDown(KeyCode.Escape))
+        else if ( !PlayerInv.isEquipmentShown && ( Input.GetKeyDown(InputManager.PauseMenuKey) || Input.GetKeyDown(KeyCode.Escape) ) )
         {
-            IsGamePaused = true;
             Pause();
         }
     }
 
     private void Pause()
     {
+        IsGamePaused = true;
         MainUi.SetActive(false);
         PauseUiCanvas.SetActive(true);
         Time.timeScale = 0;
@@ -46,6 +47,7 @@ public class PauseMenuBehaviour : MonoBehaviour
 
     public void buttonResume()
     {
+        IsGamePaused = false;
         PauseUiCanvas.SetActive(false);
         MainUi.SetActive(true);
         Time.timeScale = 1;
