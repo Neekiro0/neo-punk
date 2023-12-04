@@ -13,16 +13,17 @@ public class FloorDetector : MonoBehaviour
     
     private void OnTriggerStay2D(Collider2D collision)
     {
-        collidingObject = collision.gameObject;
-        if (collision.CompareTag("impassableFloor"))
+        if (collision.gameObject.CompareTag("impassableFloor"))
         {
             isPlayerNearGround = true;
             isFloorPassable = false;
+            collidingObject = collision.gameObject;
         }
-        else if (collision.CompareTag("passableFloor"))
+        else if (collision.gameObject.CompareTag("passableFloor"))
         {
             isPlayerNearGround = true;
             isFloorPassable = true;
+            collidingObject = collision.gameObject;
         }
         else
         {
@@ -30,9 +31,13 @@ public class FloorDetector : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        isPlayerNearGround = false;
-        isFloorPassable = false;
+        if ( collision.gameObject.CompareTag("passableFloor") || collision.gameObject.CompareTag("impassableFloor") )
+        {
+            isPlayerNearGround = false;
+            isFloorPassable = false;
+            collidingObject = null;
+        }
     }
 }
