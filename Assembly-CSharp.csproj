@@ -155,7 +155,7 @@
      <Folder Include="Assets\Resources\Items\DemonBell" />
      <Folder Include="Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\PSSL.hlsl" />
-     <Folder Include="Assets\StaticSprites\Backgounds" />
+     <Folder Include="Assets\Sprites\Backgounds" />
      <Folder Include="Library\PackageCache\com.unity.2d.aseprite@1.0.1" />
      <Folder Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
@@ -219,7 +219,7 @@
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Vectorscope.shader" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\D3D9.hlsl" />
-     <Folder Include="Assets\StaticSprites" />
+     <Folder Include="Assets\Sprites" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\ScalableAO.shader" />
      <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Prefabs" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\ACES.hlsl" />
@@ -230,7 +230,7 @@
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Histogram.compute" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\Switch.hlsl" />
      <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Textures" />
-     <Folder Include="Assets\StaticSprites\UI\Keys" />
+     <Folder Include="Assets\Sprites\UI\Keys" />
      <None Include="Library\PackageCache\com.unity.visualscripting@1.9.1\ValidationExceptions.json" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\Metal.hlsl" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Uber.shader" />
@@ -246,6 +246,7 @@
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\xRLib.hlsl" />
      <Folder Include="Assets\Scripts\DataHandlers" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+     <Folder Include="Assets\Sprites\Tilemaps" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\EveldTech\DynamicCamera\readme.txt" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\CopyStdFromDoubleWide.shader" />
@@ -299,7 +300,7 @@
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\MultiScaleVODownsample1.compute" />
      <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Scenes" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Fog.hlsl" />
-     <Folder Include="Assets\StaticSprites\Items" />
+     <Folder Include="Assets\Sprites\Items" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\ExposureHistogram.compute" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders\TMP_SDF Internal Editor.shader" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5\Presets" />
@@ -341,7 +342,7 @@
      <None Include="Library\PackageCache\com.unity.2d.tilemap.extras@3.1.2\ValidationExceptions.json" />
      <Folder Include="Assets\TextMesh Pro\Documentation" />
      <None Include="Library\PackageCache\com.unity.2d.animation@9.0.4\package.json" />
-     <Folder Include="Assets\StaticSprites\UI" />
+     <Folder Include="Assets\Sprites\UI" />
      <Folder Include="Assets\Entities\Animations" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras" />
      <Folder Include="Assets\Scripts\Entities\Zombie" />
@@ -362,6 +363,7 @@
      <Folder Include="Library\PackageCache\com.unity.2d.spriteshape@9.0.2" />
      <Folder Include="Library\PackageCache\com.unity.2d.spriteshape@9.0.2\Tests" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+     <Folder Include="Assets\Sprites\Tilemaps\Tutorial" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
      <Folder Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.2\Tests" />
      <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2" />
