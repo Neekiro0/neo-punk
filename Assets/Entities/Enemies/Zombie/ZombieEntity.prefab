@@ -258,16 +258,16 @@ MonoBehaviour:
   entityLevel: 1
   entityExperiencePoints: 0
   entityExperienceToNextLvl: 50
-  entityHealthPoints: 100
-  entityMaxHelath: 100
+  entityHealthPoints: 60
+  entityMaxHelath: 60
   droppedXp: 60
   gold: 0
-  AttackDamage: 5
+  AttackDamage: 12
   MovementSpeed: 1.1
   isFacedRight: 1
   isEnemy: 1
   detectedTarget: {fileID: 0}
-  attackRange: 3.4
+  attackRange: 8
   lightDamageColor: {r: 1, g: 0.41037738, b: 0.41037738, a: 1}
   heavyDamageColor: {r: 0.8867924, g: 0, b: 0, a: 1}
   deathColor: {r: 0.4433962, g: 0.056470275, b: 0.056470275, a: 1}

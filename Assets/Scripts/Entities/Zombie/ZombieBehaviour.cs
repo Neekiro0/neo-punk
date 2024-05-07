@@ -105,7 +105,7 @@ public class ZombieBehaviour : MonoBehaviour
         if (isChasingPlayer && entityStatus.detectedTarget )
         {
             distanceToPlayer = Vector3.Distance(transform.position, entityStatus.detectedTarget.transform.position);
-            isPlayerInAttackRange = ( distanceToPlayer < entityStatus.attackRange );
+            isPlayerInAttackRange = ( distanceToPlayer <= entityStatus.attackRange );
             
             // Atak na gracza
             if (isPlayerInAttackRange && !isAttacking)
@@ -162,7 +162,7 @@ public class ZombieBehaviour : MonoBehaviour
             ? -1
             : 1;
         
-        Vector3 movement = new Vector3(attackDirection * entityStatus.attackRange * 500, 900, 0);
+        Vector3 movement = new Vector3(attackDirection * entityStatus.attackRange * 180, 900, 0);
         zombieRigidbody.AddForce(movement);
     }
     
