@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class DoorBehaviour : MonoBehaviour
 {
-    public SceneAsset NextScene;
+    public String NextSceneName;
     
     public bool IsOpen = false;
     private GameObject player;
@@ -37,11 +37,11 @@ public class DoorBehaviour : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (Input.GetKey(InputManager.InteractKey) && null != NextScene)  
+            if (Input.GetKey(InputManager.InteractKey) && null != NextSceneName)  
             {
-                SceneManager.LoadScene(NextScene.name);
+                SceneManager.LoadScene(NextSceneName);
             }
-            else if( null == NextScene )
+            else if( "" == NextSceneName )
             {
                 Debug.LogError("Not found Scene");
             }

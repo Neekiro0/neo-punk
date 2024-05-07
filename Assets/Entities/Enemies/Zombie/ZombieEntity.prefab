@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 6181905925258928603}
   - component: {fileID: 5494206418446743803}
   - component: {fileID: 720507430564047510}
+  - component: {fileID: 721636850722433750}
   m_Layer: 0
   m_Name: ZombieEntity
   m_TagString: Enemy
@@ -318,3 +319,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &721636850722433750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994493663929399642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.04310812, y: -0.23527935, z: 0}
+  - {x: -0.047240812, y: 0.23321298, z: 0}
+  - {x: 0.0017809073, y: 0.23321295, z: 0}
+  - {x: 0.0038472812, y: -0.23527932, z: 0}
+  m_ShapePathHash: -1509224992
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -61064
+  m_LocalBounds:
+    m_Center: {x: -0.021696765, y: -0.0010331869, z: 0}
+    m_Extent: {x: 0.025544047, y: 0.23424616, z: 0}
