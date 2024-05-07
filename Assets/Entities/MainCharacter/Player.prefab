@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 588649622651481198}
   - component: {fileID: 7932063891751073557}
   - component: {fileID: 4921430104271942129}
+  - component: {fileID: 934230925171178819}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -88,7 +89,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -272,6 +273,8 @@ MonoBehaviour:
   isBlocking: 0
   isParrying: 0
   cooldownBetweenBlocks: 0
+  lastSafePosition: {x: 0, y: 0, z: 0}
+  playerVoidLevel: 0
 --- !u!114 &4921430104271942129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +288,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+--- !u!114 &934230925171178819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579532712962454047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.0058614304, y: -0.22744133, z: 0}
+  - {x: -0.010849671, y: 0.21106127, z: 0}
+  - {x: 0.03440394, y: 0.21106127, z: 0}
+  - {x: 0.031662602, y: -0.22877409, z: 0}
+  m_ShapePathHash: 1474362039
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 89562
+  m_LocalBounds:
+    m_Center: {x: 0.011777135, y: -0.008856401, z: 0}
+    m_Extent: {x: 0.022626806, y: 0.21991768, z: 0}
 --- !u!1 &5856269213428362837
 GameObject:
   m_ObjectHideFlags: 0

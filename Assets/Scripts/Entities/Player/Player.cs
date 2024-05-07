@@ -65,6 +65,9 @@ public class Player : MonoBehaviour
     private bool canBlock = true;
     private PauseMenuBehaviour pauseMenu;
     private GameObject elementalIconObject;
+    public Vector3 lastSafePosition;
+    public float playerVoidLevel;
+    
     
     private void Awake()
     {
@@ -84,8 +87,24 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = ( boxCollider.GetContacts(new ContactPoint2D[16]) > 0 );
-        
+        isGrounded = ( boxCollider.GetContacts(new ContactPoint2D[16]) > 0 ) && 0 == Mathf.Abs(playerBody.velocity.y);
+
+        /*
+         * Zapisywanie bezpiecznej lokacji do skakania
+         */
+        if (isGrounded)
+        {
+            lastSafePosition = gameObject.transform.position;
+        }
+        else
+        {
+            if (gameObject.transform.position.y <= playerVoidLevel)
+            {
+                lastSafePosition.y += 2.0f;
+                gameObject.transform.position = lastSafePosition;
+            }
+        }
+            
         float horizontalInput = Input.GetAxis("Horizontal");
         
         /*
