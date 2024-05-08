@@ -135,15 +135,23 @@ namespace Items
         public void OnTriggerStay2D(Collider2D col)
         {
             GameObject entity = col.gameObject;
-            if ( entity.CompareTag("Player") && ( Input.GetKey( KeyCode.F ) ) )
+            if ( entity.CompareTag("Player") && ( Input.GetKeyDown( InputManager.InteractKey ) ) )
             {
                 // dodawanie do ekwipunku
-                try {
-                    player.GetComponent<ItemsHandler>().AddItem(demonBell, gameObject);
+                try
+                {
+                    StartCoroutine(WaitForFrameThenAddItem(demonBell, gameObject));
                 } catch (Exception) {
                     Debug.Log("Wystąpił błąd");
                 }
             }
         }
+
+        IEnumerator WaitForFrameThenAddItem(DemonBell demonBell, GameObject gameObject)
+        {
+            yield return 0;
+            player.GetComponent<ItemsHandler>().AddItem(demonBell, gameObject);
+        }
     }
+    
 }

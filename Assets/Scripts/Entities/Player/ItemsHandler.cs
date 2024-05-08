@@ -86,7 +86,7 @@ public class ItemsHandler : MonoBehaviour
              */
             playerInventory.PickupItem(itemData);
             
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKeyDown(InputManager.InteractKey))
             {
                 
                 List<ItemData> matchingItemsList = items.FindAll(obj => obj.GetName() == itemData.GetName());

@@ -8,7 +8,7 @@ public static class InputManager
     public static KeyCode JumpKey { get; private set; } = KeyCode.Space; // Klawisz skoku (domyślnie Spacja)
     public static KeyCode AltJumpKey { get; private set; } = KeyCode.Space; // Klawisz skoku (domyślnie Spacja)
     public static KeyCode BlockKey { get; private set; } = KeyCode.Mouse1; // Klawisz blokowania (domyślnie prawy przycisk myszy)
-    public static KeyCode InteractKey { get; private set; } = KeyCode.E; // Klawisz interakcji z otoczeniem (domyślnie E)
+    public static KeyCode InteractKey { get; private set; } = KeyCode.F; // Klawisz interakcji z otoczeniem (domyślnie F)
     public static KeyCode InventoryMenuKey { get; private set; } = KeyCode.I; // Klawisz otwarcia menu przedmiotów (domyślnie I)
     public static KeyCode PauseMenuKey { get; private set; } = KeyCode.Escape; // Klawisz otwarcia menu pauzy (domyślnie Esc)
     public static KeyCode Item1Key { get; private set; } = KeyCode.Alpha1; // Klawisz używania przedmiotu 1 (domyślnie klawisz 1)
