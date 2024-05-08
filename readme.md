@@ -1,5 +1,4 @@
-﻿# Swordsman Game
-( tymczasowy tytuł roboczy )
+﻿# Neo Punk
 
 ## Ogólny opis:
 Gra napisana w środowisku __Unity__, korzystając z __C#__, oraz silnika __2D__.  
