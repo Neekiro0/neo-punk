@@ -16,6 +16,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     void Awake()
     {
         IsGamePaused = false;
+        Cursor.visible = false;
         
         PauseUi = gameObject;
         PauseUiCanvas = PauseUi.transform.GetChild(0).gameObject;
@@ -40,6 +41,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     private void Pause()
     {
         IsGamePaused = true;
+        Cursor.visible = true;
         MainUi.SetActive(false);
         PauseUiCanvas.SetActive(true);
         Time.timeScale = 0;
@@ -48,6 +50,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     public void buttonResume()
     {
         IsGamePaused = false;
+        Cursor.visible = false;
         PauseUiCanvas.SetActive(false);
         MainUi.SetActive(true);
         Time.timeScale = 1;
