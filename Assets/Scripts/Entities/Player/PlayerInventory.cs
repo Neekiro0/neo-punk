@@ -59,16 +59,13 @@ public class PlayerInventory : MonoBehaviour
     
     void Update()
     {
-        if ( Input.GetKeyDown( InputManager.InventoryMenuKey ))
+        if ( Input.GetKeyDown( InputManager.InventoryMenuKey ) && !isEquipmentShown)
         {
-            if (isEquipmentShown == false)
-            {
-                ShowEquipment();
-            }
-            else
-            {
-                HideEquipment();
-            }
+            ShowEquipment();
+        }
+        else if ( (Input.GetKeyDown(InputManager.InventoryMenuKey) || Input.GetKeyDown(KeyCode.Escape)) && isEquipmentShown)
+        {
+            HideEquipment();
         }
 
         if (isEquipmentShown)
