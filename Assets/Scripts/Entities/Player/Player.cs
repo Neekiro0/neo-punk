@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using tooltips;
 using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -83,6 +84,13 @@ public class Player : MonoBehaviour
         pauseMenu = GameObject.Find("Pause Menu Interface").GetComponent<PauseMenuBehaviour>();
 
         elementalIconObject = GameObject.Find("Main User Interface").transform.Find("Elemental").transform.Find("ElementalIcon").gameObject;
+    }
+
+    private void Start()
+    {
+        TooltipsController controller = GameObject.Find("UserInterface").transform.Find("Tooltips")
+            .GetComponent<TooltipsController>();
+        controller.ShowTooltip(0);
     }
 
     private void Update()
