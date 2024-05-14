@@ -25,6 +25,7 @@ public class PlayerInventory : MonoBehaviour
     public GameObject selectedItemDesc;
     public GameObject incomingItemInfo;
     private GameObject arrowTooltip;
+    private GameObject buttonTooltip;
     private ItemsHandler itemsHandler;
     private EntityStatus playerStatus;
     private bool isVerticalInputPressed = false;
@@ -44,6 +45,7 @@ public class PlayerInventory : MonoBehaviour
         selectedItemDesc = InventoryUi.transform.Find("SelectedItemInfo").gameObject;
         incomingItemInfo = InventoryUi.transform.Find("IncomingItemInfo").gameObject;
         arrowTooltip = InventoryUi.transform.Find("ArrowTooltip").gameObject;
+        buttonTooltip = InventoryUi.transform.Find("ButtonTooltip").gameObject;
         fields = InventoryUi.transform.Find("ItemsFields").gameObject;
         itemsHandler = gameObject.GetComponent<ItemsHandler>();
         playerStatus = gameObject.GetComponent<EntityStatus>();
@@ -118,6 +120,7 @@ public class PlayerInventory : MonoBehaviour
         InventoryUi.transform.Find("Health").gameObject.SetActive(true);
         InventoryUi.transform.Find("Experience").gameObject.SetActive(true);
         InventoryUi.transform.Find("ArrowTooltip").gameObject.SetActive(false);
+        InventoryUi.transform.Find("ButtonTooltip").gameObject.SetActive(true);
         
         isEquipmentShown = true;
         isInspectingItems = false;
@@ -130,6 +133,7 @@ public class PlayerInventory : MonoBehaviour
         selectedItemDesc.SetActive(false);
         incomingItemInfo.SetActive(false);
         arrowTooltip.SetActive(false);
+        buttonTooltip.SetActive(true);
 
         UpdateHp();
         UpdateGold();
@@ -146,6 +150,7 @@ public class PlayerInventory : MonoBehaviour
         InventoryUi.transform.Find("Health").gameObject.SetActive(false);
         InventoryUi.transform.Find("Experience").gameObject.SetActive(false);
         InventoryUi.transform.Find("ArrowTooltip").gameObject.SetActive(true);
+        InventoryUi.transform.Find("ButtonTooltip").gameObject.SetActive(false);
         
         ShowItemInspector();
         SetItemInfo(itemData, incomingItemInfo);
@@ -178,6 +183,7 @@ public class PlayerInventory : MonoBehaviour
     private void ShowItemInspector()
     {
         isInspectingItems = true;
+        buttonTooltip.SetActive(false);
                 
         // zmiana stanu menu z Inventory na InspectingItem
         selectedItemDesc.SetActive(false);
@@ -203,6 +209,7 @@ public class PlayerInventory : MonoBehaviour
     private void HideItemInspector()
     {
         isInspectingItems = false;
+        buttonTooltip.SetActive(true);
         
         // zmiana stanu menu z InspectingItem na Inventory
         selectedItemDesc.SetActive(false);
