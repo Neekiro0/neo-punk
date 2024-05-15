@@ -295,9 +295,11 @@ public class Player : MonoBehaviour
     {
         if (isChargingAttack && ( keyHoldTime >= holdTimeThreshold ) )
         {
-            Vector2 force = (playerStatus.isFacedRight) ? Vector2.right : Vector2.left * jumpForce * 100;
-            
-            playerBody.AddForce(force, ForceMode2D.Impulse);
+            float howFar = 14.0f;
+            float diection = (playerStatus.isFacedRight)?1:-1;
+                
+            Vector3 movement = new Vector3(1.0f * howFar * 1000 * diection, 100.0f, 0);
+            playerBody.AddForce(movement);
             
             DealDamage( playerStatus.GetAttackDamageCount() * 4 );
             animator.Play("heavyAttack_2");

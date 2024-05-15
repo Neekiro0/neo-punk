@@ -184,9 +184,10 @@ public class DragonflyBehavior : MonoBehaviour
 
             PerformShoot(); // Wywołaj atak
             
-            yield return new WaitForSeconds(.7f); // Poczekaj na zakończenie ataku
+            yield return new WaitForSeconds(1.5f); // Tutaj można zdefiniować attack speed
             isAttacking = false;
         }
+        
     }
 
     void Move()
