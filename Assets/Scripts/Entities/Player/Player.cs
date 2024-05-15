@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
         }
             
         float horizontalInput = Input.GetAxis("Horizontal");
-        
+
         /*
          * Przesyłanie odpowiednich zmiennych do animatora
          */
@@ -199,6 +199,13 @@ public class Player : MonoBehaviour
                 isChargingAttack = true;
             }
         }
+
+        if (isChargingAttack)
+        {
+            horizontalInput = 0;
+        }
+        
+        
         if ( !playerEq.isEquipmentShown && Input.GetKeyUp(InputManager.AttackKey) && !pauseMenu.IsGamePaused)
         {
             if (isChargingAttack)
@@ -288,15 +295,11 @@ public class Player : MonoBehaviour
     {
         if (isChargingAttack && ( keyHoldTime >= holdTimeThreshold ) )
         {
-            //Debug.Log(keyHoldTime.ToString() + "....." + holdTimeThreshold.ToString());
-            if ( Input.GetAxis("Horizontal") != 0 )
-            {
-                DealDamage( playerStatus.GetAttackDamageCount() * 2 );
-            }
-            else
-            {
-                DealDamage( playerStatus.GetAttackDamageCount() * 3 );
-            }
+            Vector2 force = (playerStatus.isFacedRight) ? Vector2.right : Vector2.left * jumpForce * 100;
+            
+            playerBody.AddForce(force, ForceMode2D.Impulse);
+            
+            DealDamage( playerStatus.GetAttackDamageCount() * 4 );
             animator.Play("heavyAttack_2");
         }
     }

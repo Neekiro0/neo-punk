@@ -151,7 +151,7 @@ public class EntityStatus : MonoBehaviour
             if (isParrying && isPlayerFacedToEnemy)
             {
                 // gracz sparował cios
-                float parryingDamageReduction = 0f; // 0 = 100% redukji
+                float parryingDamageReduction = 0f; // 0 = 100% redukcji
                 if ( damage * parryingDamageReduction * incomingDamagePercent >= GetHp() )
                 {
                     /*
