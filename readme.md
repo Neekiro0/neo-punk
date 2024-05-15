@@ -67,8 +67,13 @@ Historia będzie dość przejrzysta, lecz, aby zwiększyć nieco zainteresowanie
 1. [x] Podstawowe animacje gracza, poruszanie się i walka
 2. [x] Podstawowy przeciwnik, do testów
 3. [x] Pierwsze w pełni zaimplementowane przedmioty (na okres tutoriala 4)
-4. [ ] Przebudowa ekwipunku
-5. [ ] Podstawowi przeciwnicy (3: demon, człowiek, robot)
-6. [ ] Lokalna baza danych zawierająca podpowiedzi, oraz mechanika wyświetlania podpowiedzi.
-7. [ ] Pierwszy poziom (tutorial)
-8. [ ] system dialogów
+4. [x] Przebudowa ekwipunku
+5. [x] Podstawowi przeciwnicy (3: demon, człowiek, robot)
+6. [x] Lokalna baza danych zawierająca podpowiedzi, oraz mechanika wyświetlania podpowiedzi.
+7. [x] Pierwszy poziom (tutorial)
+8. [ ] rozbudowa startowego poziomu
+9. [ ] bugfixy
+10. [ ] odświeżenie głównej postaci
+11. [ ] odświeżenie menu głównego
+12. [ ] muzyka i udźwiękowienie
+13. [ ] testy 
