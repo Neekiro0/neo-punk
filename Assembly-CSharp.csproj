@@ -54,6 +54,7 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+     <Compile Include="Assets\Scripts\System\OptionsController.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\FloorDetector.cs" />
      <Compile Include="Assets\Scripts\System\Tooltips\moving\tipMoving.cs" />
@@ -97,6 +98,7 @@
      <Compile Include="Assets\Scripts\Items\VoodooDollItem.cs" />
      <Compile Include="Assets\Scripts\Entities\PlayerDetector.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
+     <Compile Include="Assets\Scripts\System\OptionsManager.cs" />
      <Compile Include="Assets\Scripts\Entities\Dragonfly\DragonflyBehaviour.cs" />
      <Compile Include="Assets\Scripts\System\InputManager.cs" />
      <Compile Include="Assets\Scripts\System\PauseMenuBehaviour.cs" />
@@ -307,6 +309,7 @@
      <Folder Include="Assets\SpritesAndPrefabs\Entities\Animations\Player" />
      <Folder Include="Assets\SpritesAndPrefabs\Backgounds\Tutorial" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\CopyStd.shader" />
+     <Folder Include="Assets\SpritesAndPrefabs\UI\Icons" />
      <Folder Include="Library\PackageCache\com.unity.searcher@4.9.2\Tests" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Prefabs" />
      <Folder Include="Assets\Scripts\System\Tooltips\moving" />

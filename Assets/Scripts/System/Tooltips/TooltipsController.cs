@@ -54,18 +54,20 @@ namespace tooltips
         // here provide the index of the tooltip you want to show
         public void ShowTooltip(int tooltipNumber)
         {
-            
-            if (tooltipNumber < tooltips.Count)
+            if (OptionsManager.GetShowTips())
             {
-                shownTooltip = tooltips[tooltipNumber];
-                imageObject.sprite = shownTooltip.image;
-                textObject.text = shownTooltip.text;
+                if (tooltipNumber < tooltips.Count)
+                {
+                    shownTooltip = tooltips[tooltipNumber];
+                    imageObject.sprite = shownTooltip.image;
+                    textObject.text = shownTooltip.text;
                 
-                IsTooltipMenuShown = true;
-            }
-            else
-            {
-                Debug.LogError("Tooltip with provided index does not exist.");
+                    IsTooltipMenuShown = true;
+                }
+                else
+                {
+                    Debug.LogError("Tooltip with provided index does not exist.");
+                }
             }
         }
 
