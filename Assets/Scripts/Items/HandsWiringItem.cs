@@ -128,7 +128,6 @@ namespace Items
     }
     public class HandsWiringItem : MonoBehaviour
     {
-        
         private GameObject titleObject;
         private GameObject player;
         private bool _isPlayerInsideOfRange = false;

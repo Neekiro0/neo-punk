@@ -170,6 +170,7 @@
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
      <Folder Include="Assets\TextMesh Pro\Resources\Fonts &amp; Materials" />
      <Folder Include="Library\PackageCache\com.unity.collections@1.2.4" />
+     <Folder Include="Assets\SpritesAndPrefabs\Backgounds\MainMenu" />
      <Folder Include="Assets\SpritesAndPrefabs\Objects\AirConditioner" />
      <Folder Include="Library\PackageCache\com.unity.visualscripting@1.9.1" />
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5\Gizmos" />
@@ -178,6 +179,7 @@
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\LightMeter.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
      <None Include="Library\PackageCache\com.unity.mathematics@1.2.6\package.json" />
+     <Folder Include="Assets\SpritesAndPrefabs\Backgounds\Level-1" />
      <Folder Include="Library\PackageCache\com.unity.2d.animation@9.0.4\Tests" />
      <Folder Include="Assets\SpritesAndPrefabs\Entities\Enemies\Zombie\animations" />
      <Folder Include="Assets\SpritesAndPrefabs\Objects\Doors" />
@@ -213,6 +215,7 @@
      <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.21\package.json" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <Folder Include="Library\PackageCache\com.unity.2d.common@8.0.1" />
+     <Folder Include="Assets\SpritesAndPrefabs\Backgounds\RainEffect" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\ValidationExceptions.json" />
      <Folder Include="Assets\TextMesh Pro" />
      <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Models" />
@@ -302,6 +305,7 @@
      <Folder Include="Library\PackageCache\com.unity.ide.rider@3.0.25" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <Folder Include="Assets\SpritesAndPrefabs\Entities\Animations\Player" />
+     <Folder Include="Assets\SpritesAndPrefabs\Backgounds\Tutorial" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\CopyStd.shader" />
      <Folder Include="Library\PackageCache\com.unity.searcher@4.9.2\Tests" />
      <Folder Include="Assets\TextMesh Pro\Examples &amp; Extras\Prefabs" />

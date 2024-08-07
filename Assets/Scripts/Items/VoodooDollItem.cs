@@ -123,6 +123,7 @@ namespace Items
                 player = entity;
             }
         }
+        
         private void OnTriggerExit2D(Collider2D col)
         {
             GameObject entity = col.gameObject;
