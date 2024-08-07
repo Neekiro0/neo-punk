@@ -188,7 +188,7 @@ public class EntityStatus : MonoBehaviour
             }
             else
             {
-                StartCoroutine(SygnalizeGettingDamage());
+                //StartCoroutine(SygnalizeGettingDamage());
                 // gracz nie sparował, ani nie zablokował ciosu
                 if ( damage * incomingDamagePercent >= GetHp() )
                 {

@@ -18,7 +18,7 @@ public class MenuBehaviour : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene("TestingGroundScene");
+        SceneManager.LoadScene("Tutorial");
     }
     public void QuitGame()
     {
