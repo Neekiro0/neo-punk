@@ -15,7 +15,7 @@ public class MenuBehaviour : MonoBehaviour
     void Start()
     {
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-        animator = GameObject.Find("Main Camera").gameObject.transform.Find("Background").GetComponent<Animator>();
+        animator = GameObject.Find("SceneContent").gameObject.transform.Find("Background").GetComponent<Animator>();
         SaveSlotController = GameObject.Find("SaveSlot").GetComponent<SaveSlotController>();
         SaveSlotController.CloseSlotPicker();
     }

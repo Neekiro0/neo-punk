@@ -17,6 +17,7 @@ namespace tooltips
         
         [TextArea(3, 20)]
         public String text = null;
+        public bool wasTooltipShown = false;
     }
 
     public class TooltipsController : MonoBehaviour
@@ -30,14 +31,13 @@ namespace tooltips
 
         private void Awake()
         {
-            IsTooltipMenuShown = false;
             imageObject = gameObject.transform.Find("TooltipImage").GetComponent<Image>();
             textObject = gameObject.transform.Find("TooltipText").GetComponent<TextMeshProUGUI>();
+            gameObject.SetActive(false);
         }
 
         private void Update()
         {
-            gameObject.SetActive(IsTooltipMenuShown);
 
             if (IsTooltipMenuShown && null != shownTooltip)
             {
@@ -56,23 +56,25 @@ namespace tooltips
         {
             if (OptionsManager.GetShowTips())
             {
-                if (tooltipNumber < tooltips.Count)
+                if (tooltipNumber < tooltips.Count && !tooltips[tooltipNumber].wasTooltipShown)
                 {
                     shownTooltip = tooltips[tooltipNumber];
                     imageObject.sprite = shownTooltip.image;
                     textObject.text = shownTooltip.text;
-                
                     IsTooltipMenuShown = true;
+                    gameObject.SetActive(true);
+                    shownTooltip.wasTooltipShown = true;
                 }
                 else
                 {
-                    Debug.LogError("Tooltip with provided index does not exist.");
+                    Debug.Log("Tooltip with provided index does not exist, or was already shown.");
                 }
             }
         }
 
         public void CloseTooltip()
         {
+            gameObject.SetActive(false);
             shownTooltip = null;
             imageObject.sprite = null;
             textObject.text = "";

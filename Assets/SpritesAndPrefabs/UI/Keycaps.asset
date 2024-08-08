@@ -21,13 +21,13 @@ MonoBehaviour:
     m_FamilyName: 
     m_StyleName: 
     m_PointSize: 20
-    m_Scale: 2.4
+    m_Scale: 2.34
     m_UnitsPerEM: 0
     m_LineHeight: 0
     m_AscentLine: 0
     m_CapLine: 0
     m_MeanLine: 0
-    m_Baseline: 10
+    m_Baseline: 15
     m_DescentLine: 0
     m_SuperscriptOffset: 0
     m_SuperscriptSize: 0

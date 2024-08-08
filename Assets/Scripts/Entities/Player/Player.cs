@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using tooltips;
 using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -88,9 +87,6 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        TooltipsController controller = GameObject.Find("UserInterface").transform.Find("Tooltips")
-            .GetComponent<TooltipsController>();
-        controller.ShowTooltip(0);
     }
 
     private void Update()
