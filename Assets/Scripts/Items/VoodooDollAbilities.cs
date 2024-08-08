@@ -2,38 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class UnityScheduler : MonoBehaviour {
+    private static UnityScheduler _instance;
+    public static UnityScheduler Instance {
+        get {
+            if(_instance == null) {
+                var go = new GameObject(typeof(UnityScheduler).Name) ;
+                _instance = go.AddComponent<UnityScheduler>() ;
+            }
+            return _instance;
+        }
+    }
+
+    private void OnDestroy () {
+        if(_instance == this) {
+            _instance = null;
+        }
+    }
+}
+
 // Implementacja aktywnej zdolności Voodoo Doll
 [System.Serializable]
 public class VoodooDollActiveAbility : ItemData.IActiveAbility
 {
     private float damageIncreasePercentage;
     private float effectDuration;
-    private EntityStatus playerStatus;
-    private float baseDamage;
 
     public VoodooDollActiveAbility(float damageIncreasePercentage, float effectDuration)
     {
-        this.playerStatus = GameObject.Find("Map").transform.Find("Player").gameObject.GetComponent<EntityStatus>();
         this.damageIncreasePercentage = damageIncreasePercentage;
         this.effectDuration = effectDuration;
-        this.baseDamage = playerStatus.GetAttackDamageCount();
     }
 
     public void Remove()
     {
-        playerStatus.SetAttackDamageCount(this.playerStatus.GetAttackDamageCount());
+        GameObject player = GameObject.Find("Map").transform.Find("Player").gameObject;
+        player.GetComponent<EntityStatus>().SetAttackDamageCount(player.GetComponent<EntityStatus>().GetBaseAttackDamage());
     }
 
     public void Use()
     {
         // Zwiększenie obrażeń gracza
+        EntityStatus playerStatus = GameObject.Find("Map").transform.Find("Player").gameObject.GetComponent<EntityStatus>();
+        float baseDamage = playerStatus.GetBaseAttackDamage();
+        
         playerStatus.SetAttackDamageCount(baseDamage * (1.0f + damageIncreasePercentage));
-
+        
         // Rozpoczęcie coroutine dla przywrócenia obrażeń po zakończeniu efektu
-        playerStatus.StartCoroutine(ResetDamageAfterDuration());
+        UnityScheduler.Instance.StartCoroutine(ResetDamageAfterDuration(playerStatus, baseDamage));
     }
 
-    private IEnumerator ResetDamageAfterDuration()
+    private IEnumerator ResetDamageAfterDuration(EntityStatus playerStatus, float baseDamage)
     {
         yield return new WaitForSeconds(effectDuration);
         playerStatus.SetAttackDamageCount(baseDamage);
@@ -50,24 +69,25 @@ public class VoodooDollPassiveAbility : ItemData.IPassiveAbility
     private float lastNoticedPlayerHp;
     private bool isItemInInventory;
 
-    public VoodooDollPassiveAbility(EntityStatus status, PlayerInventory inventory)
+    public VoodooDollPassiveAbility()
     {
-        this.playerStatus = status;
-        this.playerInventory = inventory;
+        this.playerStatus = null;
+        this.playerInventory = null;
         this.needleStacks = 0;
-        this.lastNoticedPlayerHp = playerStatus.GetHp();
+        this.lastNoticedPlayerHp = GameObject.Find("Map").transform.Find("Player").gameObject.GetComponent<EntityStatus>().GetHp();
     }
 
     public void Apply()
     {
-        lastNoticedPlayerHp = playerStatus.GetHp();
-        /*if (isItemInInventory)
+        if (playerStatus == null)
         {
-            needleStacks = 0;
-            isItemInInventory = false;
-        }*/
+            playerStatus = GameObject.Find("Map").transform.Find("Player").gameObject.GetComponent<EntityStatus>();
+        }
+        if (playerInventory == null)
+        {
+            playerInventory = GameObject.Find("Map").transform.Find("Player").gameObject.GetComponent<PlayerInventory>();
+        }
 
-        //Debug.Log(playerStatus.GetHp()+" < " + lastNoticedPlayerHp);
         if (playerStatus.GetHp() < lastNoticedPlayerHp)
         {
             needleStacks += 1;
@@ -91,11 +111,8 @@ public class VoodooDoll : ItemData
     
     private void OnEnable()
     {
-        GameObject player = GameObject.Find("Map").transform.Find("Player").gameObject;
-        playerStatus = player.GetComponent<EntityStatus>();
-        playerInventory = player.GetComponent<PlayerInventory>();
-        
+        currentCooldown = 0;
         activeAbility = new VoodooDollActiveAbility(0.4f, 10f);
-        passiveAbility = new VoodooDollPassiveAbility(playerStatus, playerInventory);
+        passiveAbility = new VoodooDollPassiveAbility();
     }
 }
