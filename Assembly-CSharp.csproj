@@ -103,6 +103,7 @@
      <Compile Include="Assets\Scripts\System\InputManager.cs" />
      <Compile Include="Assets\Scripts\System\PauseMenuBehaviour.cs" />
      <Compile Include="Assets\Scripts\Entities\Zombie\ZombieBehaviour.cs" />
+     <Compile Include="Assets\Scripts\System\SaveSlotController.cs" />
      <Compile Include="Assets\Scripts\Items\ExplosionCollisionHandler.cs" />
      <Compile Include="Assets\Scripts\Objects\AirVentBehaviour.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />

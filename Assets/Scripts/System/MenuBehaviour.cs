@@ -10,15 +10,19 @@ public class MenuBehaviour : MonoBehaviour
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
     public Animator animator;
+
+    private SaveSlotController SaveSlotController;
     void Start()
     {
         Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
         animator = GameObject.Find("Main Camera").gameObject.transform.Find("Background").GetComponent<Animator>();
+        SaveSlotController = GameObject.Find("SaveSlot").GetComponent<SaveSlotController>();
+        SaveSlotController.CloseSlotPicker();
     }
 
     public void LoadGame()
     {
-        SceneManager.LoadScene("Tutorial");
+        SaveSlotController.ShowSlotPicker();
     }
     public void QuitGame()
     {

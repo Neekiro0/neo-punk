@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class DoorBehaviour : MonoBehaviour
 {
-    public String NextSceneName;
+    public int NextHubNumber;
     
     public bool IsOpen = false;
     private GameObject player;
@@ -37,13 +37,17 @@ public class DoorBehaviour : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (Input.GetKey(InputManager.InteractKey) && null != NextSceneName)  
+            if (Input.GetKey(InputManager.InteractKey))  
             {
-                SceneManager.LoadScene(NextSceneName);
-            }
-            else if( "" == NextSceneName )
-            {
-                Debug.LogError("Not found Scene");
+                int CurrentSlot = PlayerPrefs.GetInt("SaveSlot");
+                int CurrentHub = PlayerPrefs.GetInt("Save"+CurrentSlot.ToString()+"_CurrentHub");
+                
+                // jeżeli nie odblokowano wcześnie tego huba
+                if (CurrentHub < NextHubNumber)
+                {
+                    PlayerPrefs.SetInt("Save"+CurrentSlot.ToString()+"_CurrentHub", NextHubNumber);
+                }
+                SceneManager.LoadScene("Hub-"+NextHubNumber.ToString());
             }
         }
     }

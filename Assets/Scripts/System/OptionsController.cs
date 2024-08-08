@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OptionsController : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class OptionsController : MonoBehaviour
         gameObject.SetActive(false);
         if ( null != ObjectToHide) ObjectToHide.SetActive(true);
         
+        GetSettingsFromMemory();
         ShowSettingsPage("Sound");
     }
 
@@ -67,5 +69,31 @@ public class OptionsController : MonoBehaviour
             }
         }
 
+    }
+
+    private void GetSettingsFromMemory()
+    {
+        GameObject GameplayPage = SettingsPagesContent.transform.Find("Gameplay").gameObject;
+        if (null != GameplayPage)
+        {
+            GameObject tips = GameplayPage.transform.Find("Tips").gameObject;
+            if (null != tips)
+            {
+                tips.transform.Find("Toggle").gameObject.GetComponent<Toggle>().isOn = OptionsManager.GetShowTips();
+            }
+        }
+    }
+
+    public void SaveTips()
+    {
+        GameObject GameplayPage = SettingsPagesContent.transform.Find("Gameplay").gameObject;
+        if (null != GameplayPage)
+        {
+            GameObject tips = GameplayPage.transform.Find("Tips").gameObject;
+            if (null != tips)
+            {
+                OptionsManager.SetShowTips(tips.transform.Find("Toggle").gameObject.GetComponent<Toggle>().isOn);
+            }
+        }
     }
 }

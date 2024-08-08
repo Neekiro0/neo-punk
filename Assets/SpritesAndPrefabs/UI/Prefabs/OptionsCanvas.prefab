@@ -390,9 +390,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 205482531442382469}
         m_TargetAssemblyTypeName: OptionsController, Assembly-CSharp
-        m_MethodName: SettingShowTips
+        m_MethodName: SaveTips
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
