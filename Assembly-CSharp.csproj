@@ -52,11 +52,14 @@
      <Compile Include="Assets\Scripts\Objects\DoorBehaviour.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+     <Compile Include="Assets\Scripts\System\Tooltips\TooltipTrigger.cs" />
+     <Compile Include="Assets\Scripts\Items\ItemObject.cs" />
      <Compile Include="Assets\Scripts\System\OptionsController.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\FloorDetector.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+     <Compile Include="Assets\Scripts\Items\VoodooDollAbilities.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\HitboxBehaviour.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
@@ -91,7 +94,6 @@
      <Compile Include="Assets\Scripts\Entities\EntityUniversalAi.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
-     <Compile Include="Assets\Scripts\Items\VoodooDollItem.cs" />
      <Compile Include="Assets\Scripts\Entities\PlayerDetector.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
@@ -106,10 +108,9 @@
      <Compile Include="Assets\Scripts\Items\ExplosionCollisionHandler.cs" />
      <Compile Include="Assets\Scripts\Objects\AirVentBehaviour.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
-     <Compile Include="Assets\Scripts\System\Tooltips\TooltipTrigger.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\SpritesAndPrefabs\UI\Prefabs" />
-     <Folder Include="Assets\Resources\Scenes" />
+     <Folder Include="Assets\Scenes" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\StdLib.hlsl" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Waveform.shader" />
      <None Include="Assets\Resources\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -147,6 +148,7 @@
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources" />
      <Folder Include="Library\PackageCache\com.unity.2d.common@8.0.1\Tests" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Vectorscope.compute" />
+     <Folder Include="Assets\Scripts\System" />
      <Folder Include="Library\PackageCache\com.unity.inputsystem@1.7.0\Tests" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Sampling.hlsl" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\CopyStdFromTexArray.shader" />
@@ -273,6 +275,7 @@
      <None Include="Assets\EveldTech\DynamicCamera\readme.txt" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\CopyStdFromDoubleWide.shader" />
      <Folder Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Textures" />
+     <Folder Include="Assets\Scripts\System\Tooltips" />
      <None Include="Assets\Resources\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Library\PackageCache\com.unity.cinemachine@2.9.5\license.txt" />
      <Folder Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts" />
@@ -284,7 +287,7 @@
      <Folder Include="Assets\Unity.VisualScripting.Generated" />
      <None Include="Library\PackageCache\com.unity.2d.tilemap.extras@3.1.2\package.json" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Overlays.shader" />
-     <Folder Include="Assets\Resources\Scenes\Act-1" />
+     <Folder Include="Assets\Scenes\Act-1" />
      <None Include="Assets\Resources\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\PSP2.hlsl" />
      <None Include="Library\PackageCache\com.unity.inputsystem@1.7.0\ValidationExceptions.json" />
@@ -313,8 +316,9 @@
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\CopyStd.shader" />
      <Folder Include="Assets\SpritesAndPrefabs\UI\Icons" />
      <Folder Include="Library\PackageCache\com.unity.searcher@4.9.2\Tests" />
+     <Folder Include="Assets\Resources\Tooltips" />
      <Folder Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Prefabs" />
-     <Folder Include="Assets\Scripts\System\Tooltips\moving" />
+     <Folder Include="Assets\Resources\TooltipsImages" />
      <Folder Include="Assets\Scripts\Entities\Player" />
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders\TMP_SDF_SSD.cginc" />
      <Folder Include="Library\PackageCache\com.unity.2d.animation@9.0.4" />

@@ -1,3 +1,4 @@
+/*
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace Items
         {
             /*
              * Zainicjowanie pasywnych bonusów
-             */
+             #1#
             if (!isDamageBonusGranted)
             {
                 addedDamage = playerStatus.GetBaseAttackDamage() * additionalDamage;
@@ -155,3 +156,4 @@ namespace Items
     }
     
 }
+*/

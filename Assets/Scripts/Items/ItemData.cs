@@ -3,127 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class ItemData : MonoBehaviour
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
+public class ItemData : ScriptableObject
 {
-    private string itemName;
-    private string passiveDescription;
-    private string activeDescription;
-    private float cooldown;
-    private float currentCooldown;
-    private string rarity;
-    private float minPlayerLvl;
-    private string imagePath;
-
-    public ItemData(string itemName, string passiveDescription, string activeDescription, string rarity, string imagePath = "", float cooldown = 0, float currentCooldown = 0, float minPlayerLvl = 0 )
+    public string itemName;
+    public string passiveDescription;
+    public string activeDescription;
+    public float cooldown;
+    public float currentCooldown;
+    public string rarity;
+    public float minPlayerLvl;
+    public Sprite itemIcon;
+    public IActiveAbility activeAbility; // interfejs do zdolności aktywnych
+    public IPassiveAbility passiveAbility; // interfejs do zdolności pasywnych
+    public IRemoveItem removeItem;
+    
+    public interface IActiveAbility
     {
-        this.itemName = itemName;
-        this.passiveDescription = passiveDescription;
-        this.activeDescription = activeDescription;
-        this.cooldown = cooldown;
-        this.currentCooldown = currentCooldown;
-        this.imagePath = imagePath;
-        this.rarity = rarity;
-        this.minPlayerLvl = minPlayerLvl;
+        void Use();
     }
 
-    /*
-     * Nazwa przedmiotu
-     */
-    public void SetName(string itemName)
+    public interface IPassiveAbility
     {
-        this.itemName = itemName;
+        void Apply();
     }
-    public string GetName()
+    public interface IRemoveItem
     {
-        return this.itemName;
+        void Remove();
     }
-
-    /*
-     * passiveDescription
-     */
-    public void SetPassiveDescription(string passiveDescription)
-    {
-        this.passiveDescription = passiveDescription;
-    }
-    public string GetPassiveDescription()
-    {
-        return this.passiveDescription;
-    }
-
-    /*
-     * activeDecription
-     */
-    public void SetActiveDescription(string activeDescription)
-    {
-        this.activeDescription = activeDescription;
-    }
-    public string GetActiveDescription()
-    {
-        return this.activeDescription;
-    }
-
-    /*
-     * Cooldown
-     */
-    public void SetCooldown(float cooldown)
-    {
-        this.cooldown = cooldown;
-    }
-    public float GetCooldown()
-    {
-        return this.cooldown;
-    }
-
-    /*
-     * Current cooldown
-     */
-    public void SetCurrentCooldown(float currentCooldown)
-    {
-        this.currentCooldown = currentCooldown;
-    }
-    public float GetCurrentCooldown()
-    {
-        return this.currentCooldown;
-    }
-
-    /*
-     * rzadkość przedmiotu
-     */
-    public void SetRarity(string rarity)
-    {
-        this.rarity = rarity;
-    }
-    public string GetRarity()
-    {
-        return this.rarity;
-    }
-
-    /*
-     * Minimalny poziom gracza do podniesienia
-     */
-    public void SetMinlvl(float minLvl)
-    {
-        this.minPlayerLvl = minLvl;
-    }
-    public float GetMinlvl()
-    {
-        return this.minPlayerLvl;
-    }
-
-    /*
-     * ścieżka to obrazka
-     */
-    public void SetImagePath(string imagePath)
-    {
-        this.imagePath = imagePath;
-    }
-    public string GetImagePath()
-    {
-        return this.imagePath;
-    }
-
-    public virtual void UseItem() {}
-    public virtual void PassiveAbility() {}
-    public virtual void OnItemDisband() {}
 }
-

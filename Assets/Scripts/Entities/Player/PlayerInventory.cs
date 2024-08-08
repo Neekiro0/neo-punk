@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Items;
 using TMPro;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -112,7 +109,7 @@ public class PlayerInventory : MonoBehaviour
     }
 
     /*
-     * Metoda chowająca ekwipunek
+     * Metoda pokazująca ekwipunek
      */
     public void ShowEquipment()
     {
@@ -343,16 +340,15 @@ public class PlayerInventory : MonoBehaviour
      */
     public void SetImageAtSlot(ItemData itemData)
     {
-        if (itemData.GetImagePath() != "")
+        if ( null != itemData.itemIcon)
         {
             GameObject selectedSlot = fields.transform.GetChild(selectedItemIndex).Find("ItemImage").gameObject;
 
-            Texture2D texture2D = Resources.Load<Texture2D>(itemData.GetImagePath());
-            if (texture2D != null && selectedSlot)
+            if (null != itemData.itemIcon && selectedSlot)
             {
-                selectedSlot.GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
+                selectedSlot.GetComponent<Image>().sprite = itemData.itemIcon;
                 
-                MainUi.transform.Find("Items").GetChild(selectedItemIndex).GetComponent<Image>().sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero);
+                MainUi.transform.Find("Items").GetChild(selectedItemIndex).GetComponent<Image>().sprite = itemData.itemIcon;
                 MainUi.transform.Find("Items").GetChild(selectedItemIndex).GetComponent<Image>().color = Color.white;
             }
             else
@@ -367,7 +363,7 @@ public class PlayerInventory : MonoBehaviour
      */
     public void SetImageAtSlotByIndex(String imagePath, String itemName)
     {
-        int itemIndex = itemsHandler.items.FindIndex(obj => string.Equals(obj.GetName(), itemName, StringComparison.OrdinalIgnoreCase));
+        int itemIndex = itemsHandler.items.FindIndex(obj => string.Equals(obj.itemName, itemName, StringComparison.OrdinalIgnoreCase));
         
         if (imagePath != "" || itemIndex == -1 )
         {
@@ -398,7 +394,7 @@ public class PlayerInventory : MonoBehaviour
             selectedField.transform.Find("Arrow").gameObject.SetActive(true);
             
             ItemData selectedItem = itemsHandler.items[selectedItemIndex];
-            if (selectedItem.GetName() != "")
+            if (null != selectedItem)
             {
                 SetItemInfo(itemsHandler.items[selectedItemIndex], selectedItemDesc);
                 selectedItemDesc.SetActive(true);
@@ -440,23 +436,22 @@ public class PlayerInventory : MonoBehaviour
         if (header)
         {
             // Tytuł przedmiotu
-            header.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetName();
+            header.transform.Find("ItemName").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.itemName;
         
             // Ikona przedmiotu
-            Sprite itemSprite = Resources.Load<Sprite>(itemData.GetImagePath());
-            header.transform.Find("ItemIcon").gameObject.GetComponent<Image>().sprite = itemSprite;
+            header.transform.Find("ItemIcon").gameObject.GetComponent<Image>().sprite = itemData.itemIcon;
         }
     
         if (passive)
         {
             // Pasywka przedmiotu
-            passive.transform.Find("PassiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetPassiveDescription();
+            passive.transform.Find("PassiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.passiveDescription;
         }
     
         if (active)
         {
             // Zdolność aktywna przedmiotu
-            active.transform.Find("ActiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.GetActiveDescription();
+            active.transform.Find("ActiveDescription").gameObject.GetComponent<TextMeshProUGUI>().text = itemData.activeDescription;
         }
     }
 }

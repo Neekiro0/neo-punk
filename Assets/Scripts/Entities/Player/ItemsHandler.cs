@@ -14,12 +14,11 @@ public class ItemsHandler : MonoBehaviour
 
     private void Start()
     {
-        // ustawianie wyekwipowanych itemów na starcie gry
-        ItemData emptyItemsData = new ItemData("", "", "", "", "");
-        items.Add( emptyItemsData );
-        items.Add( emptyItemsData );
-        items.Add( emptyItemsData );
-        items.Add( emptyItemsData );
+        // Ustawianie pustych przedmiotów na starcie gry
+        for (int i = 0; i < 4; i++)
+        {
+            items.Add(null);  // Puste sloty na przedmioty
+        }
         
         MainUi = GameObject.Find("Main User Interface");
         GameObject itemsCooldownsParent = MainUi.transform.Find("ItemsCooldowns").gameObject;
@@ -32,144 +31,139 @@ public class ItemsHandler : MonoBehaviour
             itemsCooldowns.Add(itemCooldownTextComponent);
         }
 
-        playerInventory = gameObject.GetComponent<PlayerInventory>();
+        playerInventory = GetComponent<PlayerInventory>();
     }
 
     private void Update()
     {
-        /*
-         * Używanie przedmiotów
-         */
-        if (Input.GetKeyDown(KeyCode.Alpha1)) UseItem(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) UseItem(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) UseItem(2);
-        if (Input.GetKeyDown(KeyCode.Alpha4)) UseItem(3);
-        
-        /*
-         * Zdolności pasywne
-         */
-        UsePassive(0);
-        UsePassive(1);
-        UsePassive(2);
-        UsePassive(3);
-        
-        /*
-         * Aktualizacja timera cooldownu
-         */
-        UpdateCooldownTimer(0);
-        UpdateCooldownTimer(1);
-        UpdateCooldownTimer(2);
-        UpdateCooldownTimer(3);
+        if (null != items[0])
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1)) UseItem(0);
+            UsePassive(0);
+            UpdateCooldownTimer(0);
+        }
+        if (null != items[1])
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1)) UseItem(1);
+            UsePassive(1);
+            UpdateCooldownTimer(1);
+        }
+        if (null != items[2])
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1)) UseItem(2);
+            UsePassive(2);
+            UpdateCooldownTimer(2);
+        }
+        if (null != items[3])
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1)) UseItem(3);
+            UsePassive(3);
+            UpdateCooldownTimer(3);
+        }
     }
     
     public void AddItem(ItemData itemData, GameObject objectToDelete)
     {
-        playerInventory = gameObject.GetComponent<PlayerInventory>();   
-        if (playerInventory)
-        {
-            playerInventory.isPlayerPickingItem = true;
-            StartCoroutine(WaitForAction(itemData, objectToDelete));
-        }
-        else
+        if (playerInventory == null)
         {
             Debug.LogError("Nie znaleziono PlayerInventory");
+            return;
         }
+
+        playerInventory.isPlayerPickingItem = true;
+        StartCoroutine(WaitForAction(itemData, objectToDelete));
     }
-    
+
     private IEnumerator WaitForAction(ItemData itemData, GameObject pickedObject)
     {
-        gameObject.GetComponent<PlayerInventory>().ShowEquipment();
-        while (gameObject.GetComponent<PlayerInventory>().isEquipmentShown)
+        playerInventory.ShowEquipment();
+        while (playerInventory.isEquipmentShown)
         {
-            /*
-             * Wyświetlenie podnoszonego przedmiotu na UI
-             */
+            // Wyświetlenie podnoszonego przedmiotu na UI
             playerInventory.PickupItem(itemData);
             
             if (Input.GetKeyDown(InputManager.InteractKey))
             {
+                ItemData currentItem = items[playerInventory.selectedItemIndex];
                 
-                List<ItemData> matchingItemsList = items.FindAll(obj => obj.GetName() == itemData.GetName());
-                if (matchingItemsList.Count > 0 && (items[playerInventory.selectedItemIndex].GetName() != itemData.GetName()))
+                if (currentItem != null && currentItem.itemName == itemData.itemName)
                 {
                     Debug.Log("Istnieje już taki item w ekwipunku");
                 }
                 else
                 {
-                    items[playerInventory.selectedItemIndex].OnItemDisband();
+                    items[playerInventory.selectedItemIndex] = null;
                     items[playerInventory.selectedItemIndex] = itemData;
                     playerInventory.SetImageAtSlot(itemData);
                     
                     playerInventory.EndPickingItem();
                     Destroy(pickedObject);
-                
                     playerInventory.HideEquipment();
                     playerInventory.isPlayerPickingItem = false;
                 }
-                
             }
             yield return null;
         }
     }
 
-    public void UseItem(int ItemPos)
+    public void UseItem(int itemPos)
     {
-        ItemData usedItem = items[ItemPos];
-        if ( !(usedItem.GetCurrentCooldown() > 0) )
+        ItemData usedItem = items[itemPos];
+        if (usedItem != null && usedItem.currentCooldown <= 0)
         {
-            usedItem.UseItem();
-            usedItem.SetCurrentCooldown(usedItem.GetCooldown());
-            StartCoroutine(CooldownTimer(usedItem, ItemPos));
-            
-            // wyczernienie przedmiotu
+            usedItem.activeAbility.Use();
+            usedItem.currentCooldown = usedItem.cooldown;
+            StartCoroutine(CooldownTimer(usedItem, itemPos));
+
+            // Wyczernienie przedmiotu
             try
             {
-                Image itemImage = MainUi.transform.Find("Items").transform.GetChild(ItemPos).GetComponent<Image>();
-
+                Image itemImage = MainUi.transform.Find("Items").transform.GetChild(itemPos).GetComponent<Image>();
                 itemImage.color = new Color32(55, 55, 55, 255);
-
-            } catch (Exception) {}
+            }
+            catch (Exception) { }
         }
     }
-    
-    private IEnumerator CooldownTimer(ItemData item, int ItemPos)
+
+    private IEnumerator CooldownTimer(ItemData item, int itemPos)
     {
-        while (item.GetCurrentCooldown() > 0)
+        while (item.currentCooldown > 0)
         {
             yield return new WaitForSeconds(1.0f);
-            item.SetCurrentCooldown( item.GetCurrentCooldown() - 1.0f );
+            item.currentCooldown -= 1.0f;
         }
-        item.SetCurrentCooldown(0);
+        item.currentCooldown = 0;
+
         try
         {
-            Image itemImage = MainUi.transform.Find("Items").transform.GetChild(ItemPos).GetComponent<Image>();
-
+            Image itemImage = MainUi.transform.Find("Items").transform.GetChild(itemPos).GetComponent<Image>();
             itemImage.color = Color.white;
-
-        } catch (Exception) {}
+        }
+        catch (Exception) { }
     }
 
     public void UsePassive(int itemPos)
     {
         ItemData usedItem = items[itemPos];
-        usedItem.PassiveAbility();
+        if (null != usedItem)
+        {
+            usedItem.passiveAbility.Apply();
+        }
     }
 
     public void OnItemDisband(int itemPos)
     {
         ItemData usedItem = items[itemPos];
-        usedItem.OnItemDisband();
+        usedItem.removeItem.Remove();
     }
 
-    /*
-     * Metoda aktualizująca timer na UI
-     */
+    // Metoda aktualizująca timer na UI
     private void UpdateCooldownTimer(int itemPos)
     {
         ItemData item = items[itemPos];
-        if ( item.GetCurrentCooldown() <= item.GetCooldown() && item.GetCurrentCooldown() > 0 )
+        if (item != null && item.currentCooldown > 0)
         {
-            itemsCooldowns[itemPos].text = item.GetCurrentCooldown().ToString();
+            itemsCooldowns[itemPos].text = item.currentCooldown.ToString();
         }
         else
         {

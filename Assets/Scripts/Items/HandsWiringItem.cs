@@ -1,3 +1,4 @@
+/*
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace Items
         {
             /*
              * Zainicjowanie pasywnych bonusów
-             */
+             #1#
             if (!isPassiveGranted)
             {
                 playerInitialElementalType = player.UsedElementalTypeId;
@@ -85,14 +86,14 @@ namespace Items
                         {
                             /*
                              * Odpychanie celu
-                             */
+                             #1#
                             Vector3 direction = (nearbyObject.transform.position - playerEntity.transform.position).normalized;
                             direction.y = explosionForce * 0.02f; 
                             rigidbody2D.AddForce(direction * explosionForce, ForceMode2D.Impulse);
                             
                             /*
                              * Zadawanie mu obrażeń
-                             */
+                             #1#
                             EntityStatus entityStatus = nearbyObject.gameObject.GetComponent<EntityStatus>();
                             entityStatus.DealDamage(playerStatus.GetAttackDamageCount() * 0.2f );
                         }
@@ -106,7 +107,7 @@ namespace Items
                 isEffectActive = true;
                 effectEndTime = Time.time + effectDuration;
                 /*lastElementalType = player.UsedElementalTypeId;
-                player.ChangeElementalType(5);*/
+                player.ChangeElementalType(5);#1#
             }
         }
 
@@ -199,3 +200,4 @@ namespace Items
         }
     }
 }
+*/
