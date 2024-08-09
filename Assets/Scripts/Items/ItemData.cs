@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.PlayerLoop;
-
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
@@ -16,21 +11,13 @@ public class ItemData : ScriptableObject
     public string rarity;
     public float minPlayerLvl;
     public Sprite itemIcon;
-    public IActiveAbility activeAbility; // interfejs do zdolności aktywnych
-    public IPassiveAbility passiveAbility; // interfejs do zdolności pasywnych
-    public IRemoveItem removeItem;
+    public IItemAbility itemAbility;
     
-    public interface IActiveAbility
+    public interface IItemAbility
     {
         void Use();
-    }
-
-    public interface IPassiveAbility
-    {
         void Apply();
-    }
-    public interface IRemoveItem
-    {
         void Remove();
     }
+
 }

@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 8512016983252169845}
   - component: {fileID: 2374562831117872849}
   - component: {fileID: 7747687478470453551}
-  - component: {fileID: 1472263760553543365}
   m_Layer: 0
   m_Name: UiButton
   m_TagString: Untagged
@@ -256,15 +255,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6643979270836241449}
   m_CullTransparentMesh: 1
---- !u!114 &1472263760553543365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6643979270836241449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fa360ca7c323444ba3ed58fb660bfa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

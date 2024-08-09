@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class SaveSlotController : MonoBehaviour
 {
     private int SaveSlot = 0;
-    private bool isShown = false;
+    public bool isShown = false;
 
     private void Start()
     {

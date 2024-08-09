@@ -44,7 +44,6 @@ public class Player : MonoBehaviour
      */
     private Rigidbody2D playerBody;
     private PlayerInventory playerEq;
-    private bool isPassingThrough = false;
     private Collider2D ignoredObject;
     private CapsuleCollider2D boxCollider;
     private GameObject swordHitbox;
@@ -64,12 +63,12 @@ public class Player : MonoBehaviour
     public float cooldownBetweenBlocks;
     private bool canBlock = true;
     private PauseMenuBehaviour pauseMenu;
-    private GameObject elementalIconObject;
+    private Image elementalIconComponent;
     public Vector3 lastSafePosition;
     public float playerVoidLevel;
     
     
-    private void Awake()
+    private void Start()
     {
         // pobieranie rigidbody
         playerBody = GetComponent<Rigidbody2D>();
@@ -82,12 +81,13 @@ public class Player : MonoBehaviour
         
         pauseMenu = GameObject.Find("Pause Menu Interface").GetComponent<PauseMenuBehaviour>();
 
-        elementalIconObject = GameObject.Find("Main User Interface").transform.Find("Elemental").transform.Find("ElementalIcon").gameObject;
+        elementalIconComponent = GameObject.Find("UserInterface").transform.Find("Main User Interface").transform.Find("Elemental").transform.Find("ElementalIcon").gameObject.GetComponent<Image>();
+        if (elementalIconComponent == null)
+        {
+            Debug.LogError("ElementalIconComponent nie został znaleziony w Start().");
+        }
     }
 
-    private void Start()
-    {
-    }
 
     private void Update()
     {
@@ -401,15 +401,28 @@ public class Player : MonoBehaviour
 
     public void ChangeElementalType(int TypeId)
     {
-        if (TypeId >= 0 && TypeId <= ElementalTypes.Count)
+        if (TypeId >= 0 && TypeId < ElementalTypes.Count)
         {
             String elementalName = ElementalTypes[TypeId].name;
             UsedElementalTypeId = TypeId;
             UsedElementalName = elementalName;
-            
-            elementalIconObject.GetComponent<Image>().sprite = ElementalTypes[TypeId].icon;
+        
+            if (elementalIconComponent == null)
+            {
+                Debug.LogWarning("ElementalIconComponent jest null, próbuję przypisać go ponownie.");
+                elementalIconComponent = GameObject.Find("UserInterface").transform.Find("Main User Interface").transform.Find("Elemental").transform.Find("ElementalIcon").gameObject.GetComponent<Image>();
+
+                if (elementalIconComponent == null)
+                {
+                    Debug.LogError("Nie udało się przypisać elementalIconComponent w ChangeElementalType.");
+                    return;
+                }
+            }
+
+            elementalIconComponent.sprite = ElementalTypes[TypeId].icon;
         }
     }
+
 }
 #if UNITY_EDITOR
 

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: itemData
+  m_EditorClassIdentifier: Assembly-CSharp::DemonBell
+  itemName: Demon bell
+  passiveDescription: Player takes 35% more damage, but also deals 25% more.
+  activeDescription: Overrides damage type to Bloody for 10 seconds.
+  cooldown: 40
+  currentCooldown: 0
+  rarity: Rare
+  minPlayerLvl: 0
+  itemIcon: {fileID: 21300000, guid: 0b6014fcda54dd746bf75349c77669d0, type: 3}

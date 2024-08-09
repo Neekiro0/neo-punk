@@ -25,11 +25,9 @@ public class PlayerInventory : MonoBehaviour
     private GameObject buttonTooltip;
     private ItemsHandler itemsHandler;
     private EntityStatus playerStatus;
-    private bool isVerticalInputPressed = false;
     private float ItemsListInitialWidth;
     private Texture rawImage1;
     private Texture rawImage2;
-    private bool areImagesSwapped = false;
     private Color primaryEqColor;
     private Color primaryItemsListColor;
     private bool isButtonDown = false;

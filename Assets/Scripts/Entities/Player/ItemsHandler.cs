@@ -44,19 +44,19 @@ public class ItemsHandler : MonoBehaviour
         }
         if (null != items[1])
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1)) UseItem(1);
+            if (Input.GetKeyDown(KeyCode.Alpha2)) UseItem(1);
             UsePassive(1);
             UpdateCooldownTimer(1);
         }
         if (null != items[2])
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1)) UseItem(2);
+            if (Input.GetKeyDown(KeyCode.Alpha3)) UseItem(2);
             UsePassive(2);
             UpdateCooldownTimer(2);
         }
         if (null != items[3])
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1)) UseItem(3);
+            if (Input.GetKeyDown(KeyCode.Alpha4)) UseItem(3);
             UsePassive(3);
             UpdateCooldownTimer(3);
         }
@@ -97,7 +97,7 @@ public class ItemsHandler : MonoBehaviour
                     playerInventory.SetImageAtSlot(itemData);
                     
                     playerInventory.EndPickingItem();
-                    Destroy(pickedObject);
+                    Destroy(pickedObject.gameObject.transform.parent.gameObject);
                     playerInventory.HideEquipment();
                     playerInventory.isPlayerPickingItem = false;
                 }
@@ -111,7 +111,7 @@ public class ItemsHandler : MonoBehaviour
         ItemData usedItem = items[itemPos];
         if (usedItem != null && usedItem.currentCooldown <= 0)
         {
-            usedItem.activeAbility.Use();
+            usedItem.itemAbility.Use();
             usedItem.currentCooldown = usedItem.cooldown;
             StartCoroutine(CooldownTimer(usedItem, itemPos));
 
@@ -147,14 +147,14 @@ public class ItemsHandler : MonoBehaviour
         ItemData usedItem = items[itemPos];
         if (null != usedItem)
         {
-            usedItem.passiveAbility.Apply();
+            usedItem.itemAbility.Apply();
         }
     }
 
     public void OnItemDisband(int itemPos)
     {
         ItemData usedItem = items[itemPos];
-        usedItem.removeItem.Remove();
+        usedItem.itemAbility.Remove();
     }
 
     // Metoda aktualizująca timer na UI
