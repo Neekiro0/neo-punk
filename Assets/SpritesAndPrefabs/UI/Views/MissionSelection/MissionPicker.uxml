@@ -1,0 +1,114 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/SpritesAndPrefabs/UI/Views/MissionSelection/missionSelection.uss?fileID=7433441132597879392&amp;guid=3fb45f009b96c474c83c5d06910b0cb6&amp;type=3#missionSelection" />
+    <ui:VisualElement name="UiRoot" style="flex-grow: 1; flex-direction: row; width: 90%; height: 85%; background-color: rgb(120, 133, 238); margin-top: auto; margin-right: auto; margin-bottom: auto; margin-left: auto;">
+        <ui:ScrollView name="ScrollView" vertical-scroller-visibility="Auto" horizontal-scroller-visibility="Hidden" vertical-page-size="1" mouse-wheel-scroll-size="700" elasticity="10" scroll-deceleration-rate="10" class="custom-scroll" style="flex-grow: 1; width: 413px; height: auto; overflow: visible; justify-content: space-between; align-self: stretch; flex-direction: column;">
+            <ui:Label tabindex="0" text="Mission selection" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="height: 100px; width: 100%; white-space: normal; text-overflow: clip; -unity-text-align: middle-center; justify-content: flex-start; align-self: auto; align-items: auto; font-size: 32px; -unity-font: resource(&apos;TextMesh Pro/Fonts/upheavtt&apos;); -unity-font-style: bold; background-color: rgb(131, 144, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute;" />
+            <ui:Foldout text="Act 1: street dog" value="true" name="Foldout" class="MissionsTreeAct" style="flex-direction: column; margin-bottom: 20px; margin-top: 150px;">
+                <ui:Button text="introduction" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="children" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="obesity" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+            </ui:Foldout>
+            <ui:Foldout text="Act 2: ???" value="true" name="Foldout" class="MissionsTreeAct">
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+            </ui:Foldout>
+            <ui:Foldout text="Act 3: ???" value="false" name="Foldout" class="MissionsTreeAct">
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+            </ui:Foldout>
+            <ui:Foldout text="Act 4: ???" value="false" name="Foldout" class="MissionsTreeAct">
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+            </ui:Foldout>
+            <ui:Foldout text="Act 5: ???" value="false" name="Foldout" class="MissionsTreeAct">
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+            </ui:Foldout>
+            <ui:Foldout text="Act 6: ???" value="false" name="Foldout" class="MissionsTreeAct">
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+                <ui:Button text="???" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
+            </ui:Foldout>
+        </ui:ScrollView>
+        <ui:VisualElement name="Details" style="flex-grow: 1; width: 70%; padding-top: 25px; padding-right: 25px; padding-bottom: 25px; padding-left: 25px;">
+            <ui:VisualElement name="Header" style="flex-grow: 1; height: 10%; width: 100%; align-items: auto; justify-content: center;">
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="CloseButton" tooltip="Exit" tabindex="1" style="height: 50px; width: 50px; margin-right: 20px; background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/close.png?fileID=2800000&amp;guid=1544635a7cf624b419940d88d3a574c1&amp;type=3#close&apos;); background-color: rgba(188, 188, 188, 0); -unity-background-image-tint-color: rgb(255, 255, 255); transition-property: translate; transition-duration: 0.1s; translate: 5px 0; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Main" tabindex="0" style="flex-grow: 1; width: 100%; height: 90%;">
+                <ui:VisualElement name="DetailsName" style="flex-grow: 1; height: 15%; justify-content: center; align-items: center;">
+                    <ui:Label tabindex="0" text="Sample mission name" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" style="font-size: 32px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="DetailsStats" style="flex-grow: 1; height: 25%; flex-direction: row;">
+                    <ui:VisualElement name="StatTime" class="DetailsStatsStat">
+                        <ui:Label tabindex="0" text="Time" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeLabel" class="DetailsStatsStatLabel" style="width: 100%; align-self: auto; align-items: auto; white-space: nowrap; -unity-text-align: middle-center; font-size: 20px;" />
+                        <ui:VisualElement name="TimeRate" class="DetailsStatsStatRate" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: auto; align-items: center;">
+                            <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
+                            <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
+                            <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
+                        </ui:VisualElement>
+                        <ui:Label tabindex="0" text="Best: 2:33" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeBest" class="DetailsStatsStatBest" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="StatTakedowns" class="DetailsStatsStat">
+                        <ui:Label tabindex="0" text="Takedowns" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeLabel" class="DetailsStatsStatLabel" style="width: 100%; align-self: auto; align-items: auto; white-space: nowrap; -unity-text-align: middle-center; font-size: 20px;" />
+                        <ui:VisualElement name="TimeRate" class="DetailsStatsStatRate" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: auto; align-items: center;">
+                            <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
+                            <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
+                            <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
+                        </ui:VisualElement>
+                        <ui:Label tabindex="0" text="Best: 15" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeBest" class="DetailsStatsStatBest" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="StatDamageTaken" class="DetailsStatsStat">
+                        <ui:Label tabindex="0" text="Damage taken" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeLabel" enable-rich-text="true" class="DetailsStatsStatLabel" style="width: 100%; align-self: auto; align-items: auto; white-space: nowrap; -unity-text-align: middle-center; font-size: 20px;" />
+                        <ui:VisualElement name="TimeRate" class="DetailsStatsStatRate" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: auto; align-items: center;">
+                            <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
+                            <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
+                            <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
+                        </ui:VisualElement>
+                        <ui:Label tabindex="0" text="Best: 40" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeBest" class="DetailsStatsStatBest" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="DetailsDescription" style="flex-grow: 1; height: 40%; align-items: center; justify-content: center; margin-top: 20px;">
+                    <ui:VisualElement name="Objective" style="flex-grow: 1; width: 100%; flex-direction: row; background-color: rgb(131, 144, 255); padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;">
+                        <ui:VisualElement name="ObjectiveIconWrapper" style="flex-grow: 1; width: 20%; height: auto; position: relative; justify-content: center;">
+                            <ui:VisualElement name="ObjectiveIcon" style="flex-grow: 1; width: 50px; height: 50px; background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/InfoIcon.png?fileID=2800000&amp;guid=029b8884a4426d34f9d54487e5e56ab2&amp;type=3#InfoIcon&apos;); position: absolute; top: auto; bottom: auto; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px;" />
+                        </ui:VisualElement>
+                        <ui:Label tabindex="0" text="Sample objective" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ObjectiveLabel" style="height: auto; width: 90%; -unity-text-align: middle-left; font-size: 24px;" />
+                    </ui:VisualElement>
+                    <ui:Label tabindex="0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur, augue at consectetur hendrerit, ipsum nulla porta magna, et rutrum magna ante sit amet risus. Nullam quis ultrices urna. Cras egestas ligula lorem, sed imperdiet nisi commodo sed. Nullam lorem justo, pulvinar a blandit nec, convallis sit amet diam." parse-escape-sequences="true" display-tooltip-when-elided="true" name="Description" style="-unity-text-align: upper-left; white-space: normal; font-size: 28px; width: 100%; height: 70%; padding-top: 40px; padding-right: 40px; padding-bottom: 40px; padding-left: 40px; margin-top: 20px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="DetailsControls" style="flex-grow: 1; height: 20%; flex-direction: row; justify-content: center;">
+                    <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" tooltip="Start mission" enable-rich-text="false" name="StartMissionButton" class="DetailsControlsButton" style="width: 100px; height: 100px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; padding-right: 10px; padding-left: 10px; background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/ExitIcon.png?fileID=2800000&amp;guid=66a053c82106d5c4a8952aa707441e56&amp;type=3#ExitIcon&apos;); background-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Placeholder" style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -54,9 +54,11 @@
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
      <Compile Include="Assets\Scripts\System\Tooltips\TooltipTrigger.cs" />
      <Compile Include="Assets\Scripts\Items\ItemObject.cs" />
-     <Compile Include="Assets\Scripts\System\OptionsController.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\FloorDetector.cs" />
+     <Compile Include="Assets\Scripts\UI\MissionData.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\UI\SaveSlotController.cs" />
+     <Compile Include="Assets\Scripts\Objects\ComputerController.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
      <Compile Include="Assets\Scripts\Items\VoodooDollAbilities.cs" />
@@ -67,6 +69,7 @@
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\Player.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
+     <Compile Include="Assets\Scripts\UI\OptionsController.cs" />
      <Compile Include="Assets\Scripts\Items\ItemData.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
@@ -83,10 +86,12 @@
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
      <Compile Include="Assets\Scripts\Entities\EntityStatus.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
+     <Compile Include="Assets\Scripts\UI\OptionsManager.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuBehaviour.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
+     <Compile Include="Assets\Scripts\UI\ComputerInterfaceController.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
      <Compile Include="Assets\Scripts\Objects\BulletBehaviour.cs" />
-     <Compile Include="Assets\Scripts\System\MenuBehaviour.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
@@ -96,15 +101,13 @@
      <Compile Include="Assets\Scripts\Entities\PlayerDetector.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
-     <Compile Include="Assets\Scripts\System\OptionsManager.cs" />
      <Compile Include="Assets\Scripts\Entities\Dragonfly\DragonflyBehaviour.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\Scripts\Items\HandsWiringAbilities.cs" />
      <Compile Include="Assets\Scripts\System\InputManager.cs" />
-     <Compile Include="Assets\Scripts\System\PauseMenuBehaviour.cs" />
      <Compile Include="Assets\Scripts\Entities\Zombie\ZombieBehaviour.cs" />
-     <Compile Include="Assets\Scripts\System\SaveSlotController.cs" />
+     <Compile Include="Assets\Scripts\UI\PauseMenuBehaviour.cs" />
      <Compile Include="Assets\Scripts\Items\ExplosionCollisionHandler.cs" />
      <Compile Include="Assets\Scripts\Objects\AirVentBehaviour.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
@@ -169,11 +172,13 @@
      <Folder Include="Assets\Resources\Items\DemonBell" />
      <Folder Include="Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\PSSL.hlsl" />
+     <Folder Include="Assets\Scripts\UI" />
      <Folder Include="Assets\SpritesAndPrefabs\Backgounds" />
      <Folder Include="Library\PackageCache\com.unity.2d.aseprite@1.0.1" />
      <Folder Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport" />
      <None Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
      <Folder Include="Assets\Resources\TextMesh Pro\Resources\Fonts &amp; Materials" />
+     <None Include="Assets\SpritesAndPrefabs\UI\Views\MissionSelection\MissionPicker.uxml" />
      <Folder Include="Library\PackageCache\com.unity.collections@1.2.4" />
      <Folder Include="Assets\SpritesAndPrefabs\Backgounds\MainMenu" />
      <Folder Include="Assets\SpritesAndPrefabs\Objects\AirConditioner" />
@@ -244,6 +249,7 @@
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug\Vectorscope.shader" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\D3D9.hlsl" />
+     <Folder Include="Assets\UI Toolkit\UnityThemes" />
      <Folder Include="Assets\SpritesAndPrefabs" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\ScalableAO.shader" />
      <Folder Include="Assets\EveldTech\DynamicCamera\DemoAssets\Prefabs" />
@@ -270,6 +276,7 @@
      <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.21\ValidationExceptions.json" />
      <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\Tests" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\xRLib.hlsl" />
+     <Folder Include="Assets\UI Toolkit" />
      <None Include="Assets\Resources\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <Folder Include="Assets\SpritesAndPrefabs\Tilemaps" />
      <None Include="Assets\Resources\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
@@ -338,6 +345,7 @@
      <None Include="Library\PackageCache\com.unity.textmeshpro@3.0.6\Editor Resources\Shaders\TMP_SDF Internal Editor.shader" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5\Presets" />
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5\EditorResources" />
+     <Folder Include="Assets\SpritesAndPrefabs\UI\Views" />
      <None Include="Assets\Resources\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <Folder Include="Library\PackageCache\com.unity.collab-proxy@2.2.0\Lib" />
      <None Include="Library\PackageCache\com.unity.2d.aseprite@1.0.1\package.json" />
@@ -386,6 +394,7 @@
      <Folder Include="Library\PackageCache\com.unity.2d.aseprite@1.0.1\Tests" />
      <None Include="Library\PackageCache\com.unity.burst@1.8.9\Unity.Burst.Unsafe.xml" />
      <None Include="Library\PackageCache\com.unity.2d.psdimporter@8.0.2\package.json" />
+     <None Include="Assets\SpritesAndPrefabs\UI\Views\MissionSelection\missionSelection.uss" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\API\Vulkan.hlsl" />
      <Folder Include="Assets\SpritesAndPrefabs\Objects\WorkLight" />
      <Folder Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Resources\Fonts &amp; Materials" />
@@ -396,6 +405,7 @@
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5\Presets\Noise" />
      <None Include="Assets\Resources\TextMesh Pro\Sprites\EmojiOne.json" />
      <Folder Include="Library\PackageCache\com.unity.2d.spriteshape@9.0.2" />
+     <Folder Include="Assets\SpritesAndPrefabs\UI\Views\MissionSelection" />
      <Folder Include="Library\PackageCache\com.unity.2d.spriteshape@9.0.2\Tests" />
      <None Include="Assets\Resources\TextMesh Pro\Shaders\TMP_Sprite.shader" />
      <Folder Include="Assets\SpritesAndPrefabs\Tilemaps\Tutorial" />

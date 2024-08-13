@@ -10,6 +10,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     private GameObject PauseUi;
     private GameObject PauseUiCanvas;
     private PlayerInventory PlayerInv;
+    private ComputerInterfaceController computerInterfaceController;
 
     private GameObject MainUi;
     public bool IsGamePaused;
@@ -22,6 +23,10 @@ public class PauseMenuBehaviour : MonoBehaviour
         PauseUiCanvas = PauseUi.transform.GetChild(0).gameObject;
         PauseUiCanvas.SetActive(false);
         PlayerInv = GameObject.Find("Player").GetComponent<PlayerInventory>();
+        computerInterfaceController = GameObject.Find("UserInterface").
+            transform.Find("ObjectsInterfaces").
+            transform.Find("Computer").
+            gameObject.GetComponent<ComputerInterfaceController>();
         
         MainUi = GameObject.Find("Main User Interface");
     }
@@ -32,7 +37,7 @@ public class PauseMenuBehaviour : MonoBehaviour
         {
             buttonResume();
         }
-        else if ( !PlayerInv.isEquipmentShown && ( Input.GetKeyDown(InputManager.PauseMenuKey) || Input.GetKeyDown(KeyCode.Escape) ) )
+        else if ( !PlayerInv.isEquipmentShown && !computerInterfaceController.isShown && ( Input.GetKeyDown(InputManager.PauseMenuKey) || Input.GetKeyDown(KeyCode.Escape) ) )
         {
             Pause();
         }
