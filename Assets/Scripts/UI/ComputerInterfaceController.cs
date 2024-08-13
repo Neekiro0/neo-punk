@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -18,6 +19,7 @@ public class ComputerInterfaceController : MonoBehaviour
     private Label nameLabel;
     private Label objectiveLabel;
     private Label descriptionLabel;
+    private Label codeLabel;
     private VisualElement MissionUi;
     private VisualElement MissionUiPlaceholder;
 
@@ -44,6 +46,7 @@ public class ComputerInterfaceController : MonoBehaviour
         nameLabel = InterfaceRoot.Q<Label>("NameLabel");
         objectiveLabel = InterfaceRoot.Q<Label>("ObjectiveLabel");
         descriptionLabel = InterfaceRoot.Q<Label>("DescriptionLabel");
+        codeLabel = InterfaceRoot.Q<Label>("CodeLabel");
         MissionUi = InterfaceRoot.Q<VisualElement>("Main");
         MissionUiPlaceholder = InterfaceRoot.Q<VisualElement>("Placeholder");
 
@@ -62,6 +65,8 @@ public class ComputerInterfaceController : MonoBehaviour
                 ShowMissionDetails(button.text);
             };
         }
+
+        StartCoroutine(CodeAnmiation(0.5f));
     }
 
     private void Update()
@@ -77,7 +82,6 @@ public class ComputerInterfaceController : MonoBehaviour
         isShown = true;
         gameObject.SetActive(true);
         MainUserInterface.SetActive(false);
-        Time.timeScale = 0;
         Cursor.visible = true;
     }
     
@@ -86,7 +90,6 @@ public class ComputerInterfaceController : MonoBehaviour
         isShown = false;
         gameObject.SetActive(false);
         MainUserInterface.SetActive(true);
-        Time.timeScale = 1;
         Cursor.visible = false;
     }
 
@@ -106,17 +109,58 @@ public class ComputerInterfaceController : MonoBehaviour
         SelectedMission = Resources.Load<MissionData>("Missions/"+MissionName+"/MissionData");
         if (null != SelectedMission)
         {
-            nameLabel.text = SelectedMission.MissionName;
-            objectiveLabel.text = SelectedMission.Objective;
-            descriptionLabel.text = SelectedMission.Description;
             MissionUi.style.display = DisplayStyle.Flex;
             MissionUiPlaceholder.style.display = DisplayStyle.None;
+
+            StartCoroutine(PrintName(SelectedMission.MissionName, 0.1f));
+            StartCoroutine(PrintObjective(SelectedMission.Objective, 0.05f));
+            StartCoroutine(PrintDescription(SelectedMission.Description, 0.01f));
         }
         else
         {
             MissionUi.style.display = DisplayStyle.None;
             MissionUiPlaceholder.style.display = DisplayStyle.Flex;
             Debug.LogError("Not found mission named: "+MissionName);
+        }
+    }
+
+    IEnumerator PrintName(string name, float letterPause)
+    {
+        nameLabel.text = "";
+        for (int i = 0; i < name.Length; i++)
+        {
+            nameLabel.text += name[i];
+            yield return new WaitForSeconds(letterPause);
+        }
+    }
+    
+    IEnumerator PrintObjective(string name, float letterPause)
+    {
+        objectiveLabel.text = "";
+        for (int i = 0; i < name.Length; i++)
+        {
+            objectiveLabel.text += name[i];
+            yield return new WaitForSeconds(letterPause);
+        }
+    }
+    
+    IEnumerator PrintDescription(string name, float letterPause)
+    {
+        descriptionLabel.text = "";
+        for (int i = 0; i < name.Length; i++)
+        {
+            descriptionLabel.text += name[i];
+            yield return new WaitForSeconds(letterPause);
+        }
+    }
+    IEnumerator CodeAnmiation(float blinkingBreak)
+    {
+        while (true)
+        {
+            codeLabel.text += " |";
+            yield return new WaitForSeconds(blinkingBreak);
+            codeLabel.text = codeLabel.text.Remove(codeLabel.text.Length - 2);
+            yield return new WaitForSeconds(blinkingBreak);
         }
     }
 }

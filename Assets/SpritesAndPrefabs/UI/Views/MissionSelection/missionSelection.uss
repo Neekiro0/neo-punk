@@ -5,6 +5,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 32px;
+    -unity-font: resource('TextMesh Pro/Fonts/upheavtt');
 }
 
 .MissionsTreeAct .MissionsTreeMissionButton {
@@ -20,6 +21,7 @@
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
+    -unity-font: resource('TextMesh Pro/Fonts/upheavtt');
 }
 
 .MissionsTree {
@@ -81,4 +83,40 @@
 
 .custom-scroll .unity-scroll-view__vertical-scroller {
     opacity: 0;
+}
+
+.AdStyle {
+    height: 320px;
+    width: 160px;
+    margin-right: 0;
+    margin-left: 0;
+    border-left-color: rgb(120, 133, 238);
+    border-right-color: rgb(120, 133, 238);
+    border-top-color: rgb(120, 133, 238);
+    border-bottom-color: rgb(120, 133, 238);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    max-width: 160px;
+    min-width: 160px;
+    max-height: 320px;
+    min-height: 320px;
+}
+
+.ConsoleButtons {
+    width: 30px;
+    height: 30px;
+    max-width: 30px;
+    min-width: 30px;
+    max-height: 30px;
+    min-height: 30px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    margin-top: 14px;
+    margin-right: 14px;
+    margin-bottom: 14px;
+    margin-left: 14px;
 }

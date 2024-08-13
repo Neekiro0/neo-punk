@@ -3,7 +3,7 @@
     <ui:VisualElement name="UiRoot" style="flex-grow: 1; flex-direction: row; width: 90%; height: 85%; background-color: rgb(120, 133, 238); margin-top: auto; margin-right: auto; margin-bottom: auto; margin-left: auto;">
         <ui:ScrollView name="ScrollView" vertical-scroller-visibility="Auto" horizontal-scroller-visibility="Hidden" vertical-page-size="1" mouse-wheel-scroll-size="700" elasticity="10" scroll-deceleration-rate="10" class="custom-scroll" style="flex-grow: 1; width: 413px; height: auto; overflow: visible; justify-content: space-between; align-self: stretch; flex-direction: column;">
             <ui:Label tabindex="0" text="Mission selection" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="height: 100px; width: 100%; white-space: normal; text-overflow: clip; -unity-text-align: middle-center; justify-content: flex-start; align-self: auto; align-items: auto; font-size: 32px; -unity-font: resource(&apos;TextMesh Pro/Fonts/upheavtt&apos;); -unity-font-style: bold; background-color: rgb(131, 144, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute;" />
-            <ui:Foldout text="Act 1: street dog" value="false" name="Foldout" class="MissionsTreeAct" style="flex-direction: column; margin-bottom: 20px; margin-top: 150px;">
+            <ui:Foldout text="Act 1: street dog" value="true" name="Foldout" class="MissionsTreeAct" style="flex-direction: column; margin-bottom: 20px; margin-top: 150px;">
                 <ui:Button text="Introduction" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
                 <ui:Button text="children" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
                 <ui:Button text="obesity" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MissionsTreeMissionButton" />
@@ -108,8 +108,32 @@
                     <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" tooltip="Start mission" enable-rich-text="false" name="StartMissionButton" class="DetailsControlsButton" style="width: 100px; height: 100px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; padding-right: 10px; padding-left: 10px; background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/ExitIcon.png?fileID=2800000&amp;guid=66a053c82106d5c4a8952aa707441e56&amp;type=3#ExitIcon&apos;); background-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Placeholder" style="flex-grow: 1; width: 100%; height: 90%;">
-                <ui:Label tabindex="-1" text="Test" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            <ui:VisualElement name="Placeholder" style="flex-grow: 1; width: 100%; height: 90%; display: flex; overflow: visible;">
+                <ui:VisualElement name="AdsWIndow" style="flex-grow: 1; height: 40%;">
+                    <ui:VisualElement name="Header" style="flex-grow: 1; height: 15%; background-color: rgb(113, 124, 219); flex-direction: row; justify-content: flex-end;">
+                        <ui:VisualElement class="ConsoleButtons" style="flex-grow: 1; background-color: rgb(134, 192, 130);" />
+                        <ui:VisualElement class="ConsoleButtons" style="flex-grow: 1; background-color: rgb(204, 196, 119);" />
+                        <ui:VisualElement class="ConsoleButtons" style="flex-grow: 1; background-color: rgb(192, 108, 108);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Ads" style="flex-grow: 1; width: 100%; height: 85%; flex-direction: row; overflow: visible; flex-shrink: 1; flex-basis: auto; flex-wrap: nowrap; position: relative; align-items: center; justify-content: space-around; align-self: auto; background-color: rgb(131, 144, 255);">
+                        <ui:VisualElement name="Ad" class="AdStyle" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Views/MissionSelection/Eat.png?fileID=2800000&amp;guid=8838d0293ed32344588e025777becffc&amp;type=3#Eat&apos;); justify-content: flex-start; align-items: auto; visibility: visible; align-self: auto;" />
+                        <ui:VisualElement name="Ad" class="AdStyle" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Views/MissionSelection/MrSmile.png?fileID=2800000&amp;guid=7e98953988852154ca6732eb5402de6e&amp;type=3#MrSmile&apos;);" />
+                        <ui:VisualElement name="Ad" class="AdStyle" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Views/MissionSelection/Water.png?fileID=2800000&amp;guid=b4376c1060df8474c87ab4ea02ae2fc7&amp;type=3#Water&apos;);" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="Error" style="flex-grow: 1; width: 100%; height: 20%; max-width: 100%; justify-content: center; align-self: auto; align-items: center; padding-top: 40px; padding-right: 40px; padding-bottom: 40px; padding-left: 40px;">
+                    <ui:Label tabindex="-1" text="Error occured:  Your internal web service was permanently shut down." parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="width: 70%; height: 100%; font-size: 32px; -unity-text-align: middle-center; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; text-overflow: clip; white-space: normal; background-color: rgb(131, 144, 255);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Console" style="flex-grow: 1; width: 100%; height: 40%;">
+                    <ui:VisualElement name="Header" style="flex-grow: 1; height: 15%; background-color: rgb(113, 124, 219); flex-direction: row; justify-content: flex-end;">
+                        <ui:VisualElement class="ConsoleButtons" style="flex-grow: 1; background-color: rgb(134, 192, 130);" />
+                        <ui:VisualElement class="ConsoleButtons" style="flex-grow: 1; background-color: rgb(204, 196, 119);" />
+                        <ui:VisualElement class="ConsoleButtons" style="flex-grow: 1; background-color: rgb(192, 108, 108);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Code" style="flex-grow: 1; height: 85%; background-color: rgb(58, 71, 96);">
+                        <ui:Label tabindex="-1" text="digits = [64, 34, 25, 12, 22, 11, 90, 5]&#10;&#10;n = len(digits)&#10;for i in range(n-1):&#10;    for j in range(n-i-1):&#10;        if digits[j] &gt; digits[j+1]:&#10;            digits[j], digits[j+1] = digits[j+1], digits[j]&#10;&#10;print(&quot;Bubble sort:&quot;, digits)" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CodeLabel" style="width: 100%; height: 100%; font-size: 24px; -unity-font-style: bold; color: rgb(113, 195, 97); padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
