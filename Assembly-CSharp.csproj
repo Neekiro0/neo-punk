@@ -55,7 +55,6 @@
      <Compile Include="Assets\Scripts\System\Tooltips\TooltipTrigger.cs" />
      <Compile Include="Assets\Scripts\Items\ItemObject.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\FloorDetector.cs" />
-     <Compile Include="Assets\Scripts\UI\MissionData.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\UI\SaveSlotController.cs" />
      <Compile Include="Assets\Scripts\Objects\ComputerController.cs" />
@@ -83,6 +82,7 @@
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\ItemsHandler.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+     <Compile Include="Assets\Scripts\System\MissionData.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
      <Compile Include="Assets\Scripts\Entities\EntityStatus.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
@@ -146,6 +146,7 @@
      <Folder Include="Library\PackageCache\com.unity.2d.pixel-perfect@5.0.3" />
      <Folder Include="Library\PackageCache\com.unity.2d.pixel-perfect@5.0.3\Tests" />
      <None Include="Library\PackageCache\com.unity.2d.pixel-perfect@5.0.3\package.json" />
+     <Folder Include="Assets\Resources\Missions\Introduction" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Dithering.hlsl" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Bloom.shader" />
      <Folder Include="Library\PackageCache\com.unity.cinemachine@2.9.5" />
@@ -361,6 +362,7 @@
      <Folder Include="Assets\Unity.VisualScripting.Generated\VisualScripting.Flow" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\GaussianDownsample.compute" />
      <Folder Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.21" />
+     <Folder Include="Assets\Resources\Missions" />
      <Folder Include="Assets\SpritesAndPrefabs\Entities\MainCharacter\Animations" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\ScreenSpaceReflections.hlsl" />
      <None Include="Library\PackageCache\com.unity.collections@1.2.4\package.json" />

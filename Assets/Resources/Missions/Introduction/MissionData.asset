@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: MissionData
   m_EditorClassIdentifier: 
   MissionName: Introduction
-  Objective: 
-  Description: 
-  SceneName: 
+  Objective: Reach the high tower
+  Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In efficitur,
+    augue at consectetur hendrerit, ipsum nulla porta magna, et rutrum magna ante
+    sit amet risus. Nullam quis ultrices urna. Cras egestas ligula lorem, sed imperdiet
+    nisi commodo sed. Nullam lorem justo, pulvinar a blandit nec, convallis sit amet
+    diam.
+  SceneName: Tutorial
   OneStarTime: 0
   TwoStarTime: 0
   ThreeStarTime: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 
@@ -9,11 +10,20 @@ public class ComputerInterfaceController : MonoBehaviour
     public bool isShown;
     private Button startMissionButton;
     private Button closeButton;
+    private MissionData SelectedMission;
+    
+    /*
+     * UI elements
+     */
+    private Label nameLabel;
+    private Label objectiveLabel;
+    private Label descriptionLabel;
+    private VisualElement MissionUi;
+    private VisualElement MissionUiPlaceholder;
 
 
     private void Awake()
     {
-        InterfaceRoot = gameObject.GetComponent<UIDocument>().rootVisualElement;
         MainUserInterface = GameObject.Find("UserInterface").transform.Find("Main User Interface").gameObject;
     }
 
@@ -27,13 +37,31 @@ public class ComputerInterfaceController : MonoBehaviour
         // Ładujemy UXML
         var uiDocument = GetComponent<UIDocument>();
         InterfaceRoot = uiDocument.rootVisualElement;
+        
+        /*
+         * ładowanie pól informacji o misji
+         */
+        nameLabel = InterfaceRoot.Q<Label>("NameLabel");
+        objectiveLabel = InterfaceRoot.Q<Label>("ObjectiveLabel");
+        descriptionLabel = InterfaceRoot.Q<Label>("DescriptionLabel");
+        MissionUi = InterfaceRoot.Q<VisualElement>("Main");
+        MissionUiPlaceholder = InterfaceRoot.Q<VisualElement>("Placeholder");
 
         // Znajdź przyciski w interfejsie użytkownika
         startMissionButton = InterfaceRoot.Q<Button>("StartMissionButton");
         closeButton = InterfaceRoot.Q<Button>("CloseButton");
-
-        // Przypisz zdarzenia kliknięcia do przycisków
         closeButton.clicked += OnCloseButtonClick;
+        startMissionButton.clicked += StartMission;
+        
+        // Pobierz wszystkie przyciski misji i dodaj im event click
+        var missionButtons = InterfaceRoot.Query<Button>(className: "MissionsTreeMissionButton").ToList();
+        foreach (var button in missionButtons)
+        {
+            button.clicked += () =>
+            {
+                ShowMissionDetails(button.text);
+            };
+        }
     }
 
     private void Update()
@@ -55,7 +83,6 @@ public class ComputerInterfaceController : MonoBehaviour
     
     public void HideComputerInterface()
     {
-        Debug.Log("Działa!");
         isShown = false;
         gameObject.SetActive(false);
         MainUserInterface.SetActive(true);
@@ -64,4 +91,32 @@ public class ComputerInterfaceController : MonoBehaviour
     }
 
     private void OnCloseButtonClick() { HideComputerInterface(); }
+
+    private void StartMission()
+    {
+        if (null != SelectedMission)
+        {
+            SceneManager.LoadScene(SelectedMission.SceneName);
+        }
+    }
+
+    public void ShowMissionDetails(string MissionName)
+    {
+        SelectedMission = null;
+        SelectedMission = Resources.Load<MissionData>("Missions/"+MissionName+"/MissionData");
+        if (null != SelectedMission)
+        {
+            nameLabel.text = SelectedMission.MissionName;
+            objectiveLabel.text = SelectedMission.Objective;
+            descriptionLabel.text = SelectedMission.Description;
+            MissionUi.style.display = DisplayStyle.Flex;
+            MissionUiPlaceholder.style.display = DisplayStyle.None;
+        }
+        else
+        {
+            MissionUi.style.display = DisplayStyle.None;
+            MissionUiPlaceholder.style.display = DisplayStyle.Flex;
+            Debug.LogError("Not found mission named: "+MissionName);
+        }
+    }
 }

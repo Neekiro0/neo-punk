@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewMission", menuName = "NeoPunk/Mission")]
-public class Mission : ScriptableObject
+public class MissionData : ScriptableObject
 {
     public string MissionName;
     public string Objective;
