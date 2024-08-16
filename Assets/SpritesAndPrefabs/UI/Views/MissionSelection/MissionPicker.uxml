@@ -77,22 +77,22 @@
                         <ui:Label tabindex="0" text="Best: 2:33" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeBest" class="DetailsStatsStatBest" />
                     </ui:VisualElement>
                     <ui:VisualElement name="StatTakedowns" class="DetailsStatsStat">
-                        <ui:Label tabindex="0" text="Takedowns" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeLabel" class="DetailsStatsStatLabel" style="width: 100%; align-self: auto; align-items: auto; white-space: nowrap; -unity-text-align: middle-center; font-size: 20px;" />
-                        <ui:VisualElement name="TimeRate" class="DetailsStatsStatRate" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: auto; align-items: center;">
+                        <ui:Label tabindex="0" text="Takedowns" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TakedownsLabel" class="DetailsStatsStatLabel" style="width: 100%; align-self: auto; align-items: auto; white-space: nowrap; -unity-text-align: middle-center; font-size: 20px;" />
+                        <ui:VisualElement name="TakedownsRate" class="DetailsStatsStatRate" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: auto; align-items: center;">
                             <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
                             <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
                             <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
                         </ui:VisualElement>
-                        <ui:Label tabindex="0" text="Best: 15" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeBest" class="DetailsStatsStatBest" />
+                        <ui:Label tabindex="0" text="Best: 15" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TakedownsBest" class="DetailsStatsStatBest" />
                     </ui:VisualElement>
                     <ui:VisualElement name="StatDamageTaken" class="DetailsStatsStat">
-                        <ui:Label tabindex="0" text="Damage taken" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeLabel" enable-rich-text="true" class="DetailsStatsStatLabel" style="width: 100%; align-self: auto; align-items: auto; white-space: nowrap; -unity-text-align: middle-center; font-size: 20px;" />
-                        <ui:VisualElement name="TimeRate" class="DetailsStatsStatRate" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: auto; align-items: center;">
+                        <ui:Label tabindex="0" text="Damage taken" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DamageTakenLabel" enable-rich-text="true" class="DetailsStatsStatLabel" style="width: 100%; align-self: auto; align-items: auto; white-space: nowrap; -unity-text-align: middle-center; font-size: 20px;" />
+                        <ui:VisualElement name="DamageTakenRate" class="DetailsStatsStatRate" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: auto; align-items: center;">
                             <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
                             <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
                             <ui:VisualElement name="Star" class="DetailsStatsStatRateStar" style="background-image: url(&apos;project://database/Assets/SpritesAndPrefabs/UI/Icons/StarIcon.png?fileID=-1318916319&amp;guid=1d5eddd31df81694daaf307facfb1132&amp;type=3#StarIcon_1&apos;);" />
                         </ui:VisualElement>
-                        <ui:Label tabindex="0" text="Best: 40" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeBest" class="DetailsStatsStatBest" />
+                        <ui:Label tabindex="0" text="Best: 40" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DamageTakenBest" class="DetailsStatsStatBest" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="DetailsDescription" style="flex-grow: 1; height: 40%; align-items: center; justify-content: center; margin-top: 20px;">

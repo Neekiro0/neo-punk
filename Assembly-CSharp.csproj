@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Items\VoodooDoll\VoodooDoll.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\HitboxBehaviour.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
+     <Compile Include="Assets\Scripts\System\Mission\MissionData.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\Player.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
@@ -85,9 +86,9 @@
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
      <Compile Include="Assets\Scripts\Entities\Player\ItemsHandler.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
-     <Compile Include="Assets\Scripts\System\MissionData.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
      <Compile Include="Assets\Scripts\System\LootTable.cs" />
+     <Compile Include="Assets\Scripts\System\Mission\MissionRecord.cs" />
      <Compile Include="Assets\Scripts\Entities\EntityStatus.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\Scripts\UI\OptionsManager.cs" />
@@ -105,6 +106,7 @@
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
      <Compile Include="Assets\Scripts\Entities\PlayerDetector.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
+     <Compile Include="Assets\Scripts\System\Mission\MissionTracker.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
      <Compile Include="Assets\Scripts\Entities\Dragonfly\DragonflyBehaviour.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
@@ -189,6 +191,7 @@
      <Folder Include="Library\PackageCache\com.unity.collections@1.2.4" />
      <Folder Include="Assets\SpritesAndPrefabs\Backgounds\MainMenu" />
      <Folder Include="Assets\SpritesAndPrefabs\Objects\AirConditioner" />
+     <Folder Include="Assets\Scripts\System\Mission" />
      <Folder Include="Library\PackageCache\com.unity.visualscripting@1.9.1" />
      <Folder Include="Library\PackageCache\com.unity.ai.navigation@1.1.5\Gizmos" />
      <None Include="Library\PackageCache\com.unity.ide.visualstudio@2.0.21\ValidationConfig.json" />

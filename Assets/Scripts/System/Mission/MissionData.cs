@@ -11,9 +11,9 @@ public class MissionData : ScriptableObject
     public string SceneName;
     
     [Header("Time")]
-    public double OneStarTime;
-    public double TwoStarTime;
-    public double ThreeStarTime;
+    public float OneStarTime;
+    public float TwoStarTime;
+    public float ThreeStarTime;
     
     [Header("Takedowns")]
     public int OneStarTakedowns;
@@ -21,14 +21,7 @@ public class MissionData : ScriptableObject
     public int ThreeStarTakedowns;
     
     [Header("Damage taken")]
-    public int OneStarDamageTaken;
-    public int TwoStarDamageTaken;
-    public int ThreeStarDamageTaken;
-    
-    public MissionScript missionScript;
-
-    public interface MissionScript
-    {
-        void Script(){}
-    }
+    public float OneStarDamageTaken;
+    public float TwoStarDamageTaken;
+    public float ThreeStarDamageTaken;
 }

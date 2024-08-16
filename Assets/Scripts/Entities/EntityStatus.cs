@@ -32,6 +32,7 @@ public class EntityStatus : MonoBehaviour
     private GameObject entityObject;
     private float BaseAttackDamage = 0;
     private LootTable lootTable;
+    private MissionTracker missionTracker;
     
 
     // Wartość wyrażona w procentach, która odpowiada za % otrzymywanych obrażeń
@@ -45,6 +46,7 @@ public class EntityStatus : MonoBehaviour
         player = GameObject.Find("Player");
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         lootTable = gameObject.GetComponent<LootTable>();
+        missionTracker = player.GetComponent<MissionTracker>();
 
         BaseAttackDamage = AttackDamage;
     }
@@ -185,6 +187,8 @@ public class EntityStatus : MonoBehaviour
                 } else if (damage * blockingDamageReduction * incomingDamagePercent < GetHp())
                 {
                     // gracz otrzymuje obrażenia
+                    
+                    if (null != missionTracker) missionTracker.AddDamageTaken(damage * blockingDamageReduction * incomingDamagePercent);
                     GettingDamageEvent(damage * blockingDamageReduction * incomingDamagePercent);
                 }
             }
@@ -202,6 +206,7 @@ public class EntityStatus : MonoBehaviour
                 } else if (damage * incomingDamagePercent < GetHp())
                 {
                     // gracz otrzymuje obrażenia
+                    if (null != missionTracker) missionTracker.AddDamageTaken(damage * incomingDamagePercent);
                     GettingDamageEvent(damage * incomingDamagePercent);
                     
                     // animacja paska hp sygnalizująca otrzymanie obrażeń
@@ -215,6 +220,7 @@ public class EntityStatus : MonoBehaviour
             {
                 // Encja ginie
                 DeathEvent();
+                
             } else if (damage * incomingDamagePercent < GetHp())
             {
                 // encja otrzymuje obrażenia
@@ -225,6 +231,7 @@ public class EntityStatus : MonoBehaviour
 
     void DeathEvent()
     {
+        if (null != missionTracker) missionTracker.AddTakedown();
         lootTable.DropLoot();
         player.GetComponent<EntityStatus>().AddXp(droppedXp);
         StartCoroutine(DeathAnimation(deathColor, 0.1f));

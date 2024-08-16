@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -6,9 +7,10 @@ using Cursor = UnityEngine.Cursor;
 
 public class ComputerInterfaceController : MonoBehaviour
 {
+    public bool isShown;
+    public Sprite StarImage;
     private VisualElement InterfaceRoot;
     private GameObject MainUserInterface;
-    public bool isShown;
     private Button startMissionButton;
     private Button closeButton;
     private MissionData SelectedMission;
@@ -22,6 +24,7 @@ public class ComputerInterfaceController : MonoBehaviour
     private Label codeLabel;
     private VisualElement MissionUi;
     private VisualElement MissionUiPlaceholder;
+    private VisualElement statsDetails;
 
 
     private void Awake()
@@ -55,6 +58,9 @@ public class ComputerInterfaceController : MonoBehaviour
         closeButton = InterfaceRoot.Q<Button>("CloseButton");
         closeButton.clicked += OnCloseButtonClick;
         startMissionButton.clicked += StartMission;
+        
+        // ładowanie pól do statystyk
+        statsDetails = InterfaceRoot.Q<VisualElement>("DetailsStats");
         
         // Pobierz wszystkie przyciski misji i dodaj im event click
         var missionButtons = InterfaceRoot.Query<Button>(className: "MissionsTreeMissionButton").ToList();
@@ -115,6 +121,21 @@ public class ComputerInterfaceController : MonoBehaviour
             StartCoroutine(PrintName(SelectedMission.MissionName, 0.1f));
             StartCoroutine(PrintObjective(SelectedMission.Objective, 0.05f));
             StartCoroutine(PrintDescription(SelectedMission.Description, 0.01f));
+            
+            /*
+             * Wyświetlenie wyników najlepszych
+             */
+            
+            int CurrentSlot = PlayerPrefs.GetInt("SaveSlot");
+            float BestTime = PlayerPrefs.GetFloat("Save" + CurrentSlot.ToString() + "_" + SelectedMission.MissionName + "_BestTime", 0.0f);
+            int BestTakedowns = PlayerPrefs.GetInt("Save" + CurrentSlot.ToString() + "_" + SelectedMission.MissionName + "_BestTakedowns", 0);
+            float BestDamageTaken = PlayerPrefs.GetFloat("Save" + CurrentSlot.ToString() + "_" + SelectedMission.MissionName + "_BestDamageTaken", 0.0f);
+            
+            StartCoroutine(PrintRating(statsDetails, BestTime, BestTakedowns, BestDamageTaken));
+            // Show best time
+           /*_time.Q<Label>("TimeBest").text = "Best: " + BestTime.ToString("0:00");
+           _takedowns.Q<Label>("TakedownsBest").text = "Best: " + BestTakedowns.ToString();
+           _damageTaken.Q<Label>("DamageTakenBest").text = "Best: " + BestDamageTaken.ToString("0.00");*/
         }
         else
         {
@@ -163,4 +184,63 @@ public class ComputerInterfaceController : MonoBehaviour
             yield return new WaitForSeconds(blinkingBreak);
         }
     }
+
+    IEnumerator PrintRating(VisualElement root, float bestTime, int bestTakedowns, float bestDamageTaken)
+{
+    float pauseBetweenStars = 0.5f;
+    
+    root.Q<Label>("TimeBest").text = (bestTime > 0 )?"Best: " + bestTime.ToString("0:00"):"No records";
+    root.Q<Label>("TakedownsBest").text = (bestTakedowns > 0 )?"Best: " + bestTakedowns.ToString():"No records";
+    root.Q<Label>("DamageTakenBest").text = (bestDamageTaken > 0 )?"Best: " + bestDamageTaken.ToString("0.00"):"No records";
+    
+    yield return new WaitForSeconds(pauseBetweenStars);
+    
+    var timeStars = root.Q<VisualElement>("TimeRate").Query<VisualElement>("Star").ToList();
+    var takedownsStars = root.Q<VisualElement>("TakedownsRate").Query<VisualElement>("Star").ToList();
+    var damageStars = root.Q<VisualElement>("DamageTakenRate").Query<VisualElement>("Star").ToList();
+    
+    if (bestTime <= SelectedMission.OneStarTime && timeStars.Count > 0 && bestTime > 0)
+    {
+        timeStars[0].style.backgroundImage = new StyleBackground(StarImage);
+    }
+    if (bestTakedowns >= SelectedMission.OneStarTakedowns && takedownsStars.Count > 0 && bestTakedowns > 0)
+    {
+        takedownsStars[0].style.backgroundImage = new StyleBackground(StarImage);
+    }
+    if (bestDamageTaken <= SelectedMission.OneStarDamageTaken && damageStars.Count > 0 && bestDamageTaken > 0)
+    {
+        damageStars[0].style.backgroundImage = new StyleBackground(StarImage);
+    }
+    
+    yield return new WaitForSeconds(pauseBetweenStars);
+    
+    if (bestTime <= SelectedMission.TwoStarTime && timeStars.Count > 1 && bestTime > 0)
+    {
+        timeStars[1].style.backgroundImage = new StyleBackground(StarImage);
+    }
+    if (bestTakedowns >= SelectedMission.TwoStarTakedowns && takedownsStars.Count > 1 && bestTakedowns > 0)
+    {
+        takedownsStars[1].style.backgroundImage = new StyleBackground(StarImage);
+    }
+    if (bestDamageTaken <= SelectedMission.TwoStarDamageTaken && damageStars.Count > 1 && bestTakedowns > 0)
+    {
+        damageStars[1].style.backgroundImage = new StyleBackground(StarImage);
+    }
+    
+    yield return new WaitForSeconds(pauseBetweenStars);
+    
+    if (bestTime <= SelectedMission.ThreeStarTime && timeStars.Count > 2 && bestTime > 0)
+    {
+        timeStars[2].style.backgroundImage = new StyleBackground(StarImage);
+    }
+    if (bestTakedowns >= SelectedMission.ThreeStarTakedowns && takedownsStars.Count > 2 && bestTakedowns > 0)
+    {
+        takedownsStars[2].style.backgroundImage = new StyleBackground(StarImage);
+    }
+    if (bestDamageTaken <= SelectedMission.ThreeStarDamageTaken && damageStars.Count > 2 && bestDamageTaken > 0)
+    {
+        damageStars[2].style.backgroundImage = new StyleBackground(StarImage);
+    }
+}
+
 }

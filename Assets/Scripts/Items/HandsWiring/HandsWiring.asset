@@ -18,10 +18,10 @@ MonoBehaviour:
     player AD and disables cybernetic enemies for 2 seconds.
   cooldown: 11
   currentCooldown: 0
-  rarity: 
+  rarity: Common
   minPlayerLvl: 0
   itemIcon: {fileID: 21300000, guid: e7e94ec3bac1b51408e06962005e7f9d, type: 3}
   explosionEffectPrefab: {fileID: 7813652720997984568, guid: 08c12f659bdaddd428a47332c63a981f, type: 3}
   explosionForce: 5
   explosionRange: 1
-  damageDealt: 10
+  damageDealt: 20

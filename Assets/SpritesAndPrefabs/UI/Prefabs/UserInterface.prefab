@@ -5077,6 +5077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isShown: 0
+  StarImage: {fileID: 1679783111, guid: 1d5eddd31df81694daaf307facfb1132, type: 3}
 --- !u!1 &5920907212300419895
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,15 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class DoorBehaviour : MonoBehaviour
 {
-    public int NextHubNumber;
-    
     public bool IsOpen = false;
-    private GameObject player;
+    private GameObject playerObject;
     private Animator animator;
 
     private void Awake()
     {
         animator = gameObject.GetComponent<Animator>();
+        playerObject = GameObject.Find("Player");
     }
 
 
@@ -39,15 +38,7 @@ public class DoorBehaviour : MonoBehaviour
         {
             if (Input.GetKey(InputManager.InteractKey))  
             {
-                int CurrentSlot = PlayerPrefs.GetInt("SaveSlot");
-                int CurrentHub = PlayerPrefs.GetInt("Save"+CurrentSlot.ToString()+"_CurrentHub");
-                
-                // jeżeli nie odblokowano wcześnie tego huba
-                if (CurrentHub < NextHubNumber)
-                {
-                    PlayerPrefs.SetInt("Save"+CurrentSlot.ToString()+"_CurrentHub", NextHubNumber);
-                }
-                SceneManager.LoadScene("Hub-"+NextHubNumber.ToString());
+                playerObject.GetComponent<MissionTracker>().CalculateScoreAndProceed();
             }
         }
     }

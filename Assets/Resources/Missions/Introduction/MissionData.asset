@@ -20,12 +20,12 @@ MonoBehaviour:
     nisi commodo sed. Nullam lorem justo, pulvinar a blandit nec, convallis sit amet
     diam.
   SceneName: Tutorial
-  OneStarTime: 0
-  TwoStarTime: 0
-  ThreeStarTime: 0
-  OneStarTakedowns: 0
-  TwoStarTakedowns: 0
-  ThreeStarTakedowns: 0
-  OneStarDamageTaken: 0
-  TwoStarDamageTaken: 0
+  OneStarTime: 90
+  TwoStarTime: 50
+  ThreeStarTime: 30
+  OneStarTakedowns: 2
+  TwoStarTakedowns: 5
+  ThreeStarTakedowns: 10
+  OneStarDamageTaken: 80
+  TwoStarDamageTaken: 50
   ThreeStarDamageTaken: 0

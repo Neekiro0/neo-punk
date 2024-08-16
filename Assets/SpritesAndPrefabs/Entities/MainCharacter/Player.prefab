@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7932063891751073557}
   - component: {fileID: 4921430104271942129}
   - component: {fileID: 934230925171178819}
+  - component: {fileID: 571370216834271210}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -314,10 +315,27 @@ MonoBehaviour:
   - {x: 0.031662602, y: -0.22877409, z: 0}
   m_ShapePathHash: 1474362039
   m_Mesh: {fileID: 0}
-  m_InstanceId: 89562
+  m_InstanceId: 50288
   m_LocalBounds:
     m_Center: {x: 0.011777135, y: -0.008856401, z: 0}
     m_Extent: {x: 0.022626806, y: 0.21991768, z: 0}
+--- !u!114 &571370216834271210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579532712962454047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c7b1e5675fe84b46a9c89d4cfe95784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMissionName: 
+  isWatchingScore: 1
+  time: 0
+  takedowns: 0
+  damageTaken: 0
 --- !u!1 &5856269213428362837
 GameObject:
   m_ObjectHideFlags: 0
