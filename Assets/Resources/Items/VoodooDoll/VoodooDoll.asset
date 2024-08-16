@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: ItemData
+  m_Name: VoodooDoll
   m_EditorClassIdentifier: Assembly-CSharp::VoodooDoll
-  itemName: Voodoo doll
-  passiveDescription: If you get hit, doll gets a needle stack. If you get hit when
-    Doll have 3 stacks you will die.
-  activeDescription: Amplifies damage by 40% for 10 seconds.
+  itemName: Voodoo Doll
+  passiveDescription: Increases player attack by 40% for 10 seconds.
+  activeDescription: Gives 40% more damage on use, but if you get hit, doll gets
+    a needle stack. If you get hit when Doll have 3 stacks you will die.
   cooldown: 30
   currentCooldown: 0
-  rarity: Quantum
+  rarity: 
   minPlayerLvl: 0
   itemIcon: {fileID: 21300000, guid: 2b379e307be90c246b8e917774716734, type: 3}
-  player: {fileID: 0}

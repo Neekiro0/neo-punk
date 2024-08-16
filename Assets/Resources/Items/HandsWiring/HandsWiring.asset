@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: ItemData
+  m_Name: HandsWiring
   m_EditorClassIdentifier: Assembly-CSharp::HandsWiring
-  itemName: Hands wiring
+  itemName: Hands Wiring
   passiveDescription: Changes basic type of damage to electric.
   activeDescription: Produces electric discharge, which deals damage equal 20% of
     player AD and disables cybernetic enemies for 2 seconds.
   cooldown: 11
   currentCooldown: 0
-  rarity: Common
+  rarity: 
   minPlayerLvl: 0
   itemIcon: {fileID: 21300000, guid: e7e94ec3bac1b51408e06962005e7f9d, type: 3}
   explosionEffectPrefab: {fileID: 7813652720997984568, guid: 08c12f659bdaddd428a47332c63a981f, type: 3}
   explosionForce: 5
-  explosionRange: 5
-  damageDealt: 0.75
+  explosionRange: 1
+  damageDealt: 10

@@ -1,7 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
+/*handsWiring = new HandsWiring(
+    "Hands wiring",
+    "Changes basic type of damage to electric.",
+    "Produces electric discharge, which deals damage equal 20% of player AD and disables cybernetic enemies for 2 seconds.",
+    "Common",
+    "Items/HandsWiring/HandsWiring",
+    11.0f,
+    0.0f, 
+    0,
+    explosionEffectPrefab,
+    explosionRange,
+    explosionForce );*/
 [System.Serializable]
-public class HandsWiringAbility : ItemData.IItemAbility
+public class HandsWiringAbilities : ScriptableObject, ItemData.IItemAbility
 {
     private float explosionForce;
     private float explosionRange;
@@ -13,7 +26,7 @@ public class HandsWiringAbility : ItemData.IItemAbility
     private int lastElementalType;
     private bool isPassiveGranted;
 
-    public HandsWiringAbility(GameObject _explosionEffectPrefab, float _explosionForce, float _explosionRange, float _damageDealt)
+    public void Initialize(GameObject _explosionEffectPrefab, float _explosionForce, float _explosionRange, float _damageDealt)
     {
         this.explosionEffectPrefab = _explosionEffectPrefab;
         this.explosionForce = _explosionForce;
@@ -89,21 +102,5 @@ public class HandsWiringAbility : ItemData.IItemAbility
             player.ChangeElementalType(lastElementalType);
         }
         isPassiveGranted = false;
-    }
-}
-
-[CreateAssetMenu(fileName = "New Hands Wiring", menuName = "Items/Hands Wiring")]
-public class HandsWiring : ItemData
-{
-    public GameObject explosionEffectPrefab;
-    public float explosionForce;
-    public float explosionRange;
-    [Tooltip("Percentage of player's attack dealt to enemies.")]
-    public float damageDealt;
-
-    private void OnEnable()
-    {
-        currentCooldown = 0;
-        itemAbility = new HandsWiringAbility(explosionEffectPrefab, explosionForce, explosionRange, damageDealt);
     }
 }

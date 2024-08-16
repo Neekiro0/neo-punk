@@ -1,18 +1,16 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 /*demonBell = new DemonBell(
     "Demon bell",
     "Player takes 35% more damage, but also deals 25% more.",
     "Overrides damage type to Bloody for 10 seconds.",
-    "Common",
+    "Rare",
     "Items/DemonBell/DemonBell",
     40.0f,
     0.0f );*/
-
-[System.Serializable]
-public class DemonBellAbility : ItemData.IItemAbility
+public class DemonBellAbilities : ScriptableObject,  ItemData.IItemAbility
 {
     
     public EntityStatus playerStatus;
@@ -31,7 +29,7 @@ public class DemonBellAbility : ItemData.IItemAbility
     private float loweredDefence = 0.0f;
     private bool isDamageBonusGranted;
 
-    public DemonBellAbility(float _additionalDamage, float _defenceLoweringPercent, float _effectDuration)
+    public void Initialize(float _additionalDamage, float _defenceLoweringPercent, float _effectDuration)
     {
         additionalDamage = _additionalDamage;
         defenceLoweringPercent = _defenceLoweringPercent;
@@ -99,12 +97,3 @@ public class DemonBellAbility : ItemData.IItemAbility
     }
 }
 
-[CreateAssetMenu(fileName = "New Demon Bell", menuName = "Items/Demon Bell")]
-public class DemonBell : ItemData
-{
-    private void OnEnable()
-    {
-        currentCooldown = 0;
-        itemAbility = new DemonBellAbility(0.25f, 0.35f, 10.0f);
-    }
-}

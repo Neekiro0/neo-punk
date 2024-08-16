@@ -1,38 +1,31 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class UnityScheduler : MonoBehaviour
+public class CoroutineRunner : MonoBehaviour
 {
-    private static UnityScheduler _instance;
-    public static UnityScheduler Instance
+    private static CoroutineRunner instance;
+
+    public static CoroutineRunner Instance
     {
         get
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                var go = new GameObject(typeof(UnityScheduler).Name);
-                _instance = go.AddComponent<UnityScheduler>();
-                DontDestroyOnLoad(go);
+                GameObject obj = new GameObject("CoroutineRunner");
+                instance = obj.AddComponent<CoroutineRunner>();
+                DontDestroyOnLoad(obj);
             }
-            return _instance;
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (_instance == this)
-        {
-            _instance = null;
+            return instance;
         }
     }
 }
 
 public class ItemObject : MonoBehaviour
 {
-    // Referencja do ScriptableObject z danymi przedmiotu
+    public GameObject ScriptableObjectManager;
+    public int ItemId;
     public ItemData itemData;
     public Color CommonColor;
     public Color RareColor;
@@ -47,28 +40,22 @@ public class ItemObject : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         light2D = GetComponentInParent<Light2D>();
         particleSystem = gameObject.transform.parent.GetComponentInChildren<ParticleSystem>();
+        itemData = ScriptableObjectManager.GetComponent<ScriptableObjectManager>().GetItemData(ItemId);
 
-        // Ustawienie wyglądu i właściwości przedmiotu
         if (itemData != null)
         {
-            SetItemAppearance();
-            UpdateItemLightColor();
-        }
-        else
-        {
-            Debug.LogWarning("ItemData jest null dla obiektu: " + gameObject.name);
-        }
-    }
-
-    private void SetItemAppearance()
-    {
-        if (itemData.itemIcon != null)
-        {
             spriteRenderer.sprite = itemData.itemIcon;
+            UpdateItemLightColor();
+
+            // Inicjalizujemy przypisane zdolności (itemAbility) tylko raz
+            if (itemData.itemAbility != null)
+            {
+                itemData.itemAbility.Apply(); // Możemy od razu zastosować zdolność
+            }
         }
         else
         {
-            Debug.LogWarning("Nie można załadować sprite'a dla przedmiotu: " + itemData.itemName);
+            Debug.LogError("ItemData is not assigned!");
         }
     }
 
@@ -98,7 +85,7 @@ public class ItemObject : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D col)
     {
-        if (col.CompareTag("Player") && Input.GetKeyDown(InputManager.InteractKey))
+        if (col.CompareTag("Player") && Input.GetKey(InputManager.InteractKey))
         {
             ItemsHandler itemsHandler = col.GetComponent<ItemsHandler>();
             if (itemsHandler != null && itemData != null)
@@ -112,6 +99,5 @@ public class ItemObject : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         itemsHandler.AddItem(itemData, gameObject);
-        gameObject.SetActive(false); // Ukryj przedmiot po podniesieniu, zamiast go niszczyć
     }
 }
