@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "VoodooDoll", menuName = "NeoPunk/Items/VoodooDoll", order = 2)]
 public class VoodooDoll : ItemData
 {
+    private void OnEnable()
+    {
+        currentCooldown = 0;
+        Initialize();
+    }
+
     public override void Initialize()
     {
         currentCooldown = 0;

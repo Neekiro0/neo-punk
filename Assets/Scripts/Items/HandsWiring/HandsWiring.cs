@@ -12,6 +12,12 @@ public class HandsWiring : ItemData
     [Tooltip("Percentage of player's attack dealt to enemies.")]
     public float damageDealt = 10.0f;
 
+    private void OnEnable()
+    {
+        currentCooldown = 0;
+        Initialize();  // Wywołanie funkcji inicjalizacyjnej
+    }
+
     public override void Initialize()
     {
         currentCooldown = 0;

@@ -34,24 +34,20 @@ public class ItemObject : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Light2D light2D;
     private ParticleSystem particleSystem;
+    private ParticleSystem dropAnimation;
 
-    private void Awake()
+    private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         light2D = GetComponentInParent<Light2D>();
-        particleSystem = gameObject.transform.parent.GetComponentInChildren<ParticleSystem>();
+        particleSystem = gameObject.transform.parent.Find("Particles").GetComponentInChildren<ParticleSystem>();
+        dropAnimation = gameObject.transform.parent.Find("DropAnimation").GetComponentInChildren<ParticleSystem>();
         itemData = ScriptableObjectManager.GetComponent<ScriptableObjectManager>().GetItemData(ItemId);
 
         if (itemData != null)
         {
             spriteRenderer.sprite = itemData.itemIcon;
             UpdateItemLightColor();
-
-            // Inicjalizujemy przypisane zdolności (itemAbility) tylko raz
-            if (itemData.itemAbility != null)
-            {
-                itemData.itemAbility.Apply(); // Możemy od razu zastosować zdolność
-            }
         }
         else
         {
@@ -62,23 +58,28 @@ public class ItemObject : MonoBehaviour
     private void UpdateItemLightColor()
     {
         var main = particleSystem.main;
+        var dropAnimMain = dropAnimation.main;
         switch (itemData.rarity)
         {
             case "Common":
                 light2D.color = CommonColor;
                 main.startColor = CommonColor;
+                dropAnimMain.startColor = CommonColor;
                 break;
             case "Rare":
                 light2D.color = RareColor;
                 main.startColor = RareColor;
+                dropAnimMain.startColor = RareColor;
                 break;
             case "Quantum":
                 light2D.color = QuantumColor;
                 main.startColor = QuantumColor;
+                dropAnimMain.startColor = QuantumColor;
                 break;
             default:
                 light2D.color = CommonColor;
                 main.startColor = CommonColor;
+                dropAnimMain.startColor = CommonColor;
                 break;
         }
     }

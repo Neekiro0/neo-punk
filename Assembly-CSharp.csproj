@@ -87,6 +87,7 @@
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
      <Compile Include="Assets\Scripts\System\MissionData.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
+     <Compile Include="Assets\Scripts\System\LootTable.cs" />
      <Compile Include="Assets\Scripts\Entities\EntityStatus.cs" />
      <Compile Include="Assets\Resources\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\Scripts\UI\OptionsManager.cs" />
@@ -133,7 +134,7 @@
      <None Include="Library\PackageCache\com.unity.inputsystem@1.7.0\package.json" />
      <Folder Include="Library\PackageCache\com.unity.2d.tilemap.extras@3.1.2" />
      <None Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\README.txt" />
-     <Folder Include="Assets\Resources\Items\ItemPrefab" />
+     <Folder Include="Assets\Resources\Items\Prefabs" />
      <None Include="Library\PackageCache\com.unity.inputsystem@1.7.0\ValidationConfig.json" />
      <None Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Builtins\Texture3DLerp.compute" />
      <Folder Include="Library\PackageCache\com.unity.postprocessing@3.2.2\PostProcessing\Shaders\Debug" />

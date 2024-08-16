@@ -9,6 +9,12 @@ public class DemonBell : ItemData
     public float defenceLoweringPercent = 0.35f;  
     public float effectDuration = 10.0f; 
     
+    private void OnEnable()
+    {
+        currentCooldown = 0;
+        Initialize();  // Wywołanie funkcji inicjalizacyjnej
+    }
+
     public override void Initialize()
     {
         currentCooldown = 0;

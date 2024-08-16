@@ -15,7 +15,6 @@ public class EntityStatus : MonoBehaviour
     public float entityMaxHelath = 100.0f;
     public int droppedXp = 0;
     public int gold = 0;
-    private float BaseAttackDamage = 0;
     public float AttackDamage = 0;
     public float MovementSpeed = 0;
     public bool isFacedRight = true;
@@ -25,12 +24,14 @@ public class EntityStatus : MonoBehaviour
     public Color lightDamageColor;
     public Color heavyDamageColor;
     public Color deathColor;
-    private GameObject entityObject;
     public GameObject healthBar;
 
     private GameObject mainUserInterface;
     private SpriteRenderer spriteRenderer;
     private GameObject player;
+    private GameObject entityObject;
+    private float BaseAttackDamage = 0;
+    private LootTable lootTable;
     
 
     // Wartość wyrażona w procentach, która odpowiada za % otrzymywanych obrażeń
@@ -43,6 +44,7 @@ public class EntityStatus : MonoBehaviour
         mainUserInterface = GameObject.Find("Main User Interface");
         player = GameObject.Find("Player");
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        lootTable = gameObject.GetComponent<LootTable>();
 
         BaseAttackDamage = AttackDamage;
     }
@@ -223,6 +225,7 @@ public class EntityStatus : MonoBehaviour
 
     void DeathEvent()
     {
+        lootTable.DropLoot();
         player.GetComponent<EntityStatus>().AddXp(droppedXp);
         StartCoroutine(DeathAnimation(deathColor, 0.1f));
     }

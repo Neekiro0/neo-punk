@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 8803115537215106585}
   - component: {fileID: 4518836975572445885}
   - component: {fileID: 8087556771050902175}
+  - component: {fileID: 6800996854045666896}
   m_Layer: 0
   m_Name: Dragonfly
   m_TagString: Untagged
@@ -407,6 +408,21 @@ MonoBehaviour:
   shootingPoint: {fileID: 1265795612261544432}
   projectilePrefab: {fileID: 59628738718778725, guid: 8fa4ffcf90244444481feb261ae18bae, type: 3}
   bulletSpeed: 50
+--- !u!114 &6800996854045666896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4149488371525154487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c9a30e273482b44858cadca39b37a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootItems:
+  - itemId: 1
+    dropChance: 26.6
 --- !u!1 &5796607058185083297
 GameObject:
   m_ObjectHideFlags: 0
