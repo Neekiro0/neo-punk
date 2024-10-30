@@ -56,12 +56,12 @@ Czyli opcjonalnej areny gdzie gracz walczy z falami przciwników. Będą one uł
 ## Przedmioty:
 Każdy przedmiot powinien mieć umiejętność pasywną i aktywną, no i powinien dodawać małe ciekawe mechaniki, jak dashe, kotwiczki, teleportacje, uniki itp.
 Gameplay będzie definiowany poprzez posiadane przez gracza przedmioty, które będą się pojawiać po zakończonej inwazji.
-[Lista przedmiotów](documentation/items.md)
+[Lista przedmiotów](docs/items.md)
 
 ## Lore:
 Lore w zamyśle będzie podawany poprzez dialogi i wydarzenia w tle. 
 Historia będzie dość przejrzysta, lecz, aby zwiększyć nieco zainteresowanie i zaangażowanie, pewne jej elementy, będą niejawne, dając graczom pewne, lecz ograniczone pole do interpretacji.
-[Dokładniejszy opis lore](documentation/lore.md)
+[Dokładniejszy opis lore](docs/lore.md)
 
 ## Roadmap:
 1. [x] Podstawowe animacje gracza, poruszanie się i walka
